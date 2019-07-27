@@ -1239,7 +1239,6 @@ GameObject:
   - component: {fileID: 2051882260090765377}
   - component: {fileID: 2051882260090765378}
   - component: {fileID: 2052899438272740384}
-  - component: {fileID: 222684942338813070}
   - component: {fileID: 2052899438446055203}
   - component: {fileID: 5131545509554272966}
   - component: {fileID: 3731473109870597713}
@@ -1314,6 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d835d3ac23c3249b32114e5bdf34e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUnit: 0
   state: 0
   action:
     actionType: 0
@@ -1462,22 +1462,6 @@ MonoBehaviour:
   aggression: 0
   visionRange: 3
   broadcastRange: 5
---- !u!114 &222684942338813070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2051882260090765376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecbe2445d272e2547b3ff6602db52d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerUnit: 1
-  layer:
-    serializedVersion: 2
-    m_Bits: 1537
 --- !u!114 &2052899438446055203
 MonoBehaviour:
   m_ObjectHideFlags: 0

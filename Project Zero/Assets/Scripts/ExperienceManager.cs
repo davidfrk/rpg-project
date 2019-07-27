@@ -19,15 +19,15 @@ public class ExperienceManager : MonoBehaviour
     public void Awake()
     {
         unitController = GetComponent<UnitController>();
-        unitController.OnDeathCallback += CreditsTheDeath;
+        unitController.OnKillCallback += CreditsKill;
     }
 
-    public void CreditsTheDeath(Unit killer)
+    public void CreditsKill(Unit prey)
     {
-        if (killer != null)
+        if (prey != null)
         {
-            ExperienceManager experienceManager = killer.GetComponent<ExperienceManager>();
-            experienceManager.AddExperience(experienceGivenOnDeath);
+            ExperienceManager experienceManager = prey.GetComponent<ExperienceManager>();
+            AddExperience(experienceManager.experienceGivenOnDeath);
         }
     }
 

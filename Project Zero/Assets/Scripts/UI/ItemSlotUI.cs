@@ -60,6 +60,11 @@ public class ItemSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
         {
             slotManager.OnMouseRightClickDown(this);
         }
+
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            slotManager.OnMouseLeftClickDown(this);
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct QuestCondition
+public class QuestCondition
 {
     public bool completed;
     //public delegate void OnCompleteEvent();
@@ -13,6 +13,8 @@ public struct QuestCondition
     public Item item;
     public Unit targetUnit;
     public Goal goal;
+    public int amount;
+    public int currentAmount;
 
     public bool Update(Unit owner)
     {
@@ -42,15 +44,17 @@ public struct QuestCondition
 
         if (inventory != null)
         {
+            currentAmount = 0;
             foreach (Item item in inventory.Items)
             {
                 if (item != null && this.item && item.id == this.item.id)
                 {
-                    return true;
+                    currentAmount++;
                 }
             }
         }
-        return false;
+
+        return currentAmount >= amount;
     }
 
     private bool CheckGoalCondition(Unit owner)
@@ -69,9 +73,14 @@ public struct QuestCondition
     {
         if (conditionType == ConditionType.Slay)
         {
-            if (prey == targetUnit)
+            if (prey.id == targetUnit.id)
             {
-                completed = true;
+                currentAmount = Mathf.Min(currentAmount + 1, amount) ;
+
+                if (currentAmount >= amount)
+                {
+                    completed = true;
+                }
             }
         }
     }

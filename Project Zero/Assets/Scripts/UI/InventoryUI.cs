@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Unit selectedUnit;
+    private Unit selectedUnit;
     public List<ItemSlotUI> ItemSlots;
 
     public void Start()
@@ -47,6 +47,7 @@ public class InventoryUI : MonoBehaviour
     //Temporario até ter eventos
     void Update()
     {
+        selectedUnit = UIController.instance.selectedUnit;
         UpdateInventory();
     }
 }

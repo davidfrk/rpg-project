@@ -8,7 +8,7 @@ public class UIController : MonoBehaviour, ISlotManager
 {
     public static UIController instance;
 
-    public Unit selectedUnit;
+    internal Unit selectedUnit;
 
     [Space(10)]
     public GameObject equipmentUI;
@@ -27,6 +27,12 @@ public class UIController : MonoBehaviour, ISlotManager
 
     void Update()
     {
+        if (selectedUnit != PlayerController.localPlayer.selectedUnit)
+        {
+            selectedUnit = PlayerController.localPlayer.selectedUnit;
+            //Callback selecionou nova unidade
+        }
+
         if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             Toggle();
@@ -43,6 +49,11 @@ public class UIController : MonoBehaviour, ISlotManager
         show = !show;
 
         equipmentUI.SetActive(show);
+    }
+
+    public void OnMouseLeftClickDown(ItemSlotUI itemSlotUI)
+    {
+        lastUIClick = Time.time;
     }
 
     public void OnMouseRightClickDown(ItemSlotUI itemSlotUI)

@@ -9,6 +9,7 @@ public class Unit : MonoBehaviour
     internal UnitController unitController;
 
     public bool alive = true;
+    public int id;
 
     [SerializeField]
     float health;

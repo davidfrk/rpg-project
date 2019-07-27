@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class ExperienceUI : MonoBehaviour
 {
-    public ExperienceManager selectedUnit;
+    private Unit selectedUnit;
+    private ExperienceManager experienceManager;
     public Text levelText;
     private UIBar expBar;
 
@@ -16,15 +17,21 @@ public class ExperienceUI : MonoBehaviour
 
     void Update()
     {
+        selectedUnit = UIController.instance.selectedUnit;
         if (selectedUnit != null)
         {
-            UpdateUI();
+            experienceManager = selectedUnit.GetComponent<ExperienceManager>();
+
+            if (experienceManager != null)
+            {
+                UpdateUI();
+            }
         }
     }
 
     void UpdateUI()
     {
-        levelText.text = selectedUnit.level.ToString();
-        expBar.Set(selectedUnit.nextLevelProgression);
+        levelText.text = experienceManager.level.ToString();
+        expBar.Set(experienceManager.nextLevelProgression);
     }
 }

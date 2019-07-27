@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EquipmentManagerUI : MonoBehaviour
 {
-    public Unit selectedUnit;
+    private Unit selectedUnit;
     public List<ItemSlotUI> equipmentSlots;
 
     public void Start()
@@ -48,6 +48,7 @@ public class EquipmentManagerUI : MonoBehaviour
     //Temporario até ter eventos
     void Update()
     {
+        selectedUnit = UIController.instance.selectedUnit;
         UpdateEquipmentUI();
     }
 }

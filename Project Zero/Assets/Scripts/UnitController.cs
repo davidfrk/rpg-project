@@ -8,6 +8,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Unit))]
 public class UnitController : MonoBehaviour
 {
+    public bool playerUnit = false;
+    public PlayerController owner;
+
     public UnitState state = UnitState.Idle;
 
     internal Unit unit;
@@ -25,6 +28,9 @@ public class UnitController : MonoBehaviour
 
     public delegate void DeathEvent(Unit killer);
     public event DeathEvent OnDeathCallback;
+
+    public delegate void KillEvent(Unit prey);
+    public event KillEvent OnKillCallback;
 
     void Awake()
     {
@@ -138,6 +144,22 @@ public class UnitController : MonoBehaviour
         gameObject.layer = LayerMask.NameToLayer("Corpse");
 
         OnDeathCallback?.Invoke(killer);
+
+        if (killer != null)
+        {
+            UnitController killerController = killer.GetComponent<UnitController>();
+            killerController.OnKillEvent(this.unit);
+        }
+    }
+
+    private void OnKillEvent(Unit prey)
+    {
+        OnKillCallback?.Invoke(prey);
+
+        if (owner != null)
+        {
+            owner.OnKill(prey);
+        }
     }
 
     public void Spawn(Vector3 pos, Quaternion rot)

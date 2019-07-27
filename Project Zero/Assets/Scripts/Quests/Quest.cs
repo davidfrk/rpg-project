@@ -47,6 +47,14 @@ public class Quest : MonoBehaviour
         return completed;
     }
 
+    public void OnSlay(Unit prey)
+    {
+        foreach (QuestCondition condition in questConditions)
+        {
+            condition.OnSlay(prey);
+        }
+    }
+
     public void Complete()
     {
         completed = true;

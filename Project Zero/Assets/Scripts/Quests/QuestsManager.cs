@@ -5,23 +5,34 @@ using UnityEngine.Events;
 
 public class QuestsManager : MonoBehaviour
 {
-    public Unit questOwner;
+    public PlayerController questOwner;
     public Quest quest;
 
     public UnityEvent OnGameStart;
 
     public void Start()
     {
+        questOwner = PlayerController.localPlayer;
+        questOwner.OnKillCallback += OnSlay;
         OnGameStart.Invoke();
     }
 
     public void Update()
     {
-        quest?.UpdateState(questOwner);
+        Unit selectedUnit = questOwner.selectedUnit;
+        if (selectedUnit != null)
+        {
+            quest?.UpdateState(selectedUnit);
+        }
     }
 
     public void AddQuest(Quest quest)
     {
         this.quest = quest;
+    }
+
+    public void OnSlay(Unit prey)
+    {
+        quest?.OnSlay(prey);
     }
 }

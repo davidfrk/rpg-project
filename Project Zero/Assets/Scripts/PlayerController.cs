@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public bool playerUnit = false;
-
-    UnitController unitController;
+    static public PlayerController localPlayer;
+    public Unit selectedUnit;
+    private UnitController selectedUnitController;
     Vector3 targetPosition;
     Unit targetUnit;
 
@@ -18,9 +18,12 @@ public class PlayerController : MonoBehaviour
     Ray ray;
     public LayerMask layer;
 
+    public delegate void KillEvent(Unit prey);
+    public event KillEvent OnKillCallback;
+
     void Awake()
     {
-        unitController = GetComponent<UnitController>();
+        localPlayer = this;
     }
 
     void Start()
@@ -30,12 +33,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (unitController.state == UnitState.Dead) return;
-
-        if (playerUnit)
-        {
-            InputUpdate();
-        }
+        InputUpdate();
     }
 
     void InputUpdate()
@@ -43,36 +41,56 @@ public class PlayerController : MonoBehaviour
         //Avoids clicks on UI firing commands
         if (uiController.lastUIClick + uiProtectionTime > Time.time) return;
 
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer))
+        {
+            targetUnit = hit.transform.GetComponentInParent<Unit>();
+
+            //LeftClick
+            if (Input.GetMouseButtonDown(0) && targetUnit != null)
+            {
+                selectedUnit = targetUnit;
+                selectedUnitController = selectedUnit.GetComponent<UnitController>();
+            }
+
+            if (selectedUnit != null && selectedUnitController.state != UnitState.Dead)
+            {
+                UnitCommandsUpdate();
+            }
+        }
+    }
+
+    void UnitCommandsUpdate()
+    {
         if (Input.GetMouseButtonDown(1))
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer))
+            if (targetUnit != null)
             {
-                targetUnit = hit.transform.GetComponentInParent<Unit>();
-                if (targetUnit != null)
+                //UnitClick
+                if (selectedUnit != targetUnit)
                 {
-                    //UnitClick
-                    if (unitController.unit != targetUnit)
-                    {
-                        unitController.MoveAttack(targetUnit);
-                    }
+                    selectedUnitController.MoveAttack(targetUnit);
+                }
+            }
+            else
+            {
+                Item item = hit.transform.GetComponentInParent<Item>();
+                //PickItem
+                if (item != null)
+                {
+                    selectedUnitController.MoveToPickItem(item);
                 }
                 else
                 {
-                    Item item = hit.transform.GetComponentInParent<Item>();
-                    //PickItem
-                    if (item != null)
-                    {
-                        unitController.MoveToPickItem(item);
-                    }
-                    else
-                    {
-                        //GroundClick
-                        unitController.Move(hit.point);
-                    }
+                    //GroundClick
+                    selectedUnitController.Move(hit.point);
                 }
             }
         }
+    }
+
+    public void OnKill(Unit prey)
+    {
+        OnKillCallback?.Invoke(prey);
     }
 }
