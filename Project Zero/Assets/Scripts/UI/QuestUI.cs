@@ -1,33 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestUI : MonoBehaviour
 {
     public Quest quest;
+    public Text questName;
+    public Transform conditionsTransform;
     public QuestConditionUI conditionUIPrefab;
-    public Transform questTransform;
 
     List<QuestConditionUI> conditionUIList = new List<QuestConditionUI>();
-
-    void Start()
-    {
-        QuestManager.questManager.OnQuestUpdateCallback += InitiateUI;
-        Quest newQuest = QuestManager.questManager.quest;
-        if (newQuest != null)
-        {
-            InitiateUI(newQuest);
-        }
-    }
-
-    void Update()
-    {
-        UpdateUI();
-    }
 
     public void InitiateUI(Quest quest)
     {
         this.quest = quest;
+        questName.text = quest.gameObject.name;
 
         foreach(QuestConditionUI condition in conditionUIList)
         {
@@ -37,7 +25,7 @@ public class QuestUI : MonoBehaviour
 
         for (int i = 0; i < quest.questConditions.Count; i++)
         {
-            QuestConditionUI newConditionUI = Instantiate<QuestConditionUI>(conditionUIPrefab, questTransform);
+            QuestConditionUI newConditionUI = Instantiate<QuestConditionUI>(conditionUIPrefab, conditionsTransform);
             conditionUIList.Add(newConditionUI);
         }
     }

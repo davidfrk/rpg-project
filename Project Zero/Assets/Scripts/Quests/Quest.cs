@@ -11,11 +11,11 @@ public class Quest : MonoBehaviour
     public List<QuestCondition> questConditions;
 
     public UnityEvent OnComplete;
-    private QuestManager questsManager;
+    private QuestsManager questsManager;
 
     void Awake()
     {
-        questsManager = GetComponentInParent<QuestManager>();
+        questsManager = GetComponentInParent<QuestsManager>();
     }
 
     public void StartQuest()

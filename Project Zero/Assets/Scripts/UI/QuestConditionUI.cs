@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class QuestConditionUI : MonoBehaviour
 {
-    private Text text;
-
-    void Awake()
+    public Text text;
+    
+    public void Awake()
     {
-        text = GetComponent<Text>();
+        //text = GetComponent<Text>();
     }
 
     public void UpdateUI(QuestCondition condition)
