@@ -40,14 +40,29 @@ public class QuestCondition
 
     private bool CheckItemCondition(Unit owner)
     {
-        Inventory inventory = owner.GetComponent<Inventory>();
+        if (this.item == null)
+        {
+            return true;
+        }
 
-        if (inventory != null)
+        EquipmentManager equipmentManager = owner.GetComponent<EquipmentManager>();
+
+        if (equipmentManager != null)
         {
             currentAmount = 0;
-            foreach (Item item in inventory.Items)
+            
+            foreach (EquipmentSlot equipmentSlot in equipmentManager.equipmentSlots)
             {
-                if (item != null && this.item && item.id == this.item.id)
+                Item item = equipmentSlot.equipment?.item;
+                if (item != null && item.id == this.item.id)
+                {
+                    currentAmount++;
+                }
+            }
+            
+            foreach (Item item in equipmentManager.inventory.Items)
+            {
+                if (item != null && item.id == this.item.id)
                 {
                     currentAmount++;
                 }

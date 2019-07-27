@@ -6,7 +6,7 @@ using UnityEngine;
 public class EquipmentManager : MonoBehaviour
 {
     Unit unit;
-    Inventory inventory;
+    internal Inventory inventory;
     public List<EquipmentSlot> equipmentSlots;
 
     void Awake()
