@@ -57,11 +57,6 @@ namespace Skills
                 }
             }
         }
-
-        public static Collider[] FindUnitsInBox(Vector3 center, Vector3 dimensions, Quaternion orientation)
-        {
-            return Physics.OverlapBox(center, dimensions, orientation, LayerMask.GetMask("Unit"));
-        }
     }
 }
 

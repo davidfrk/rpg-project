@@ -9,8 +9,16 @@ public class UIBar : MonoBehaviour
 
     public void Set(float state)
     {
-        Vector2 newSize = size;
-        newSize.x *= Mathf.Clamp01(state); 
-        rectTransform.sizeDelta = newSize;
+        if (state == 0)
+        {
+            rectTransform.gameObject.SetActive(false);
+        }
+        else
+        {
+            Vector2 newSize = size;
+            newSize.x *= Mathf.Clamp01(state);
+            rectTransform.sizeDelta = newSize;
+            rectTransform.gameObject.SetActive(true);
+        }
     }
 }
