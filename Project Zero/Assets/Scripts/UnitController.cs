@@ -227,6 +227,25 @@ public class UnitController : MonoBehaviour
 
         Debug.Log("MoveToCast");
     }
+
+    //Workaround para evitar que o agente continue tentando chegar em um posição bloqueada por outro agente
+    private void OnTriggerStay(Collider other)
+    {
+        if (state == UnitState.Moving)
+        {
+            UnitController unitController = other.GetComponent<UnitController>();
+            if (unitController != null)
+            {
+                Vector3 targetDir = targetPosition - unitController.transform.position;
+                float minDist = unit.radius + unitController.unit.radius + 0.1f;
+                if (targetDir.magnitude < minDist)
+                {
+                    Move(unitController.transform.position + minDist * targetDir.normalized);
+                    //movementController.Stop();
+                }
+            }
+        }
+    }
 }
 
 public enum UnitState

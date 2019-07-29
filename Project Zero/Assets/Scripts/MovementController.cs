@@ -70,7 +70,7 @@ public class MovementController : MonoBehaviour
 
     public void MoveToPosition(Vector3 position)
     {
-        agent.stoppingDistance = 0f;
+        agent.stoppingDistance = 0.1f;
         targetPosition = position;
         agent.SetDestination(position);
         movementState = MovementState.Running;
@@ -101,6 +101,14 @@ public class MovementController : MonoBehaviour
         {
             return true;
         }
+    }
+
+    public void Stop()
+    {
+        agent.isStopped = true;
+        agent.isStopped = false;
+        movementState = MovementState.Idle;
+        OnMovementCallback.Invoke();
     }
 }
 

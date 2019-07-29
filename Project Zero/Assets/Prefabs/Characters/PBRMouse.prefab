@@ -1295,12 +1295,12 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051882260090765376}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.29517803
-  m_Height: 1.2320688
+  m_Radius: 0.5
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.65, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &2052899439519085565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1314,6 +1314,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerUnit: 0
+  owner: {fileID: 0}
   state: 0
   action:
     actionType: 0
@@ -1379,6 +1380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 1
+  id: 0
   health: 0
   mana: 0
   radius: 0.5
