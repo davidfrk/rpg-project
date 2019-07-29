@@ -17,6 +17,7 @@ public class UnitController : MonoBehaviour
     MovementController movementController;
     NavMeshAgent navMeshAgent;
     EquipmentManager equipmentManager;
+    internal CastController castController;
 
     [SerializeField]
     Action action = new Action();
@@ -39,6 +40,7 @@ public class UnitController : MonoBehaviour
         movementController.OnMovementCallback += MovementCallback;
         navMeshAgent = GetComponent<NavMeshAgent>();
         equipmentManager = GetComponent<EquipmentManager>();
+        castController = GetComponent<CastController>();
     }
 
     void Update()
@@ -58,14 +60,23 @@ public class UnitController : MonoBehaviour
 
         if (state == UnitState.MovingToAct)
         {
-            if (action.actionType == Action.ActionType.Attack)
+            switch (action.actionType)
             {
-                Attack(targetUnit);
-            }
-
-            if (action.actionType == Action.ActionType.PickItem)
-            {
-                PickItem(action.item);
+                case Action.ActionType.Attack:
+                    {
+                        Attack(targetUnit);
+                        break;
+                    }
+                case Action.ActionType.PickItem:
+                    {
+                        PickItem(action.item);
+                        break;
+                    }
+                case Action.ActionType.Cast:
+                    {
+                        Cast();
+                        break;
+                    }
             }
         }
     }
@@ -110,6 +121,11 @@ public class UnitController : MonoBehaviour
         targetUnit = target;
     }
 
+    void Cast()
+    {
+        state = UnitState.Casting;
+    }
+
     public void AttackEndEvent()
     {
         if (targetUnit != null)
@@ -121,7 +137,11 @@ public class UnitController : MonoBehaviour
             {
                 if (targetUnit.alive)
                 {
-                    MoveAttack(targetUnit);
+                    Vector3 targetDir = targetUnit.transform.position - transform.position;
+                    if (targetDir.magnitude > DistanceToAttack() || Vector3.Angle(transform.forward, targetDir) > 5f)
+                    {
+                        MoveAttack(targetUnit);
+                    }
                 }
                 else
                 {
@@ -129,6 +149,14 @@ public class UnitController : MonoBehaviour
                     targetUnit = null;
                 }
             }
+        }
+    }
+
+    public void OnCastEnd()
+    {
+        if (state == UnitState.Casting)
+        {
+            state = UnitState.Idle;
         }
     }
 
@@ -188,6 +216,16 @@ public class UnitController : MonoBehaviour
             equipmentManager.PickItem(item);
         }
         state = UnitState.Idle;
+    }
+
+    public void MoveToCast(Vector3 position, float range)
+    {
+        state = UnitState.MovingToAct;
+        action.actionType = Action.ActionType.Cast;
+
+        movementController.MoveCloseToPosition(position, range);
+
+        Debug.Log("MoveToCast");
     }
 }
 

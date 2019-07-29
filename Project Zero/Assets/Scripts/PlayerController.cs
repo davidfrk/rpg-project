@@ -24,6 +24,16 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         localPlayer = this;
+        if (selectedUnit != null)
+        {
+            SelectUnit(selectedUnit);
+        }
+    }
+
+    void SelectUnit(Unit unit)
+    {
+        selectedUnit = unit;
+        selectedUnitController = selectedUnit.GetComponent<UnitController>();
     }
 
     void Start()
@@ -49,8 +59,7 @@ public class PlayerController : MonoBehaviour
             //LeftClick
             if (Input.GetMouseButtonDown(0) && targetUnit != null)
             {
-                selectedUnit = targetUnit;
-                selectedUnitController = selectedUnit.GetComponent<UnitController>();
+                SelectUnit(targetUnit);
             }
 
             if (selectedUnit != null && selectedUnitController.state != UnitState.Dead)
@@ -62,7 +71,22 @@ public class PlayerController : MonoBehaviour
 
     void UnitCommandsUpdate()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (selectedUnitController.castController != null && selectedUnitController.castController.CanCast(0))
+            {
+                if (targetUnit != null)
+                {
+                    selectedUnitController.MoveToCast(targetUnit.transform.position, selectedUnitController.castController.GetCastRange(0));
+                }
+                else
+                {
+                    selectedUnitController.MoveToCast(hit.point, selectedUnitController.castController.GetCastRange(0));
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1) && selectedUnitController.state != UnitState.Casting)
         {
             if (targetUnit != null)
             {

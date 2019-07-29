@@ -19,6 +19,7 @@ public class AnimatorUpdate : MonoBehaviour
     {
         animator.SetBool("Running", movementController.MovementState == MovementState.Running);
         animator.SetBool("Attacking", unitController.state == UnitState.Attacking);
+        animator.SetBool("Casting", unitController.state == UnitState.Casting);
         animator.SetBool("Dead", unitController.state == UnitState.Dead);
     }
 }

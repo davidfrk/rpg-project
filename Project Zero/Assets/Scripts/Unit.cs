@@ -129,6 +129,11 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public void PayManaCost(float manaCost)
+    {
+        Mana -= manaCost;
+    }
+
     public void Awake()
     {
         experienceManager = GetComponent<ExperienceManager>();

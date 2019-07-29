@@ -14,5 +14,6 @@ public struct Action
     {
         Attack,
         PickItem,
+        Cast
     }
 }

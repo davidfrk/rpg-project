@@ -4553,6 +4553,7 @@ Transform:
   - {fileID: 893988825311420826}
   - {fileID: 893988825311420824}
   - {fileID: 893988825311420822}
+  - {fileID: 8434849036624082776}
   m_Father: {fileID: 893988825311420814}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5286,6 +5287,7 @@ GameObject:
   - component: {fileID: 7486849434557813901}
   - component: {fileID: 1376011945041131546}
   - component: {fileID: 5555215616702508784}
+  - component: {fileID: 2612029882873055457}
   m_Layer: 9
   m_Name: FemaleWarrior
   m_TagString: Untagged
@@ -5355,6 +5357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerUnit: 0
+  owner: {fileID: 0}
   state: 0
   action:
     actionType: 0
@@ -5420,6 +5423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 1
+  id: 0
   health: 0
   mana: 0
   radius: 0.5
@@ -5583,6 +5587,20 @@ MonoBehaviour:
     equipment: {fileID: 0}
   - equipmentType: 5
     equipment: {fileID: 0}
+--- !u!114 &2612029882873055457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371175118911467019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d54dab9cf849c514dbba2bc5ef8fdf57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castTransform: {fileID: 8434849036624082776}
+  effectPrefab: {fileID: 0}
 --- !u!1 &4372174721725756961
 GameObject:
   m_ObjectHideFlags: 0
@@ -5868,3 +5886,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 200, y: 20}
   rectTransform: {fileID: 4372174721725756960}
+--- !u!1 &5148752167914619618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8434849036624082776}
+  m_Layer: 0
+  m_Name: CastTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8434849036624082776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5148752167914619618}
+  m_LocalRotation: {x: -0.515403, y: 0.47019607, z: 0.5840388, w: -0.4149388}
+  m_LocalPosition: {x: -0.0039, y: 0.0112, z: 0.0024}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 893988825311420806}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 186.979, y: -268.467, z: 77.579994}
