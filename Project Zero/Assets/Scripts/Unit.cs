@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Kryz.CharacterStats;
 
 [RequireComponent(typeof(ExperienceManager))]
 public class Unit : MonoBehaviour
@@ -48,13 +49,15 @@ public class Unit : MonoBehaviour
     }
 
     public float radius = 0.5f;
+    [SerializeField]
+    public Stats stats;
 
-    public UnitStats unitStats;
-    public UnitStats baseStats;
-    public UnitStats statsGain;
-    public UnitStats equipStats;
+    public BaseStats unitStats;
+    public BaseStats baseStats;
+    public BaseStats statsGain;
+    public BaseStats equipStats;
 
-    UnitStats newStats;
+    BaseStats newStats;
 
     float physicalResistance = 0f;
     float magicResistance = 0f;
@@ -62,7 +65,7 @@ public class Unit : MonoBehaviour
     public void UpdateStats()
     {
         newStats = baseStats + (experienceManager.level * statsGain) + equipStats;
-        UnitStats.UpdateDerivedStats(ref newStats);
+        BaseStats.UpdateDerivedStats(ref newStats);
 
         //maintaining proportion of life and mana
         health = health / unitStats.MaxHealth * newStats.MaxHealth;
@@ -72,7 +75,7 @@ public class Unit : MonoBehaviour
 
         //Update resistances
         physicalResistance = PhysicalResistanceFormula(unitStats.Armor);
-        magicResistance = MagicResistanceFormula(unitStats.MagicResistance);
+        magicResistance = MagicResistanceFormula(unitStats.MagicArmor);
     }
 
     public void TakeDamage(float damage, DamageType damageType, Unit damageDealer)

@@ -50,7 +50,7 @@ public class StatsUI : MonoBehaviour
             Attack.text = selectedUnit.unitStats.Attack.ToString("F0");
             AttackSpeed.text = selectedUnit.unitStats.AttackSpeed.ToString("F0");
             Armor.text = selectedUnit.unitStats.Armor.ToString("F0");
-            MagicArmor.text = selectedUnit.unitStats.MagicResistance.ToString("F0");
+            MagicArmor.text = selectedUnit.unitStats.MagicArmor.ToString("F0");
             
             Str.text = selectedUnit.unitStats.Str.ToString("F0");
             Agi.text = selectedUnit.unitStats.Agi.ToString("F0");

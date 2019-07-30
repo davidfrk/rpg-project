@@ -180,7 +180,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void UpdateEquipmentStats()
     {
-        UnitStats equipStats = new UnitStats();
+        BaseStats equipStats = new BaseStats();
 
         foreach(EquipmentSlot slot in equipmentSlots)
         {
