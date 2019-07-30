@@ -9,7 +9,7 @@ public class SkillsUI : MonoBehaviour
     List<SkillSlotUI> skillSlots = new List<SkillSlotUI>();
     PlayerController localPlayer;
     Unit selectedUnit;
-    CastController castController;
+    SkillsManager castController;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class SkillsUI : MonoBehaviour
         }
         skillSlots.Clear();
 
-        castController = selectedUnit.GetComponent<CastController>();
+        castController = selectedUnit.GetComponent<SkillsManager>();
 
         if (castController != null)
         {

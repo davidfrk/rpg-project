@@ -5359,11 +5359,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUnit: 0
   owner: {fileID: 0}
-  state: 0
   action:
     actionType: 0
     targetUnit: {fileID: 0}
     item: {fileID: 0}
+    skill: {fileID: 0}
 --- !u!114 &4372174723199442353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5424,7 +5424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 1
-  id: 0
+  id: 3
   health: 0
   mana: 0
   radius: 0.5
@@ -5602,6 +5602,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castTransform: {fileID: 8434849036624082776}
   skills: []
+  startingSkills:
+  - {fileID: 5930755566368755613, guid: e1d0211543b2b024f9234558aec62c5f, type: 3}
 --- !u!54 &4197918634927300674
 Rigidbody:
   m_ObjectHideFlags: 0

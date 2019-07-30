@@ -455,7 +455,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUnit: 0
   owner: {fileID: 0}
-  state: 0
   action:
     actionType: 0
     targetUnit: {fileID: 0}
@@ -520,7 +519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 1
-  id: 0
+  id: 4
   health: 0
   mana: 0
   radius: 0.5

@@ -25,7 +25,7 @@ public class AI : MonoBehaviour
 
     void OnBeingAttacked(Unit aggressor)
     {
-        if (unitController.state == UnitState.Idle)
+        if (unitController.State == UnitState.Idle && aggressor.alive)
         {
             unitController.MoveAttack(aggressor);
             //Call for assistance
@@ -50,7 +50,7 @@ public class AI : MonoBehaviour
 
     private void ListenOnBeingAttackedEvent(Unit target, Unit aggressor)
     {
-        if (unitController.state == UnitState.Idle || unitController.state == UnitState.Moving)
+        if (unitController.State == UnitState.Idle || unitController.State == UnitState.Moving)
         {
             //Dont attack yourself
             if (aggressor != this.unit)
@@ -62,7 +62,7 @@ public class AI : MonoBehaviour
 
     void Update()
     {
-        if (aggression == AggressionType.Agressive && unitController.state == UnitState.Idle)
+        if (aggression == AggressionType.Agressive && unitController.State == UnitState.Idle)
         {
             SearchForEnemy();
         }

@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
                 SelectUnit(targetUnit);
             }
 
-            if (selectedUnit != null && selectedUnitController.state != UnitState.Dead)
+            if (selectedUnit != null && selectedUnitController.State != UnitState.Dead)
             {
                 UnitCommandsUpdate();
             }
@@ -77,16 +77,16 @@ public class PlayerController : MonoBehaviour
             {
                 if (targetUnit != null)
                 {
-                    selectedUnitController.MoveToCast(targetUnit.transform.position, selectedUnitController.castController.GetCastRange(0));
+                    selectedUnitController.MoveToCast(targetUnit.transform.position, 0);
                 }
                 else
                 {
-                    selectedUnitController.MoveToCast(hit.point, selectedUnitController.castController.GetCastRange(0));
+                    selectedUnitController.MoveToCast(hit.point, 0);
                 }
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && selectedUnitController.state != UnitState.Casting)
+        if (Input.GetMouseButtonDown(1))
         {
             if (targetUnit != null)
             {

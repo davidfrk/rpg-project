@@ -11,18 +11,36 @@ public class UnitController : MonoBehaviour
     public bool playerUnit = false;
     public PlayerController owner;
 
-    public UnitState state = UnitState.Idle;
+    private UnitState state = UnitState.Idle;
+    public UnitState State
+    {
+        get
+        {
+            return state;
+        }
+        set
+        {
+            if (value != state)
+            {
+                state = value;
+                OnStateChangeCallback?.Invoke(state);
+            }
+        }
+    }
 
     internal Unit unit;
     MovementController movementController;
     NavMeshAgent navMeshAgent;
     EquipmentManager equipmentManager;
-    internal CastController castController;
+    internal SkillsManager castController;
 
-    [SerializeField]
-    Action action = new Action();
+    //[SerializeField]
+    public Action action = new Action();
     Vector3 targetPosition;
     Unit targetUnit;
+
+    public delegate void StateChangeEvent(UnitState state);
+    public event StateChangeEvent OnStateChangeCallback;
 
     public delegate void OnBeingAttackedEvent(Unit aggressor);
     public event OnBeingAttackedEvent OnBeingAttackedCallback;
@@ -40,12 +58,12 @@ public class UnitController : MonoBehaviour
         movementController.OnMovementCallback += MovementCallback;
         navMeshAgent = GetComponent<NavMeshAgent>();
         equipmentManager = GetComponent<EquipmentManager>();
-        castController = GetComponent<CastController>();
+        castController = GetComponent<SkillsManager>();
     }
 
     void Update()
     {
-        if (state == UnitState.MovingToAct && action.actionType == Action.ActionType.Attack)
+        if (State == UnitState.MovingToAct && action.actionType == Action.ActionType.Attack)
         {
             MoveToAttackUpdate();
         }
@@ -53,12 +71,12 @@ public class UnitController : MonoBehaviour
 
     void MovementCallback()
     {
-        if (state == UnitState.Moving)
+        if (State == UnitState.Moving)
         {
-            state = UnitState.Idle;
+            State = UnitState.Idle;
         }
 
-        if (state == UnitState.MovingToAct)
+        if (State == UnitState.MovingToAct)
         {
             switch (action.actionType)
             {
@@ -83,7 +101,9 @@ public class UnitController : MonoBehaviour
 
     public void MoveAttack(Unit target)
     {
-        state = UnitState.MovingToAct;
+        if (!StopCurrentAction()) return;
+
+        State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.Attack;
         action.targetUnit = target;
 
@@ -95,7 +115,7 @@ public class UnitController : MonoBehaviour
     {
         if (targetUnit == null || !targetUnit.alive)
         {
-            state = UnitState.Idle;
+            State = UnitState.Idle;
         }
         else
         {
@@ -110,20 +130,43 @@ public class UnitController : MonoBehaviour
 
     public void Move(Vector3 position)
     {
-        state = UnitState.Moving;
+        if (!StopCurrentAction()) return;
+
+        State = UnitState.Moving;
         targetPosition = position;
         movementController.MoveToPosition(targetPosition);
     }
 
     void Attack(Unit target)
     {
-        state = UnitState.Attacking;
+        State = UnitState.Attacking;
         targetUnit = target;
     }
 
     void Cast()
     {
-        state = UnitState.Casting;
+        State = UnitState.Casting;
+    }
+
+    bool StopCurrentAction()
+    {
+        if (State == UnitState.Casting)
+        {
+            if (action.skill.CanBeInterrupted())
+            {
+                action.skill.Interrupt();
+                State = UnitState.Idle;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
     }
 
     public void AttackEndEvent()
@@ -133,7 +176,7 @@ public class UnitController : MonoBehaviour
             targetUnit.TakeDamage(unit.unitStats.Attack, DamageType.Physical, this.unit);
             targetUnit.unitController.OnBeingAttackedEventCallback(this.unit);
 
-            if (unit.alive && state == UnitState.Attacking)
+            if (unit.alive && State == UnitState.Attacking)
             {
                 if (targetUnit.alive)
                 {
@@ -145,7 +188,7 @@ public class UnitController : MonoBehaviour
                 }
                 else
                 {
-                    state = UnitState.Idle;
+                    State = UnitState.Idle;
                     targetUnit = null;
                 }
             }
@@ -154,9 +197,9 @@ public class UnitController : MonoBehaviour
 
     public void OnCastEnd()
     {
-        if (state == UnitState.Casting)
+        if (State == UnitState.Casting)
         {
-            state = UnitState.Idle;
+            State = UnitState.Idle;
         }
     }
 
@@ -167,7 +210,7 @@ public class UnitController : MonoBehaviour
 
     public void Die(Unit killer)
     {
-        state = UnitState.Dead;
+        State = UnitState.Dead;
         navMeshAgent.enabled = false;
         gameObject.layer = LayerMask.NameToLayer("Corpse");
 
@@ -196,13 +239,15 @@ public class UnitController : MonoBehaviour
         transform.rotation = rot;
         unit.Spawn();
         navMeshAgent.enabled = true;
-        state = UnitState.Idle;
+        State = UnitState.Idle;
         gameObject.layer = LayerMask.NameToLayer("Unit");
     }
 
     public void MoveToPickItem(Item item)
     {
-        state = UnitState.MovingToAct;
+        if (!StopCurrentAction()) return;
+
+        State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.PickItem;
         action.item = item;
 
@@ -215,15 +260,18 @@ public class UnitController : MonoBehaviour
         {
             equipmentManager.PickItem(item);
         }
-        state = UnitState.Idle;
+        State = UnitState.Idle;
     }
 
-    public void MoveToCast(Vector3 position, float range)
+    public void MoveToCast(Vector3 position, int skillSlot)
     {
-        state = UnitState.MovingToAct;
-        action.actionType = Action.ActionType.Cast;
+        if (!StopCurrentAction()) return;
 
-        movementController.MoveCloseToPosition(position, range);
+        State = UnitState.MovingToAct;
+        action.actionType = Action.ActionType.Cast;
+        action.skill = castController.skills[skillSlot];
+
+        movementController.MoveCloseToPosition(position, action.skill.castRange);
 
         Debug.Log("MoveToCast");
     }
@@ -231,7 +279,7 @@ public class UnitController : MonoBehaviour
     //Workaround para evitar que o agente continue tentando chegar em um posição bloqueada por outro agente
     private void OnTriggerStay(Collider other)
     {
-        if (state == UnitState.Moving)
+        if (State == UnitState.Moving)
         {
             UnitController unitController = other.GetComponent<UnitController>();
             if (unitController != null)

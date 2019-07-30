@@ -6389,10 +6389,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2612029882873055457, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
-      propertyPath: skills.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4376567983897914695, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.36
@@ -6441,36 +6437,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: FemaleWarrior
       objectReference: {fileID: 0}
-    - target: {fileID: 4372174722718498079, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 534669904}
-    - target: {fileID: 4371175118911467019, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 4372174723199442358, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
+      propertyPath: playerUnit
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2578146209175847621, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
-      propertyPath: layer.m_Bits
-      value: 3585
       objectReference: {fileID: 0}
     - target: {fileID: 4372174723199442358, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
       propertyPath: owner
       value: 
       objectReference: {fileID: 588896054}
-    - target: {fileID: 4372174723199442358, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
-      propertyPath: playerUnit
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2612029882873055457, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
-      propertyPath: effectPrefab
-      value: 
-      objectReference: {fileID: 1634767862067424, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
-    - target: {fileID: 2612029882873055457, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
-      propertyPath: skills.Array.data[0]
-      value: 
-      objectReference: {fileID: 5930755566368755613, guid: e1d0211543b2b024f9234558aec62c5f, type: 3}
-    m_RemovedComponents:
-    - {fileID: 2578146209175847621, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
 --- !u!1001 &1332744085128387749
 PrefabInstance:

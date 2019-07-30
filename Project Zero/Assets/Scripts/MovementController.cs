@@ -11,18 +11,29 @@ public class MovementController : MonoBehaviour
     bool ensureRotation = false;
 
     [SerializeField]
-    MovementState movementState = MovementState.Idle;
+    private MovementState movementState = MovementState.Idle;
     public MovementState MovementState
     {
         get
         {
             return movementState;
         }
+        set
+        {
+            if (value != movementState)
+            {
+                movementState = value;
+                OnStateChangeCallback?.Invoke(movementState);
+            }
+        }
     }
 
     //Callback quando esta em range ou chegou no destino
     public delegate void MovementEvent();
     public event MovementEvent OnMovementCallback;
+
+    public delegate void StateChangeEvent(MovementState state);
+    public event StateChangeEvent OnStateChangeCallback;
 
     void Awake()
     {
@@ -37,13 +48,13 @@ public class MovementController : MonoBehaviour
         }
         else
         {
-            movementState = MovementState.Idle;
+            MovementState = MovementState.Idle;
         }
     }
 
     void StateUpdate()
     {
-        if (movementState != MovementState.Idle) {
+        if (MovementState != MovementState.Idle) {
             if (!agent.pathPending)
             {
                 if (agent.velocity.sqrMagnitude == 0f && agent.remainingDistance <= agent.stoppingDistance)
@@ -54,13 +65,13 @@ public class MovementController : MonoBehaviour
                         if (isFacingTheTarget)
                         {
                             ensureRotation = false;
-                            movementState = MovementState.Idle;
+                            MovementState = MovementState.Idle;
                             OnMovementCallback();
                         }
                     }
                     else
                     {
-                        movementState = MovementState.Idle;
+                        MovementState = MovementState.Idle;
                         OnMovementCallback();
                     }
                 }
@@ -73,7 +84,7 @@ public class MovementController : MonoBehaviour
         agent.stoppingDistance = 0.1f;
         targetPosition = position;
         agent.SetDestination(position);
-        movementState = MovementState.Running;
+        MovementState = MovementState.Running;
         ensureRotation = false;
     }
 
@@ -82,7 +93,7 @@ public class MovementController : MonoBehaviour
         agent.stoppingDistance = distance;
         targetPosition = position;
         agent.SetDestination(position);
-        movementState = MovementState.Running;
+        MovementState = MovementState.Running;
         ensureRotation = true;
     }
 
@@ -107,7 +118,7 @@ public class MovementController : MonoBehaviour
     {
         agent.isStopped = true;
         agent.isStopped = false;
-        movementState = MovementState.Idle;
+        MovementState = MovementState.Idle;
         OnMovementCallback.Invoke();
     }
 }

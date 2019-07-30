@@ -20,15 +20,17 @@ namespace Skills
             transform.rotation = owner.transform.rotation;
             transform.GetChild(0).gameObject.SetActive(true);
             active = true;
+
+            ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
+            particleSystem.Play(true);
         }
 
         public override void OnCastEnd()
         {
             ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
             particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            active = false;
 
-            Destroy(this.gameObject, durationAfterCastEnd);
+            active = false;
         }
 
         void Update()
@@ -46,7 +48,7 @@ namespace Skills
         public virtual void DamageTick(Unit owner)
         {
             Vector3 center = owner.transform.position + owner.transform.forward * boxDimensions.z + owner.transform.up * boxDimensions.y;
-            Collider[] unitColliders = FindUnitsInBox(center, boxDimensions, transform.rotation);
+            Collider[] unitColliders = FindUnitsInBox(center, boxDimensions, owner.transform.rotation);
 
             foreach (Collider unitCollider in unitColliders)
             {
@@ -56,6 +58,11 @@ namespace Skills
                     unit.TakeDamage(damage, DamageType.Magic, owner);
                 }
             }
+        }
+
+        public override void Interrupt()
+        {
+            if (active) OnCastEnd();
         }
     }
 }
