@@ -5,6 +5,7 @@ namespace Skills
 {
     public class FlameThrowerSkill : Skill
     {
+        [Space(10)]
         public float damageInterval = 0.25f;
         public float damage = 10f;
         public float durationAfterCastEnd = 3;

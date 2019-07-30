@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 6638992914797894187}
   - component: {fileID: 2944301475110909628}
   - component: {fileID: 8564938496336945238}
+  - component: {fileID: 4828874021842340786}
   - component: {fileID: 4200514870737558181}
   m_Layer: 9
   m_Name: Knight
@@ -459,6 +460,7 @@ MonoBehaviour:
     actionType: 0
     targetUnit: {fileID: 0}
     item: {fileID: 0}
+    skill: {fileID: 0}
 --- !u!114 &534174340963668759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -683,6 +685,22 @@ MonoBehaviour:
     equipment: {fileID: 0}
   - equipmentType: 5
     equipment: {fileID: 0}
+--- !u!114 &4828874021842340786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535182445142892717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d54dab9cf849c514dbba2bc5ef8fdf57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castTransform: {fileID: 4008976834811251653}
+  skills: []
+  startingSkills:
+  - {fileID: 3892930933726173128, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
 --- !u!54 &4200514870737558181
 Rigidbody:
   m_ObjectHideFlags: 0
