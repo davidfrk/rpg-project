@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Kryz.CharacterStats;
 
 public class FocusSkill : Skill
 {
@@ -11,8 +12,8 @@ public class FocusSkill : Skill
 
     public override void Cast(Unit owner, Transform castTransform, Vector3 targetPosition)
     {
-        //owner.unitStats.Str.AddBuff(strBuff, duration);
-        //owner.hpRegen.AddBuff( hpRegenBuff, duration);
+        owner.stats.Str.AddModifier(new StatModifier(strBuff, StatModType.Flat, (int) StatModType.Flat, this));
+        owner.stats.HpRegen.AddModifier(new StatModifier(hpRegenBuff, StatModType.Flat, (int)StatModType.Flat, this));
 
         ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
         particleSystem.Play(true);
@@ -27,6 +28,8 @@ public class FocusSkill : Skill
 
     private void Stop()
     {
+        owner.stats.Str.RemoveAllModifiersFromSource(this);
+        owner.stats.HpRegen.RemoveAllModifiersFromSource(this);
         ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
         particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }

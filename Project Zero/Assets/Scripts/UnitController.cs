@@ -173,7 +173,7 @@ public class UnitController : MonoBehaviour
     {
         if (targetUnit != null)
         {
-            targetUnit.TakeDamage(unit.unitStats.Attack, DamageType.Physical, this.unit);
+            targetUnit.TakeDamage(unit.stats.Attack.Value, DamageType.Physical, this.unit);
             targetUnit.unitController.OnBeingAttackedEventCallback(this.unit);
 
             if (unit.alive && State == UnitState.Attacking)

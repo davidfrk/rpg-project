@@ -20,7 +20,7 @@ public class HealthBar : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        float state = unit.Health / unit.unitStats.MaxHealth;
+        float state = unit.Health / unit.MaxHealth;
         if (state == 1f || state == 0f)
         {
             healthBar.gameObject.SetActive(false);

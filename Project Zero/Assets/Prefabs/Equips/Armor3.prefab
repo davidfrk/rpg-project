@@ -85,18 +85,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equipmentType: 1
-  equipStats:
-    MaxHealth: 100
-    MaxMana: 0
-    Armor: 10
-    Attack: 0
-    AttackSpeed: 0
-    Str: 0
-    Agi: 0
-    Int: 0
-    Will: 0
-    MovementSpeed: 0
-    MagicResistance: 5
+  statBonus:
+  - stat: 4
+    statModType: 100
+    value: 5
 --- !u!1001 &4580892962107773319
 PrefabInstance:
   m_ObjectHideFlags: 0

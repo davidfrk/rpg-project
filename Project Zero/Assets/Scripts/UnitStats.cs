@@ -7,7 +7,9 @@ using Kryz.CharacterStats;
 public class Stats
 {
     public CharacterStat MaxHealth;
+    public CharacterStat HpRegen;
     public CharacterStat MaxMana;
+    public CharacterStat ManaRegen;
     public CharacterStat Armor;
     public CharacterStat MagicArmor;
     public CharacterStat Attack;
@@ -29,10 +31,20 @@ public class Stats
 
     private int level = 0;
 
-    public void UpdateBaseStats()
+    private StatModifier MaxHealthMod       = new StatModifier(0f, StatModType.Flat);
+    private StatModifier MaxManaMod         = new StatModifier(0f, StatModType.Flat);
+    private StatModifier ArmorMod           = new StatModifier(0f, StatModType.Flat);
+    private StatModifier MagicArmorMod      = new StatModifier(0f, StatModType.Flat);
+    private StatModifier AttackMod          = new StatModifier(0f, StatModType.Flat);
+    private StatModifier AttackSpeedMod     = new StatModifier(0f, StatModType.Flat);
+    private StatModifier MovementSpeedMod   = new StatModifier(0f, StatModType.Flat);
+
+    public void InitStats()
     {
         MaxHealth.BaseValue     = baseStats.MaxHealth;
+        HpRegen.BaseValue       = baseStats.HpRegen;
         MaxMana.BaseValue       = baseStats.MaxMana;
+        ManaRegen.BaseValue     = baseStats.ManaRegen;
         Armor.BaseValue         = baseStats.Armor;
         MagicArmor.BaseValue    = baseStats.MagicArmor;
         Attack.BaseValue        = baseStats.Attack;
@@ -42,6 +54,14 @@ public class Stats
         Int.BaseValue           = baseStats.Int;
         Will.BaseValue          = baseStats.Will;
         MovementSpeed.BaseValue = baseStats.MovementSpeed;
+
+        MaxHealth.AddModifier(MaxHealthMod);
+        MaxMana.AddModifier(MaxManaMod);
+        Armor.AddModifier(ArmorMod);
+        MagicArmor.AddModifier(MagicArmorMod);
+        Attack.AddModifier(AttackMod);
+        AttackSpeed.AddModifier(AttackSpeedMod);
+        MovementSpeed.AddModifier(MovementSpeedMod);
     }
 
     public void UpdateLevel(int level)
@@ -53,27 +73,79 @@ public class Stats
             Int.BaseValue = baseStats.Int + level * IntGain;
             Will.BaseValue = baseStats.Will + level * WillGain;
 
-            UpdateDerivedStats();
+            //UpdateDerivedStats();
         }
     }
 
     public void UpdateDerivedStats()
     {
-        MaxHealth.BaseValue += 10f * Str.Value;
-        MaxMana.BaseValue += 2f * Int.Value + Will.Value;
-        Armor.BaseValue += Agi.Value / 5f;
-        MagicArmor.BaseValue += Will.Value;
-        Attack.BaseValue += Str.Value;
-        AttackSpeed.BaseValue += Agi.Value;
-        MovementSpeed.BaseValue += Agi.Value / 20f;
+        MaxHealthMod.Value      = 10f * Str.Value;
+        MaxManaMod.Value        = 2f * Int.Value + Will.Value;
+        ArmorMod.Value          = Agi.Value / 5f;
+        MagicArmorMod.Value     = Will.Value;
+        AttackMod.Value         = Str.Value;
+        AttackSpeedMod.Value    = Agi.Value;
+        MovementSpeedMod.Value  = Agi.Value / 20f;
     }
+
+    public void AddStatModifier(StatType stat, float value, StatModType modType, object source)
+    {
+        CharacterStat characterStat = GetCharacterStat(stat);
+        characterStat.AddModifier(new StatModifier(value, modType, (int)modType, source));
+    }
+
+    public void RemoveStatModifier(StatType stat, object source)
+    {
+        CharacterStat characterStat = GetCharacterStat(stat);
+        characterStat.RemoveAllModifiersFromSource(source);
+    }
+
+    public CharacterStat GetCharacterStat(StatType stat)
+    {
+        switch (stat)
+        {
+            case StatType.MaxHealth:    return MaxHealth;
+            case StatType.HpRegen:      return HpRegen;
+            case StatType.MaxMana:      return MaxMana;
+            case StatType.ManaRegen:    return ManaRegen;
+            case StatType.Armor:        return Armor;
+            case StatType.MagicArmor:   return MagicArmor;
+            case StatType.Attack:       return Attack;
+            case StatType.AttackSpeed:  return AttackSpeed;
+            case StatType.Str:          return Str;
+            case StatType.Agi:          return Agi;
+            case StatType.Int:          return Int;
+            case StatType.Will:         return Will;
+            case StatType.MovementSpeed:return MovementSpeed;
+            default: return null;
+        }
+    }
+}
+
+public enum StatType
+{
+    MaxHealth,
+    HpRegen,
+    MaxMana,
+    ManaRegen,
+    Armor,
+    MagicArmor,
+    Attack,
+    AttackSpeed,
+    Str,
+    Agi,
+    Int,
+    Will,
+    MovementSpeed
 }
 
 [System.Serializable]
 public struct BaseStats
 {
     public float MaxHealth;
+    public float HpRegen;
     public float MaxMana;
+    public float ManaRegen;
     public float Armor;
     public float MagicArmor;
     public float Attack;
@@ -83,24 +155,15 @@ public struct BaseStats
     public float Int;
     public float Will;
     public float MovementSpeed;
-    
-    public static void UpdateDerivedStats(ref BaseStats stats)
-    {
-        stats.MaxHealth        += 10 * stats.Str;
-        stats.MaxMana          += 2 * stats.Int + stats.Will;
-        stats.Armor            += stats.Agi / 5f;
-        stats.Attack           += stats.Str;
-        stats.AttackSpeed      += stats.Agi;
-        stats.MovementSpeed    += stats.Agi / 20f;
-        stats.MagicArmor       += stats.Will;
-    }
 
     public static BaseStats operator+ (BaseStats stats1, BaseStats stats2)
     {
         BaseStats result;
         
         result.MaxHealth        = stats1.MaxHealth       + stats2.MaxHealth;
+        result.HpRegen          = stats1.HpRegen         + stats2.HpRegen;
         result.MaxMana          = stats1.MaxMana         + stats2.MaxMana;
+        result.ManaRegen        = stats1.ManaRegen       + stats2.ManaRegen;
         result.Armor            = stats1.Armor           + stats2.Armor;
         result.Attack           = stats1.Attack          + stats2.Attack;
         result.AttackSpeed      = stats1.AttackSpeed     + stats2.AttackSpeed;
@@ -119,7 +182,9 @@ public struct BaseStats
         BaseStats result;
 
         result.MaxHealth        = mult * stats.MaxHealth;
+        result.HpRegen          = mult * stats.HpRegen;
         result.MaxMana          = mult * stats.MaxMana;
+        result.ManaRegen        = mult * stats.ManaRegen;
         result.Armor            = mult * stats.Armor;
         result.Attack           = mult * stats.Attack;
         result.AttackSpeed      = mult * stats.AttackSpeed;

@@ -9,7 +9,22 @@ namespace Kryz.CharacterStats
 
 	public class StatModifier
 	{
-		public readonly float Value;
+		private float value;
+        public float Value
+        {
+            get
+            {
+                return this.value;
+            }
+            set
+            {
+                this.value = value;
+                if (owner != null)
+                {
+                    owner.SetDirty();
+                }
+            }
+        }
 		public readonly StatModType Type;
 		public readonly int Order;
 		public readonly object Source;
@@ -27,5 +42,18 @@ namespace Kryz.CharacterStats
 		public StatModifier(float value, StatModType type, int order) : this(value, type, order, null) { }
 
 		public StatModifier(float value, StatModType type, object source) : this(value, type, (int)type, source) { }
+
+        private CharacterStat owner;
+        public CharacterStat Owner
+        {
+            get
+            {
+                return owner;
+            }
+            set
+            {
+                owner = value;
+            }
+        }
 	}
 }

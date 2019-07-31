@@ -2633,6 +2633,7 @@ MonoBehaviour:
     actionType: 0
     targetUnit: {fileID: 0}
     item: {fileID: 0}
+    skill: {fileID: 0}
 --- !u!114 &6105486389643045186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2694,57 +2695,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alive: 1
   id: 2
-  health: 0
-  mana: 0
+  health: 1
+  mana: 1
   radius: 1.1
-  unitStats:
-    MaxHealth: 0
-    MaxMana: 0
-    Armor: 0
-    Attack: 0
-    AttackSpeed: 0
-    Str: 0
-    Agi: 0
-    Int: 0
-    Will: 0
-    MovementSpeed: 0
-    MagicResistance: 0
-  baseStats:
-    MaxHealth: 500
-    MaxMana: 150
-    Armor: 0
-    Attack: 30
-    AttackSpeed: 0
-    Str: 7
-    Agi: 15
-    Int: 3
-    Will: 6
-    MovementSpeed: 50
-    MagicResistance: 0
-  statsGain:
-    MaxHealth: 0
-    MaxMana: 0
-    Armor: 0
-    Attack: 0
-    AttackSpeed: 0
-    Str: 1
-    Agi: 2
-    Int: 1.5
-    Will: 1
-    MovementSpeed: 0
-    MagicResistance: 0
-  equipStats:
-    MaxHealth: 0
-    MaxMana: 0
-    Armor: 0
-    Attack: 0
-    AttackSpeed: 0
-    Str: 0
-    Agi: 0
-    Int: 0
-    Will: 0
-    MovementSpeed: 0
-    MagicResistance: 0
+  stats:
+    MaxHealth:
+      BaseValue: 0
+    HpRegen:
+      BaseValue: 0
+    MaxMana:
+      BaseValue: 0
+    ManaRegen:
+      BaseValue: 0
+    Armor:
+      BaseValue: 0
+    MagicArmor:
+      BaseValue: 0
+    Attack:
+      BaseValue: 0
+    AttackSpeed:
+      BaseValue: 0
+    Str:
+      BaseValue: 0
+    Agi:
+      BaseValue: 0
+    Int:
+      BaseValue: 0
+    Will:
+      BaseValue: 0
+    MovementSpeed:
+      BaseValue: 0
+    baseStats:
+      MaxHealth: 200
+      HpRegen: 2
+      MaxMana: 20
+      ManaRegen: 0
+      Armor: 0
+      MagicArmor: 0
+      Attack: 15
+      AttackSpeed: 20
+      Str: 10
+      Agi: 8
+      Int: 4
+      Will: 3
+      MovementSpeed: 50
+    StrGain: 1.4
+    AgiGain: 1.8
+    IntGain: 0.8
+    WillGain: 0.6
 --- !u!114 &6106765265455225594
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -38,10 +38,16 @@ namespace Kryz.CharacterStats
 			BaseValue = baseValue;
 		}
 
+        public void SetDirty()
+        {
+            isDirty = true;
+        }
+
 		public virtual void AddModifier(StatModifier mod)
 		{
 			isDirty = true;
 			statModifiers.Add(mod);
+            mod.Owner = this;
 		}
 
 		public virtual bool RemoveModifier(StatModifier mod)
@@ -49,6 +55,7 @@ namespace Kryz.CharacterStats
 			if (statModifiers.Remove(mod))
 			{
 				isDirty = true;
+                mod.Owner = null;
 				return true;
 			}
 			return false;

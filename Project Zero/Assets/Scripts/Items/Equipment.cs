@@ -6,7 +6,7 @@ public class Equipment : MonoBehaviour
 {
     internal Item item;
     public EquipmentType equipmentType;
-    public BaseStats equipStats;
+    public List<StatBonus> statBonus;
 
     void Awake()
     {

@@ -8,7 +8,7 @@ public class EquipmentManager : MonoBehaviour
     Unit unit;
     internal Inventory inventory;
     public List<EquipmentSlot> equipmentSlots;
-
+    
     void Awake()
     {
         unit = GetComponent<Unit>();
@@ -17,7 +17,7 @@ public class EquipmentManager : MonoBehaviour
 
     void Start()
     {
-        UpdateEquipmentStats();
+        //UpdateEquipmentStats();
     }
 
     public void PickItem(Item item)
@@ -62,7 +62,8 @@ public class EquipmentManager : MonoBehaviour
                 equipmentSlots[i] = slot;
 
                 //If you found an available equipment slot return
-                UpdateEquipmentStats();
+                Equip(equipment);
+                //UpdateEquipmentStats();
                 return;
             }
         }
@@ -74,8 +75,14 @@ public class EquipmentManager : MonoBehaviour
     private void RemoveEquipment(int slot)
     {
         EquipmentSlot equipmentSlot = equipmentSlots[slot];
-        equipmentSlot.equipment = null;
-        equipmentSlots[slot] = equipmentSlot;
+        Equipment equipment = equipmentSlot.equipment;
+
+        if (equipment != null)
+        {
+            equipmentSlot.equipment = null;
+            equipmentSlots[slot] = equipmentSlot;
+            UnEquip(equipment);
+        }
     }
 
     public void DropItem(Item.ItemType slotType, int slotIndex)
@@ -86,7 +93,7 @@ public class EquipmentManager : MonoBehaviour
             item = equipmentSlots[slotIndex].equipment?.item;
             RemoveEquipment(slotIndex);
 
-            UpdateEquipmentStats();
+            //UpdateEquipmentStats();
         }
         else
         {
@@ -111,7 +118,7 @@ public class EquipmentManager : MonoBehaviour
             SetSlot(slot1Type, slot1Index, item2);
             SetSlot(slot2Type, slot2Index, item1);
 
-            UpdateEquipmentStats();
+            //UpdateEquipmentStats();
         }
     }
 
@@ -163,7 +170,11 @@ public class EquipmentManager : MonoBehaviour
     private void SetEquipmentSlot(int slot, Item item)
     {
         EquipmentSlot equipSlot = equipmentSlots[slot];
-        equipSlot.equipment = null;
+        if (equipSlot.equipment != null)
+        {
+            UnEquip(equipSlot.equipment);
+            equipSlot.equipment = null;
+        }
 
         if (item != null)
         {
@@ -172,24 +183,37 @@ public class EquipmentManager : MonoBehaviour
             if (newEquip != null && equipmentSlots[slot].equipmentType == newEquip.equipmentType)
             {
                 equipSlot.equipment = newEquip;
+                Equip(newEquip);
             }
         }
 
         equipmentSlots[slot] = equipSlot;
     }
-
+    /*
     public void UpdateEquipmentStats()
     {
-        BaseStats equipStats = new BaseStats();
-
         foreach(EquipmentSlot slot in equipmentSlots)
         {
             if (slot.equipment != null)
             {
-                equipStats = equipStats + slot.equipment.equipStats;
+                Equip(slot.equipment);
             }
         }
+    }*/
 
-        unit.equipStats = equipStats;
+    void Equip(Equipment equipment)
+    {
+        foreach(StatBonus statBonus in equipment.statBonus)
+        {
+            unit.stats.AddStatModifier(statBonus.stat, statBonus.value, statBonus.statModType, equipment);
+        }
+    }
+
+    void UnEquip(Equipment equipment)
+    {
+        foreach (StatBonus statBonus in equipment.statBonus)
+        {
+            unit.stats.RemoveStatModifier(statBonus.stat, equipment);
+        }
     }
 }

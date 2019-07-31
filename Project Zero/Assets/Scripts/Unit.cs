@@ -29,8 +29,16 @@ public class Unit : MonoBehaviour
             }
             else
             {
-                health = value;
+                health = Mathf.Clamp(value, 0f, lastMaxHealth);
             }
+        }
+    }
+    float lastMaxHealth;
+    public float MaxHealth
+    {
+        get
+        {
+            return lastMaxHealth;
         }
     }
 
@@ -44,7 +52,15 @@ public class Unit : MonoBehaviour
         }
         private set
         {
-            mana = value;
+            mana = Mathf.Clamp(value, 0f, lastMaxMana);
+        }
+    }
+    float lastMaxMana;
+    public float MaxMana
+    {
+        get
+        {
+            return lastMaxMana;
         }
     }
 
@@ -52,30 +68,30 @@ public class Unit : MonoBehaviour
     [SerializeField]
     public Stats stats;
 
-    public BaseStats unitStats;
-    public BaseStats baseStats;
-    public BaseStats statsGain;
-    public BaseStats equipStats;
-
-    BaseStats newStats;
-
     float physicalResistance = 0f;
     float magicResistance = 0f;
 
     public void UpdateStats()
     {
-        newStats = baseStats + (experienceManager.level * statsGain) + equipStats;
-        BaseStats.UpdateDerivedStats(ref newStats);
+        stats.UpdateLevel(experienceManager.level);
+        stats.UpdateDerivedStats();
+
+        if (alive)
+        {
+            Health += stats.HpRegen.Value * Time.deltaTime;
+            Mana += stats.ManaRegen.Value * Time.deltaTime;
+        }
 
         //maintaining proportion of life and mana
-        health = health / unitStats.MaxHealth * newStats.MaxHealth;
-        mana = mana / unitStats.MaxMana * newStats.MaxMana;
+        health = health / lastMaxHealth * stats.MaxHealth.Value;
+        mana = mana / lastMaxMana * stats.MaxMana.Value;
 
-        unitStats = newStats;
+        lastMaxHealth = stats.MaxHealth.Value;
+        lastMaxMana = stats.MaxMana.Value;
 
         //Update resistances
-        physicalResistance = PhysicalResistanceFormula(unitStats.Armor);
-        magicResistance = MagicResistanceFormula(unitStats.MagicArmor);
+        physicalResistance = PhysicalResistanceFormula(stats.Armor.Value);
+        magicResistance = MagicResistanceFormula(stats.MagicArmor.Value);
     }
 
     public void TakeDamage(float damage, DamageType damageType, Unit damageDealer)
@@ -145,9 +161,12 @@ public class Unit : MonoBehaviour
 
     public void Start()
     {
+        stats.InitStats();
         UpdateStats();
-        health = unitStats.MaxHealth;
-        mana = unitStats.MaxMana;
+        lastMaxHealth = stats.MaxHealth.Value;
+        lastMaxMana = stats.MaxMana.Value;
+        health = lastMaxHealth;
+        mana = lastMaxMana;
     }
 
     public void Update()
@@ -165,8 +184,8 @@ public class Unit : MonoBehaviour
 
     public void Spawn()
     {
-        health = unitStats.MaxHealth;
-        mana = unitStats.MaxMana;
+        health = lastMaxHealth;
+        mana = lastMaxMana;
         alive = true;
     }
 }

@@ -6636,6 +6636,10 @@ PrefabInstance:
       propertyPath: Ssss.BaseValue
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 535182445142892716, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}
+      propertyPath: stats.baseStats.MaxMana
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}
 --- !u!1001 &5749383954872403573

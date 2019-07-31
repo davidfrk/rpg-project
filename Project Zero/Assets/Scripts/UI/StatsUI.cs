@@ -42,20 +42,20 @@ public class StatsUI : MonoBehaviour
 
     void UpdateUI()
     {
-        HealthBar.Set(selectedUnit.Health, selectedUnit.unitStats.MaxHealth);
-        ManaBar.Set(selectedUnit.Mana, selectedUnit.unitStats.MaxMana);
+        HealthBar.Set(selectedUnit.Health, selectedUnit.MaxHealth);
+        ManaBar.Set(selectedUnit.Mana, selectedUnit.MaxMana);
 
         if (showStats)
         {
-            Attack.text = selectedUnit.unitStats.Attack.ToString("F0");
-            AttackSpeed.text = selectedUnit.unitStats.AttackSpeed.ToString("F0");
-            Armor.text = selectedUnit.unitStats.Armor.ToString("F0");
-            MagicArmor.text = selectedUnit.unitStats.MagicArmor.ToString("F0");
+            Attack.text = selectedUnit.stats.Attack.Value.ToString("F0");
+            AttackSpeed.text = selectedUnit.stats.AttackSpeed.Value.ToString("F0");
+            Armor.text = selectedUnit.stats.Armor.Value.ToString("F0");
+            MagicArmor.text = selectedUnit.stats.MagicArmor.Value.ToString("F0");
             
-            Str.text = selectedUnit.unitStats.Str.ToString("F0");
-            Agi.text = selectedUnit.unitStats.Agi.ToString("F0");
-            Int.text = selectedUnit.unitStats.Int.ToString("F0");
-            Will.text = selectedUnit.unitStats.Will.ToString("F0");
+            Str.text = selectedUnit.stats.Str.Value.ToString("F0");
+            Agi.text = selectedUnit.stats.Agi.Value.ToString("F0");
+            Int.text = selectedUnit.stats.Int.Value.ToString("F0");
+            Will.text = selectedUnit.stats.Will.Value.ToString("F0");
         }
     }
 }
