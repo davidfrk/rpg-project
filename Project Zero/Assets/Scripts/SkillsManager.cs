@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rpg.Skills;
 
 public class SkillsManager : MonoBehaviour
 {
@@ -10,10 +11,12 @@ public class SkillsManager : MonoBehaviour
     private Skill skill;
 
     private Unit unit;
+    private UnitController unitController;
 
     void Awake()
     {
         unit = GetComponent<Unit>();
+        unitController = GetComponent<UnitController>();
     }
 
     void Start()
@@ -61,7 +64,14 @@ public class SkillsManager : MonoBehaviour
     public void OnCastStart(int skillSlot)
     {
         skill = skills[skillSlot];
-        skill.Cast(unit, castTransform, Vector3.forward);//ToDo: Atualizar cast position
+        if (unitController.action.targetUnit != null)
+        {
+            skill.Cast(unit, castTransform, unitController.action.targetUnit);
+        }
+        else
+        {
+            skill.Cast(unit, castTransform, Vector3.forward);//ToDo: Atualizar cast position
+        }
         unit.PayManaCost(skill.manaCost);
     }
 

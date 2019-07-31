@@ -1,4 +1,4 @@
-namespace Kryz.CharacterStats
+namespace Rpg.Stats
 {
 	public enum StatModType
 	{

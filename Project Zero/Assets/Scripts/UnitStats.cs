@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Kryz.CharacterStats;
+
+namespace Rpg.Stats {
 
 [System.Serializable]
 public class Stats
@@ -197,4 +198,5 @@ public struct BaseStats
 
         return result;
     }
+}
 }

@@ -1,25 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rpg.Stats;
 
-public class Equipment : MonoBehaviour
+namespace Rpg.Items
 {
-    internal Item item;
-    public EquipmentType equipmentType;
-    public List<StatBonus> statBonus;
-
-    void Awake()
+    public class Equipment : MonoBehaviour
     {
-        item = GetComponent<Item>();
-    }
+        internal Item item;
+        public EquipmentType equipmentType;
+        public List<StatBonus> statBonus;
 
-    public enum EquipmentType
-    {
-        Weapon,
-        Armor,
-        Helmet,
-        Pants,
-        Boots,
-        Accessory
+        void Awake()
+        {
+            item = GetComponent<Item>();
+        }
+
+        public enum EquipmentType
+        {
+            Weapon,
+            Armor,
+            Helmet,
+            Pants,
+            Boots,
+            Accessory
+        }
     }
 }

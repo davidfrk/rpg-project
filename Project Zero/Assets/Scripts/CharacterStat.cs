@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Kryz.CharacterStats
+namespace Rpg.Stats
 {
 	[Serializable]
 	public class CharacterStat

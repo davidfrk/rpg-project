@@ -96,6 +96,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castRange: 5
   manaCost: 25
+  canCastOnGround: 1
+  canCastOnUnit: 0
   icon: {fileID: 21300000, guid: e977c1562987f7e41b442f92c93f4234, type: 3}
   canBeInterrupted: 1
   damageInterval: 0.25

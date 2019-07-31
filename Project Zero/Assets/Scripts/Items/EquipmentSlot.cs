@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct EquipmentSlot
+namespace Rpg.Items
 {
-    public Equipment.EquipmentType equipmentType;
-    public Equipment equipment;
+
+    [System.Serializable]
+    public struct EquipmentSlot
+    {
+        public Equipment.EquipmentType equipmentType;
+        public Equipment equipment;
+    }
 }

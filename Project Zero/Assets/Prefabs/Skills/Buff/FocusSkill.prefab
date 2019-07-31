@@ -51,6 +51,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castRange: 3
   manaCost: 15
+  canCastOnGround: 0
+  canCastOnUnit: 1
   icon: {fileID: 21300000, guid: ab2c0effa4522104dbdb381ab0b16a7b, type: 3}
   canBeInterrupted: 0
   strBuff: 20

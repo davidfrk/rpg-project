@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Rpg.Items;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(AnimatorUpdate))]
@@ -63,9 +64,9 @@ public class UnitController : MonoBehaviour
 
     void Update()
     {
-        if (State == UnitState.MovingToAct && action.actionType == Action.ActionType.Attack)
+        if (State == UnitState.MovingToAct)
         {
-            MoveToAttackUpdate();
+            MovementUpdate();
         }
     }
 
@@ -111,7 +112,7 @@ public class UnitController : MonoBehaviour
         movementController.MoveCloseToPosition(target.transform.position, DistanceToAttack());
     }
 
-    private void MoveToAttackUpdate()
+    private void MovementUpdate()
     {
         if (targetUnit == null || !targetUnit.alive)
         {
@@ -119,7 +120,14 @@ public class UnitController : MonoBehaviour
         }
         else
         {
-            movementController.MoveCloseToPosition(targetUnit.transform.position, DistanceToAttack());
+            if (action.actionType == Action.ActionType.Attack)
+            {
+                movementController.MoveCloseToPosition(targetUnit.transform.position, DistanceToAttack());
+            }
+            else if (action.actionType == Action.ActionType.Cast && action.targetUnit != null)
+            {
+                movementController.MoveCloseToPosition(targetUnit.transform.position, action.skill.castRange);
+            }
         }
     }
 
@@ -270,10 +278,25 @@ public class UnitController : MonoBehaviour
         State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.Cast;
         action.skill = castController.skills[skillSlot];
+        action.targetUnit = null;
 
         movementController.MoveCloseToPosition(position, action.skill.castRange);
 
-        Debug.Log("MoveToCast");
+        Debug.Log("CastOnGround");
+    }
+
+    public void MoveToCast(Unit target, int skillSlot)
+    {
+        if (!StopCurrentAction()) return;
+
+        State = UnitState.MovingToAct;
+        action.actionType = Action.ActionType.Cast;
+        action.skill = castController.skills[skillSlot];
+        action.targetUnit = target;
+
+        movementController.MoveCloseToPosition(target.transform.position, action.skill.castRange);
+
+        Debug.Log("CastOnTarget");
     }
 
     //Workaround para evitar que o agente continue tentando chegar em um posição bloqueada por outro agente

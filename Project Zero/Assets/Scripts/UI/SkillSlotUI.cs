@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Rpg.Skills;
 
 public class SkillSlotUI : MonoBehaviour
 {

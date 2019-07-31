@@ -73,15 +73,26 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (selectedUnitController.castController != null && selectedUnitController.castController.CanCast(0))
+            int slot = 0;
+            if (selectedUnitController.castController != null && selectedUnitController.castController.CanCast(slot))
             {
                 if (targetUnit != null)
                 {
-                    selectedUnitController.MoveToCast(targetUnit.transform.position, 0);
+                    if (selectedUnitController.castController.skills[slot].canCastOnUnit)
+                    {
+                        selectedUnitController.MoveToCast(targetUnit, slot);
+                    }
+                    else
+                    {
+                        selectedUnitController.MoveToCast(targetUnit.transform.position, slot);
+                    }
                 }
                 else
                 {
-                    selectedUnitController.MoveToCast(hit.point, 0);
+                    if (selectedUnitController.castController.skills[slot].canCastOnGround)
+                    {
+                        selectedUnitController.MoveToCast(hit.point, slot);
+                    }
                 }
             }
         }
