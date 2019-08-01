@@ -42,16 +42,12 @@ namespace Rpg.Items
 
         public void AddInInventory(Item item)
         {
-            if (!inventory.isFull())
-            {
-                item.SetState(Item.ItemState.InInventory);
-                inventory.AddItem(item);
-            }
+            inventory.AddItem(item);
         }
 
         public void AddInEquipmentSlot(Item item)
         {
-            Equipment equipment = item.GetComponent<Equipment>();
+            Equipment equipment = item as Equipment;
             Equipment.EquipmentType equipmentType = equipment.equipmentType;
 
             for (int i = 0; i < equipmentSlots.Count; i++)
@@ -140,7 +136,7 @@ namespace Rpg.Items
             else
             {
                 EquipmentSlot equipSlot = equipmentSlots[slotIndex];
-                Equipment equip = item.GetComponent<Equipment>();
+                Equipment equip = item as Equipment;
 
                 return equipSlot.equipmentType == equip.equipmentType;
             }
@@ -181,7 +177,7 @@ namespace Rpg.Items
 
             if (item != null)
             {
-                Equipment newEquip = item.GetComponent<Equipment>();
+                Equipment newEquip = item as Equipment;
 
                 if (newEquip != null && equipmentSlots[slot].equipmentType == newEquip.equipmentType)
                 {
@@ -192,32 +188,15 @@ namespace Rpg.Items
 
             equipmentSlots[slot] = equipSlot;
         }
-        /*
-        public void UpdateEquipmentStats()
-        {
-            foreach(EquipmentSlot slot in equipmentSlots)
-            {
-                if (slot.equipment != null)
-                {
-                    Equip(slot.equipment);
-                }
-            }
-        }*/
 
         void Equip(Equipment equipment)
         {
-            foreach (StatBonus statBonus in equipment.statBonus)
-            {
-                unit.stats.AddStatModifier(statBonus.stat, statBonus.value, statBonus.statModType, equipment);
-            }
+            unit.stats.AddStatModifierList(equipment.statBonus, equipment);
         }
 
         void UnEquip(Equipment equipment)
         {
-            foreach (StatBonus statBonus in equipment.statBonus)
-            {
-                unit.stats.RemoveStatModifier(statBonus.stat, equipment);
-            }
+            unit.stats.RemoveStatModifierList(equipment.statBonus, equipment);
         }
     }
 }

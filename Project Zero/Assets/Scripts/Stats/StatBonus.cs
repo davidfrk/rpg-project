@@ -10,5 +10,6 @@ namespace Rpg.Stats
         public StatType stat;
         public StatModType statModType;
         public float value;
+        public List<StatModifier.Dependency> dependencies;
     }
 }

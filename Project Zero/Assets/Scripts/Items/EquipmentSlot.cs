@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Rpg.Items
 {
-
     [System.Serializable]
     public struct EquipmentSlot
     {

@@ -19,6 +19,7 @@ namespace Rpg.Stats
 					lastBaseValue = BaseValue;
 					_value = CalculateFinalValue();
 					isDirty = false;
+                    OnChangeCallback?.Invoke();
 				}
 				return _value;
 			}
@@ -27,7 +28,10 @@ namespace Rpg.Stats
 		protected readonly List<StatModifier> statModifiers;
 		public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
-		public CharacterStat()
+        public delegate void ValueChangeEvent();
+        public event ValueChangeEvent OnChangeCallback;
+
+        public CharacterStat()
 		{
 			statModifiers = new List<StatModifier>();
 			StatModifiers = statModifiers.AsReadOnly();
@@ -55,7 +59,7 @@ namespace Rpg.Stats
 			if (statModifiers.Remove(mod))
 			{
 				isDirty = true;
-                mod.Owner = null;
+                mod.Remove();
 				return true;
 			}
 			return false;

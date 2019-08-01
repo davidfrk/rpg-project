@@ -55,8 +55,13 @@ MonoBehaviour:
   canCastOnUnit: 1
   icon: {fileID: 21300000, guid: ab2c0effa4522104dbdb381ab0b16a7b, type: 3}
   canBeInterrupted: 0
-  strBuff: 20
-  hpRegenBuff: 5
+  StatBonus:
+  - stat: 8
+    statModType: 100
+    value: 10
+  - stat: 1
+    statModType: 100
+    value: 15
   duration: 10
 --- !u!1001 &3892930933448706186
 PrefabInstance:

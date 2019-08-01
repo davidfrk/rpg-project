@@ -167,7 +167,7 @@ MonoBehaviour:
     currentAmount: 0
   - completed: 0
     conditionType: 0
-    item: {fileID: 286220600}
+    item: {fileID: 3557833302729401416, guid: 0971eb185f79c2a41afd0935da6ccdab, type: 3}
     targetUnit: {fileID: 0}
     goal: {fileID: 0}
     amount: 1
@@ -1162,17 +1162,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4731548797671380, guid: 37bf6b4eaddee8d448771b63238e03d1, type: 3}
   m_PrefabInstance: {fileID: 1101194181}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &286220600 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3557833302729401419, guid: 0971eb185f79c2a41afd0935da6ccdab, type: 3}
-  m_PrefabInstance: {fileID: 3557833302819125961}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47eba3768012d1f4fa038749e07582d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &288009236
 PrefabInstance:
   m_ObjectHideFlags: 0

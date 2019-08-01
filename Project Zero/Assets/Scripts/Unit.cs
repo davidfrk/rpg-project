@@ -70,6 +70,14 @@ public class Unit : MonoBehaviour
 
     float physicalResistance = 0f;
     float magicResistance = 0f;
+    float attackSpeed = 1f;
+    public float AttackSpeed
+    {
+        get
+        {
+            return attackSpeed;
+        }
+    }
 
     public void UpdateStats()
     {
@@ -92,6 +100,7 @@ public class Unit : MonoBehaviour
         //Update resistances
         physicalResistance = PhysicalResistanceFormula(stats.Armor.Value);
         magicResistance = MagicResistanceFormula(stats.MagicArmor.Value);
+        attackSpeed = AttackSpeedFormula(stats.AttackSpeed.Value);
     }
 
     public void TakeDamage(float damage, DamageType damageType, Unit damageDealer)
@@ -146,6 +155,11 @@ public class Unit : MonoBehaviour
         {
             return -Mathf.Abs(magicArmor) / 100f;
         }
+    }
+
+    public static float AttackSpeedFormula(float attackSpeed)
+    {
+        return 0.5f + attackSpeed / 100f;
     }
 
     public void PayManaCost(float manaCost)

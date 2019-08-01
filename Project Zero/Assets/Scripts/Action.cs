@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rpg.Skills;
+using Rpg.Items;
 
 [System.Serializable]
 public struct Action

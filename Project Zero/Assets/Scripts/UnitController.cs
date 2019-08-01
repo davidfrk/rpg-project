@@ -12,6 +12,7 @@ public class UnitController : MonoBehaviour
     public bool playerUnit = false;
     public PlayerController owner;
 
+    [SerializeField]
     private UnitState state = UnitState.Idle;
     public UnitState State
     {
@@ -72,6 +73,7 @@ public class UnitController : MonoBehaviour
 
     void MovementCallback()
     {
+        //Debug.Log(gameObject + " MovementCallback " + State + " action " + action.actionType);
         if (State == UnitState.Moving)
         {
             State = UnitState.Idle;
@@ -114,19 +116,26 @@ public class UnitController : MonoBehaviour
 
     private void MovementUpdate()
     {
-        if (targetUnit == null || !targetUnit.alive)
+        if (action.actionType == Action.ActionType.Attack)
         {
-            State = UnitState.Idle;
-        }
-        else
-        {
-            if (action.actionType == Action.ActionType.Attack)
+            if (targetUnit != null && targetUnit.alive)
             {
                 movementController.MoveCloseToPosition(targetUnit.transform.position, DistanceToAttack());
             }
-            else if (action.actionType == Action.ActionType.Cast && action.targetUnit != null)
+            else
             {
-                movementController.MoveCloseToPosition(targetUnit.transform.position, action.skill.castRange);
+                State = UnitState.Idle;
+            }
+        }
+        else if (action.actionType == Action.ActionType.Cast && action.targetUnit != null)
+        {
+            if (action.targetUnit.alive)
+            {
+                movementController.MoveCloseToPosition(action.targetUnit.transform.position, action.skill.castRange);
+            }
+            else
+            {
+                State = UnitState.Idle;
             }
         }
     }
@@ -143,6 +152,8 @@ public class UnitController : MonoBehaviour
         State = UnitState.Moving;
         targetPosition = position;
         movementController.MoveToPosition(targetPosition);
+
+        //Debug.Log("MoveCmd");
     }
 
     void Attack(Unit target)
@@ -260,6 +271,7 @@ public class UnitController : MonoBehaviour
         action.item = item;
 
         movementController.MoveCloseToPosition(item.transform.position, 3f * unit.radius);
+        //Debug.Log(gameObject + " MoveToPickCmd " + State);
     }
 
     private void PickItem(Item item)
@@ -269,6 +281,7 @@ public class UnitController : MonoBehaviour
             equipmentManager.PickItem(item);
         }
         State = UnitState.Idle;
+        //Debug.Log(gameObject +  " PickItem " + item);
     }
 
     public void MoveToCast(Vector3 position, int skillSlot)
@@ -282,7 +295,7 @@ public class UnitController : MonoBehaviour
 
         movementController.MoveCloseToPosition(position, action.skill.castRange);
 
-        Debug.Log("CastOnGround");
+        //Debug.Log("CastOnGround");
     }
 
     public void MoveToCast(Unit target, int skillSlot)
@@ -296,7 +309,7 @@ public class UnitController : MonoBehaviour
 
         movementController.MoveCloseToPosition(target.transform.position, action.skill.castRange);
 
-        Debug.Log("CastOnTarget");
+        //Debug.Log("CastOnTarget");
     }
 
     //Workaround para evitar que o agente continue tentando chegar em um posição bloqueada por outro agente
@@ -305,7 +318,7 @@ public class UnitController : MonoBehaviour
         if (State == UnitState.Moving)
         {
             UnitController unitController = other.GetComponent<UnitController>();
-            if (unitController != null)
+            if (unitController != null && unitController.unit.alive)
             {
                 Vector3 targetDir = targetPosition - unitController.transform.position;
                 float minDist = unit.radius + unitController.unit.radius + 0.1f;

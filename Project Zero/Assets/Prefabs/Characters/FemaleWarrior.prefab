@@ -5359,6 +5359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUnit: 0
   owner: {fileID: 0}
+  state: 0
   action:
     actionType: 0
     targetUnit: {fileID: 0}
@@ -5431,7 +5432,11 @@ MonoBehaviour:
   stats:
     MaxHealth:
       BaseValue: 0
+    HpRegen:
+      BaseValue: 0
     MaxMana:
+      BaseValue: 0
+    ManaRegen:
       BaseValue: 0
     Armor:
       BaseValue: 0
@@ -5453,7 +5458,9 @@ MonoBehaviour:
       BaseValue: 0
     baseStats:
       MaxHealth: 80
+      HpRegen: 0
       MaxMana: 20
+      ManaRegen: 0
       Armor: 0
       MagicArmor: 0
       Attack: 3
@@ -5669,7 +5676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.990566, g: 0.6373381, b: 0.3224012, a: 0.9529412}
+  m_Color: {r: 0.99215686, g: 0.32156858, b: 0.35278177, a: 0.9529412}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

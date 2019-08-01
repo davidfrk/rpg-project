@@ -22,6 +22,11 @@ public class AnimatorUpdate : MonoBehaviour
         OnStateUpdate(unitController.State);
     }
 
+    void Update()
+    {
+        animator.SetFloat("AttackSpeed", unitController.unit.AttackSpeed);
+    }
+
     void OnStateUpdate(UnitState state)
     {
         animator.SetBool("Running", movementController.MovementState == MovementState.Running);

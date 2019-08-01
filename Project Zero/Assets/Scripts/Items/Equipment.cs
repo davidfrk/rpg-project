@@ -5,16 +5,11 @@ using Rpg.Stats;
 
 namespace Rpg.Items
 {
-    public class Equipment : MonoBehaviour
+    public class Equipment : Item
     {
-        internal Item item;
+        [Space(10)]
         public EquipmentType equipmentType;
         public List<StatBonus> statBonus;
-
-        void Awake()
-        {
-            item = GetComponent<Item>();
-        }
 
         public enum EquipmentType
         {
