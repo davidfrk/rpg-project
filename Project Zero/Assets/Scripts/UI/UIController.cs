@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Rpg.Items;
+using Rpg.UI;
 
 public class UIController : MonoBehaviour, ISlotManager
 {
@@ -17,6 +18,9 @@ public class UIController : MonoBehaviour, ISlotManager
     public Sprite itemSlotSprite;
     public Sprite itemSlotBackgroundSprite;
     public Image draggingItemImage;
+    public EquipmentTooltip equipmentTooltipPrefab;
+
+    private EquipmentTooltip equipmentTooltip;
     private ItemSlotUI selectedItemSlot;
 
     internal float lastUIClick;
@@ -103,6 +107,45 @@ public class UIController : MonoBehaviour, ISlotManager
             draggingItemImage.sprite = selectedItemSlot.item.sprite;
             draggingItemImage.rectTransform.position = position;
             draggingItemImage.gameObject.SetActive(true);
+        }
+    }
+
+    public void OnPointerEnter(ItemSlotUI itemSlotUI, PointerEventData eventData)
+    {
+        if (itemSlotUI.item != null && itemSlotUI.item.itemType == Item.ItemType.Equipment)
+        {
+            Equipment equipment = itemSlotUI.item as Equipment;
+            ShowEquipmentTooltip(equipment, eventData.position);
+        }
+        else
+        {
+            HideEquipmentTooltip();
+        }
+    }
+
+    public void OnPointerExit(ItemSlotUI itemSlotUI, PointerEventData eventData)
+    {
+        HideEquipmentTooltip();
+    }
+
+    private void ShowEquipmentTooltip(Equipment equipment, Vector2 position)
+    {
+        if (equipmentTooltip != null)
+        {
+            if (equipmentTooltip.equipment == equipment) return;
+            else HideEquipmentTooltip();
+        }
+
+        equipmentTooltip = Instantiate<EquipmentTooltip>(equipmentTooltipPrefab, position, Quaternion.identity, transform);
+        equipmentTooltip.UpdateUI(equipment);
+    }
+
+    private void HideEquipmentTooltip()
+    {
+        if (equipmentTooltip != null)
+        {
+            Destroy(equipmentTooltip.gameObject);
+            equipmentTooltip = null;
         }
     }
 

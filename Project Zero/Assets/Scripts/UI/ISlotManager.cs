@@ -9,4 +9,6 @@ public interface ISlotManager
     void OnMouseRightClickDown(ItemSlotUI itemSlotUI);
     void OnMouseLeftClickDrag(ItemSlotUI itemSlotUI, PointerEventData eventData);
     void OnMouseLeftClickDrop(ItemSlotUI itemSlotUI, PointerEventData eventData);
+    void OnPointerEnter(ItemSlotUI itemSlotUI, PointerEventData eventData);
+    void OnPointerExit(ItemSlotUI itemSlotUI, PointerEventData eventData);
 }

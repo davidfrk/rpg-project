@@ -192,11 +192,11 @@ public class UnitController : MonoBehaviour
     {
         if (targetUnit != null)
         {
-            targetUnit.TakeDamage(unit.stats.Attack.Value, DamageType.Physical, this.unit);
-            targetUnit.unitController.OnBeingAttackedEventCallback(this.unit);
-
             if (unit.alive && State == UnitState.Attacking)
             {
+                targetUnit.TakeDamage(unit.stats.Attack.Value, DamageType.Physical, this.unit);
+                targetUnit.unitController.OnBeingAttackedEventCallback(this.unit);
+
                 if (targetUnit.alive)
                 {
                     Vector3 targetDir = targetUnit.transform.position - transform.position;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Rpg.Items;
 
-public class ItemSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler, IDropHandler
+public class ItemSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Item item;
     public Image itemImage;
@@ -91,5 +91,15 @@ public class ItemSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
         {
             slotManager.OnMouseLeftClickDrop(this, eventData);
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        slotManager.OnPointerEnter(this, eventData);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        slotManager.OnPointerExit(this, eventData);
     }
 }
