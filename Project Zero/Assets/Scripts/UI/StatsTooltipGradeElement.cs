@@ -13,7 +13,7 @@ namespace Rpg.UI
 
         public void UpdateUI(StatModifier.Dependency dependency)
         {
-            statName.text = dependency.StatType.ToString();
+            statName.text = dependency.StatType.ToString() + " grade";
             statGrade.text = GetGrade(dependency.Value);
         }
 

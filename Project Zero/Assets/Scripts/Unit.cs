@@ -81,7 +81,7 @@ public class Unit : MonoBehaviour
 
     public void UpdateStats()
     {
-        stats.UpdateLevel(experienceManager.level);
+        stats.UpdateLevel(experienceManager.Level);
         stats.UpdateDerivedStats();
 
         if (alive)

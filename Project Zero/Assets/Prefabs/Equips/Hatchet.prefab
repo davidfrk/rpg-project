@@ -78,7 +78,7 @@ MonoBehaviour:
     value: 0
     dependencies:
     - StatType: 8
-      Value: 10
+      Value: 0.5
   - stat: 8
     statModType: 100
     value: 5

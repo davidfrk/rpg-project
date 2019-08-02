@@ -32,6 +32,12 @@ namespace Rpg.Stats {
 
         private int level = 0;
 
+        private int StrLevel = 0;
+        private int AgiLevel = 0;
+        private int IntLevel = 0;
+        private int WillLevel = 0;
+        private float statGain = 3f;
+
         private StatModifier MaxHealthMod       = new StatModifier(0f, StatModType.Flat);
         private StatModifier MaxManaMod         = new StatModifier(0f, StatModType.Flat);
         private StatModifier ArmorMod           = new StatModifier(0f, StatModType.Flat);
@@ -65,17 +71,46 @@ namespace Rpg.Stats {
             MovementSpeed.AddModifier(MovementSpeedMod);
         }
 
+        public void LevelUp(StatType type)
+        {
+            switch (type)
+            {
+                case StatType.Str: StrLevel += 1; break;
+                case StatType.Agi: AgiLevel += 1; break;
+                case StatType.Int: IntLevel += 1; break;
+                case StatType.Will: WillLevel += 1; break;
+                default: return;
+            }
+
+            UpdateBaseStats();
+        }
+
+        public bool HasStatsPointsAvailable()
+        {
+            return StatsPointsAvailable() > 0;
+        }
+
+        private int StatsPointsAvailable()
+        {
+            return level - (StrLevel + AgiLevel + IntLevel + WillLevel);
+        }
+
         public void UpdateLevel(int level)
         {
             if (level != this.level)
             {
-                Str.BaseValue = baseStats.Str + level * StrGain;
-                Agi.BaseValue = baseStats.Agi + level * AgiGain;
-                Int.BaseValue = baseStats.Int + level * IntGain;
-                Will.BaseValue = baseStats.Will + level * WillGain;
-
+                this.level = level;
+                UpdateBaseStats();
                 //UpdateDerivedStats();
             }
+        }
+
+        private void UpdateBaseStats()
+        {
+            Str.BaseValue = baseStats.Str + level * StrGain + statGain * StrLevel;
+            Agi.BaseValue = baseStats.Agi + level * AgiGain + statGain * AgiLevel;
+            Int.BaseValue = baseStats.Int + level * IntGain + statGain * IntLevel;
+            Will.BaseValue = baseStats.Will + level * WillGain + statGain * WillLevel;
         }
 
         public void UpdateDerivedStats()

@@ -2816,9 +2816,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropList:
   - chance: 0.5
-    item: {fileID: 5749383953796622137, guid: c07c0f821a88f524ea6d791841dfcbb8, type: 3}
+    item: {fileID: 5749383953796622142, guid: c07c0f821a88f524ea6d791841dfcbb8, type: 3}
   - chance: 0.5
-    item: {fileID: 8496660243653559194, guid: 44cf7eea2ae69f644bf24e94463ebdaa, type: 3}
+    item: {fileID: 8496660243653559192, guid: 44cf7eea2ae69f644bf24e94463ebdaa, type: 3}
 --- !u!1 &6106776463294841488
 GameObject:
   m_ObjectHideFlags: 0

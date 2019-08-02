@@ -31,7 +31,7 @@ public class ExperienceUI : MonoBehaviour
 
     void UpdateUI()
     {
-        levelText.text = experienceManager.level.ToString();
+        levelText.text = experienceManager.Level.ToString();
         expBar.Set(experienceManager.nextLevelProgression);
     }
 }

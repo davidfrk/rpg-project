@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class AttackSoundManager : MonoBehaviour
 {
-    private AudioSource audioSource;
+    public AudioSource audioSource;
     public List<AudioClip> attackSounds;
+    private UnitController unitController;
 
     void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
+        unitController = GetComponent<UnitController>();
     }
 
     public void AttackEndEvent()
     {
-        if (attackSounds.Count != 0)
+        if (attackSounds.Count != 0 && unitController.unit.alive)
         {
             int audioIndex = Random.Range(0, attackSounds.Count);
 

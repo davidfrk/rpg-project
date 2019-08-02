@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour, ISlotManager
     public Image draggingItemImage;
     public EquipmentTooltip equipmentTooltipPrefab;
 
+    private bool draggingItem = false;
     private EquipmentTooltip equipmentTooltip;
     private ItemSlotUI selectedItemSlot;
 
@@ -101,12 +102,14 @@ public class UIController : MonoBehaviour, ISlotManager
         if (selectedItemSlot == null || selectedItemSlot.item == null)
         {
             draggingItemImage.gameObject.SetActive(false);
+            draggingItem = false;
         }
         else
         {
             draggingItemImage.sprite = selectedItemSlot.item.sprite;
             draggingItemImage.rectTransform.position = position;
             draggingItemImage.gameObject.SetActive(true);
+            draggingItem = true;
         }
     }
 
@@ -114,8 +117,11 @@ public class UIController : MonoBehaviour, ISlotManager
     {
         if (itemSlotUI.item != null && itemSlotUI.item.itemType == Item.ItemType.Equipment)
         {
-            Equipment equipment = itemSlotUI.item as Equipment;
-            ShowEquipmentTooltip(equipment, eventData.position);
+            if (!draggingItem)
+            {
+                Equipment equipment = itemSlotUI.item as Equipment;
+                ShowEquipmentTooltip(equipment, eventData.position);
+            }
         }
         else
         {

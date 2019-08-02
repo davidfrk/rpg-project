@@ -4,10 +4,26 @@ using UnityEngine;
 
 public class ExperienceManager : MonoBehaviour
 {
-    public int level = 1;
+    private int level = 1;
+    public int Level {
+        get
+        {
+            return level;
+        }
+        set
+        {
+            if (value != level)
+            {
+                level = value;
+                LevelUp();
+            }
+        }
+    }
     public float exp = 0;
     public float quadraticTermInLevelFormula = 10;
     public float linearTermInLevelFormula = 1000;
+    public AudioSource audioSource;
+    public AudioClip levelUpSound;
 
     internal float nextLevelProgression = 0f;
 
@@ -15,6 +31,9 @@ public class ExperienceManager : MonoBehaviour
     public float experienceGivenOnDeath;
 
     UnitController unitController;
+
+    public delegate void LevelUpEvent();
+    public event LevelUpEvent OnLevelUpCallback;
 
     public void Awake()
     {
@@ -39,9 +58,9 @@ public class ExperienceManager : MonoBehaviour
 
     public void UpdateExperience()
     {
-        level = GetLevelByExp(exp);
-        float levelExp = GetExpByLevel(level);
-        float nextLevelExp = GetExpByLevel(level + 1);
+        Level = GetLevelByExp(exp);
+        float levelExp = GetExpByLevel(Level);
+        float nextLevelExp = GetExpByLevel(Level + 1);
         nextLevelProgression = Mathf.InverseLerp(levelExp, nextLevelExp, exp);
     }
 
@@ -67,9 +86,22 @@ public class ExperienceManager : MonoBehaviour
         return quadraticTermInLevelFormula * level * level + linearTermInLevelFormula * level;
     }
 
+    private void LevelUp()
+    {
+        OnLevelUpCallback?.Invoke();
+        if (unitController.playerUnit)
+        {
+            if (audioSource && levelUpSound)
+            {
+                audioSource.clip = levelUpSound;
+                audioSource.Play();
+            }
+        }
+    }
+
     public void Start()
     {
-        exp = GetExpByLevel(level);
+        exp = GetExpByLevel(Level);
     }
 
     //only to debug
