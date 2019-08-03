@@ -12,6 +12,7 @@ namespace Rpg.Items
         public ItemType itemType = ItemType.Item;
         public GameObject model;
         internal Item item;
+        public ItemState State { get; private set; } = ItemState.InWorld;
 
         void Awake()
         {
@@ -23,10 +24,13 @@ namespace Rpg.Items
             if (state == ItemState.InWorld)
             {
                 model?.SetActive(true);
+                State = ItemState.InWorld;
+
             }
             else
             {
                 model?.SetActive(false);
+                State = ItemState.InInventory;
             }
         }
 

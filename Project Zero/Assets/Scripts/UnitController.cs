@@ -26,6 +26,11 @@ public class UnitController : MonoBehaviour
             {
                 state = value;
                 OnStateChangeCallback?.Invoke(state);
+
+                if (state == UnitState.Idle)
+                {
+                    action.actionType = Action.ActionType.None;
+                }
             }
         }
     }
@@ -37,9 +42,8 @@ public class UnitController : MonoBehaviour
     internal SkillsManager castController;
 
     //[SerializeField]
-    public Action action = new Action();
-    Vector3 targetPosition;
-    Unit targetUnit;
+    public Action action;
+    private Action actionQueue = new Action();
 
     public delegate void StateChangeEvent(UnitState state);
     public event StateChangeEvent OnStateChangeCallback;
@@ -55,6 +59,8 @@ public class UnitController : MonoBehaviour
 
     void Awake()
     {
+        action.actionType = Action.ActionType.None;
+        actionQueue.actionType = Action.ActionType.None;
         unit = GetComponent<Unit>();
         movementController = GetComponent<MovementController>();
         movementController.OnMovementCallback += MovementCallback;
@@ -69,11 +75,16 @@ public class UnitController : MonoBehaviour
         {
             MovementUpdate();
         }
+
+        if (State == UnitState.Idle)
+        {
+            ResumeAction();
+        }
     }
 
     void MovementCallback()
     {
-        //Debug.Log(gameObject + " MovementCallback " + State + " action " + action.actionType);
+        Debug.Log(gameObject + " MovementCallback ");
         if (State == UnitState.Moving)
         {
             State = UnitState.Idle;
@@ -85,7 +96,7 @@ public class UnitController : MonoBehaviour
             {
                 case Action.ActionType.Attack:
                     {
-                        Attack(targetUnit);
+                        Attack(action.targetUnit);
                         break;
                     }
                 case Action.ActionType.PickItem:
@@ -98,19 +109,25 @@ public class UnitController : MonoBehaviour
                         Cast();
                         break;
                     }
+                default: break;
             }
         }
     }
 
     public void MoveAttack(Unit target)
     {
-        if (!StopCurrentAction()) return;
+        if (!StopCurrentAction())
+        {
+            actionQueue.actionType = Action.ActionType.Attack;
+            actionQueue.targetUnit = target;
+            return;
+        }
 
         State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.Attack;
         action.targetUnit = target;
 
-        targetUnit = target;
+
         movementController.MoveCloseToPosition(target.transform.position, DistanceToAttack());
     }
 
@@ -118,9 +135,9 @@ public class UnitController : MonoBehaviour
     {
         if (action.actionType == Action.ActionType.Attack)
         {
-            if (targetUnit != null && targetUnit.alive)
+            if (action.targetUnit != null && action.targetUnit.alive)
             {
-                movementController.MoveCloseToPosition(targetUnit.transform.position, DistanceToAttack());
+                movementController.MoveCloseToPosition(action.targetUnit.transform.position, DistanceToAttack());
             }
             else
             {
@@ -137,21 +154,45 @@ public class UnitController : MonoBehaviour
             {
                 State = UnitState.Idle;
             }
+        }else if (action.actionType == Action.ActionType.PickItem)
+        {
+            if (action.item.State == Item.ItemState.InWorld)
+            {
+                movementController.MoveCloseToPosition(action.item.transform.position, DistanceToPickItem());
+            }
+            else
+            {
+                State = UnitState.Idle;
+            }
+        }else if (action.actionType == Action.ActionType.Move)
+        {
+            movementController.MoveToPosition(action.targetPosition);
+            State = UnitState.Moving;
         }
     }
 
     float DistanceToAttack()
     {
-        return unit.radius + targetUnit.radius + 0.2f;
+        return unit.radius + action.targetUnit.radius + 0.2f;
+    }
+
+    float DistanceToPickItem()
+    {
+        return 3f * unit.radius;
     }
 
     public void Move(Vector3 position)
     {
-        if (!StopCurrentAction()) return;
+        if (!StopCurrentAction())
+        {
+            actionQueue.actionType = Action.ActionType.Move;
+            actionQueue.targetPosition = position;
+            return;
+        }
 
         State = UnitState.Moving;
-        targetPosition = position;
-        movementController.MoveToPosition(targetPosition);
+        action.targetPosition = position;
+        movementController.MoveToPosition(action.targetPosition);
 
         //Debug.Log("MoveCmd");
     }
@@ -159,7 +200,7 @@ public class UnitController : MonoBehaviour
     void Attack(Unit target)
     {
         State = UnitState.Attacking;
-        targetUnit = target;
+        //targetUnit = target;
     }
 
     void Cast()
@@ -190,25 +231,25 @@ public class UnitController : MonoBehaviour
 
     public void AttackEndEvent()
     {
-        if (targetUnit != null)
+        if (action.targetUnit != null)
         {
             if (unit.alive && State == UnitState.Attacking)
             {
-                targetUnit.TakeDamage(unit.stats.Attack.Value, DamageType.Physical, this.unit);
-                targetUnit.unitController.OnBeingAttackedEventCallback(this.unit);
+                action.targetUnit.TakeDamage(unit.stats.Attack.Value, DamageType.Physical, this.unit);
+                //targetUnit.unitController.OnBeingAttackedEventCallback(this.unit);
 
-                if (targetUnit.alive)
+                if (action.targetUnit.alive)
                 {
-                    Vector3 targetDir = targetUnit.transform.position - transform.position;
+                    Vector3 targetDir = action.targetUnit.transform.position - transform.position;
                     if (targetDir.magnitude > DistanceToAttack() || Vector3.Angle(transform.forward, targetDir) > 5f)
                     {
-                        MoveAttack(targetUnit);
+                        MoveAttack(action.targetUnit);
                     }
                 }
                 else
                 {
                     State = UnitState.Idle;
-                    targetUnit = null;
+                    action.targetUnit = null;
                 }
             }
         }
@@ -222,7 +263,7 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    private void OnBeingAttackedEventCallback(Unit aggressor)
+    public void CallOnBeingAttackedEvent(Unit aggressor)
     {
         OnBeingAttackedCallback(aggressor);
     }
@@ -264,13 +305,18 @@ public class UnitController : MonoBehaviour
 
     public void MoveToPickItem(Item item)
     {
-        if (!StopCurrentAction()) return;
+        if (!StopCurrentAction())
+        {
+            actionQueue.actionType = Action.ActionType.PickItem;
+            actionQueue.item = item;
+            return;
+        }
 
         State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.PickItem;
         action.item = item;
 
-        movementController.MoveCloseToPosition(item.transform.position, 3f * unit.radius);
+        movementController.MoveCloseToPosition(item.transform.position, DistanceToPickItem());
         //Debug.Log(gameObject + " MoveToPickCmd " + State);
     }
 
@@ -286,7 +332,14 @@ public class UnitController : MonoBehaviour
 
     public void MoveToCast(Vector3 position, int skillSlot)
     {
-        if (!StopCurrentAction()) return;
+        if (!StopCurrentAction())
+        {
+            actionQueue.actionType = Action.ActionType.Cast;
+            actionQueue.skill = castController.skills[skillSlot];
+            actionQueue.targetUnit = null;
+            actionQueue.targetPosition = position;
+            return;
+        }
 
         State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.Cast;
@@ -300,7 +353,13 @@ public class UnitController : MonoBehaviour
 
     public void MoveToCast(Unit target, int skillSlot)
     {
-        if (!StopCurrentAction()) return;
+        if (!StopCurrentAction())
+        {
+            actionQueue.actionType = Action.ActionType.Cast;
+            actionQueue.skill = castController.skills[skillSlot];
+            actionQueue.targetUnit = target;
+            return;
+        }
 
         State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.Cast;
@@ -312,6 +371,16 @@ public class UnitController : MonoBehaviour
         //Debug.Log("CastOnTarget");
     }
 
+    private void ResumeAction()
+    {
+        if (actionQueue.actionType != Action.ActionType.None)
+        {
+            action = actionQueue;
+            actionQueue.actionType = Action.ActionType.None;
+            State = UnitState.MovingToAct;
+        }
+    }
+
     //Workaround para evitar que o agente continue tentando chegar em um posição bloqueada por outro agente
     private void OnTriggerStay(Collider other)
     {
@@ -320,7 +389,7 @@ public class UnitController : MonoBehaviour
             UnitController unitController = other.GetComponent<UnitController>();
             if (unitController != null && unitController.unit.alive)
             {
-                Vector3 targetDir = targetPosition - unitController.transform.position;
+                Vector3 targetDir = action.targetPosition - unitController.transform.position;
                 float minDist = unit.radius + unitController.unit.radius + 0.1f;
                 if (targetDir.magnitude < minDist)
                 {

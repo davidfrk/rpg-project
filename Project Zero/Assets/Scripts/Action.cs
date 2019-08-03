@@ -11,12 +11,14 @@ public struct Action
     public Unit targetUnit;
     public Item item;
     public Skill skill;
-    //public Vector3 targetPosition;
+    public Vector3 targetPosition;
 
     public enum ActionType
     {
+        None,
         Attack,
         PickItem,
-        Cast
+        Cast,
+        Move,
     }
 }

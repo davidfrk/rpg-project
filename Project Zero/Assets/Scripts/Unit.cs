@@ -126,6 +126,11 @@ public class Unit : MonoBehaviour
                 }
         }
 
+        if (damageDealer != null)
+        {
+            unitController.CallOnBeingAttackedEvent(damageDealer);
+        }
+        
         if (alive == false)
         {
             //Credit the death
