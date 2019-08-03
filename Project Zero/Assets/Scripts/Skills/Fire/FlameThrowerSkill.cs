@@ -14,6 +14,7 @@ namespace Rpg.Skills
 
         private bool active = false;
         private float lastDamageTick = 0f;
+        
 
         public override void Cast(Unit owner, Transform castTransform, Vector3 targetPosition)
         {
@@ -25,12 +26,14 @@ namespace Rpg.Skills
 
             ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
             particleSystem.Play(true);
+            audioSource.Play();
         }
 
         public override void OnCastEnd()
         {
             ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
             particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            audioSource.Stop();
 
             active = false;
         }

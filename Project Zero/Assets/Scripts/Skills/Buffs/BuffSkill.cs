@@ -17,6 +17,7 @@ namespace Rpg.Skills
             targetUnit.stats.AddStatModifierList(StatBonus, this);
             ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
             particleSystem.Play(true);
+            audioSource.Play();
 
             StartCoroutine(Stop(targetUnit, duration));
         }

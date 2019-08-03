@@ -4052,24 +4052,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4947743726954784, guid: 63ce2b31e16acab4d8a41f884c36333c, type: 3}
   m_PrefabInstance: {fileID: 1214831994}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1235945387 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6106765265455225592, guid: 208f743d0f3eb024390d0537a59dcf46, type: 3}
-  m_PrefabInstance: {fileID: 1332744085128387749}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1235945388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235945387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd89b21d93b01df4790a6594b69590b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 5
 --- !u!1 &1236866827
 GameObject:
   m_ObjectHideFlags: 0
@@ -5763,24 +5745,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6eea03362de4f9342b66c60201e844c8, type: 3}
---- !u!1 &1890850780 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5098440950110906385, guid: 6eea03362de4f9342b66c60201e844c8, type: 3}
-  m_PrefabInstance: {fileID: 1890850779}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1890850781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1890850780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd89b21d93b01df4790a6594b69590b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 3
 --- !u!1001 &1918133630
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6434,6 +6398,10 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 588896054}
+    - target: {fileID: 4371175118911467018, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
+      propertyPath: stats.baseStats.MaxMana
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
 --- !u!1001 &1185404362277512560
@@ -6974,7 +6942,8 @@ PrefabInstance:
       propertyPath: stats.baseStats.MaxMana
       value: 100
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8191392265819481176, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}
 --- !u!1001 &5749383954872403573
 PrefabInstance:

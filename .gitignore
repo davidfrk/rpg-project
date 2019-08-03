@@ -6,6 +6,7 @@ Library/
 Project Zero/Assets/BigFiles/
 build_Data/
 build.exe
+Build/
 **/LightingData*
 
 # ===================================== #

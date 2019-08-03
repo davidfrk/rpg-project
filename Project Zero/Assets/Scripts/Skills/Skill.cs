@@ -14,6 +14,12 @@ namespace Rpg.Skills
         [SerializeField]
         private bool canBeInterrupted = false;
         internal Unit owner;
+        protected AudioSource audioSource;
+
+        void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
 
         public virtual void Cast(Unit owner, Transform castTransform, Vector3 targetPosition)
         {

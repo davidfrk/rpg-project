@@ -22,7 +22,7 @@ public class StatsUI : MonoBehaviour
     public Text Will;
 
     Unit selectedUnit;
-    private bool showStats = false;
+    private bool showStats = true;
     
     void Update()
     {
