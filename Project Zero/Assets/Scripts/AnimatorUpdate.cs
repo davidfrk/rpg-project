@@ -8,6 +8,8 @@ public class AnimatorUpdate : MonoBehaviour
     MovementController movementController;
     UnitController unitController;
 
+    public float movementSpeed = 1f;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -25,6 +27,7 @@ public class AnimatorUpdate : MonoBehaviour
     void Update()
     {
         animator.SetFloat("AttackSpeed", unitController.unit.AttackSpeed);
+        animator.SetFloat("MovementSpeed", movementSpeed * unitController.unit.MovementSpeed);
     }
 
     void OnStateUpdate(UnitState state)
@@ -34,7 +37,7 @@ public class AnimatorUpdate : MonoBehaviour
         animator.SetBool("Casting", state == UnitState.Casting);
         animator.SetBool("Dead", state == UnitState.Dead);
     }
-
+    
     void OnStateUpdate(MovementState state)
     {
         animator.SetBool("Running", state == MovementState.Running);

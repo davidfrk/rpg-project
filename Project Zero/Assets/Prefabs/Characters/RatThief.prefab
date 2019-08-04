@@ -1016,6 +1016,7 @@ MonoBehaviour:
     targetUnit: {fileID: 0}
     item: {fileID: 0}
     skill: {fileID: 0}
+    targetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &5099711034125097899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1041,6 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2b5c86b2de1174e9c900976a605b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 1.2
 --- !u!195 &5099711034125097898
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1155,9 +1157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de887b539acab1d409afe0b7cc4fd3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggression: 0
+  aggression: 1
   visionRange: 3
-  broadcastRange: 5
+  broadcastRange: 7
 --- !u!114 &5099711035198515058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1183,7 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519f7a24ba5933c4cb05405cda873f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToRespawn: 15
+  TimeToRespawn: 50
 --- !u!114 &3451458330146520172
 MonoBehaviour:
   m_ObjectHideFlags: 0

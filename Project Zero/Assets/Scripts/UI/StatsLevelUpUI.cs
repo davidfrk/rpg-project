@@ -6,6 +6,12 @@ using Rpg.Stats;
 public class StatsLevelUpUI : MonoBehaviour
 {
     public GameObject statsLevelUpTransform;
+    AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -19,6 +25,7 @@ public class StatsLevelUpUI : MonoBehaviour
     public void LevelUp(int stat)
     {
         UIController.instance.selectedUnit?.stats.LevelUp(GetStatType(stat));
+        audioSource.Play();
     }
 
     private StatType GetStatType(int stat)
@@ -29,7 +36,11 @@ public class StatsLevelUpUI : MonoBehaviour
             case 1: return StatType.Agi;
             case 2: return StatType.Int;
             case 3: return StatType.Will;
-            default: return StatType.Str;
+            default:
+                {
+                    Debug.LogError("Invalid stat id");
+                    return StatType.Str;
+                }
         }
     }
 }

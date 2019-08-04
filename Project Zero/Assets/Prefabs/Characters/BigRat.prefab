@@ -2573,8 +2573,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6106765265455225592}
-  m_LocalRotation: {x: -0, y: 0.8129607, z: -0, w: 0.5823186}
-  m_LocalPosition: {x: -19.28, y: 0.12651534, z: -4.8}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 6103713896066789242}
@@ -2583,7 +2583,7 @@ Transform:
   - {fileID: 6105486389521009920}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 108.772, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6190226505839484878
 Animator:
   serializedVersion: 3
@@ -2637,6 +2637,7 @@ MonoBehaviour:
     targetUnit: {fileID: 0}
     item: {fileID: 0}
     skill: {fileID: 0}
+    targetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &6105486389643045186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2662,6 +2663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2b5c86b2de1174e9c900976a605b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 0.6
 --- !u!195 &6105486389643045187
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2763,7 +2765,7 @@ MonoBehaviour:
   linearTermInLevelFormula: 1000
   audioSource: {fileID: 0}
   levelUpSound: {fileID: 0}
-  experienceGivenOnDeath: 2500
+  experienceGivenOnDeath: 1500
 --- !u!114 &6105486388480550552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2777,8 +2779,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aggression: 1
-  visionRange: 3
-  broadcastRange: 5
+  visionRange: 4
+  broadcastRange: 7
 --- !u!114 &6105486388569363867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2804,7 +2806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519f7a24ba5933c4cb05405cda873f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToRespawn: 50
+  TimeToRespawn: 60
 --- !u!114 &921089045743829029
 MonoBehaviour:
   m_ObjectHideFlags: 0

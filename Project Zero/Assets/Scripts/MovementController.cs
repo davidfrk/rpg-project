@@ -100,6 +100,8 @@ public class MovementController : MonoBehaviour
     public bool FaceTargetUpdate()
     {
         Vector3 targetDir = targetPosition - transform.position;
+        //Removing vertical component
+        targetDir = Vector3.ProjectOnPlane(targetDir, Vector3.up);
 
         if (targetDir != Vector3.zero)
         {

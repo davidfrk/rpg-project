@@ -79,6 +79,15 @@ public class Unit : MonoBehaviour
         }
     }
 
+    float movementSpeed = 1f;
+    public float MovementSpeed
+    {
+        get
+        {
+            return movementSpeed;
+        }
+    }
+
     public void UpdateStats()
     {
         stats.UpdateLevel(experienceManager.Level);
