@@ -3,65 +3,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class QuestsManager : MonoBehaviour
+namespace Rpg.Quest
 {
-    static public QuestsManager questsManager;
-    public PlayerController questOwner;
-    public List<Quest> activeQuests;
-
-    public UnityEvent OnGameStart;
-
-    public delegate void QuestUpdateEvent();
-    public event QuestUpdateEvent OnQuestUpdateCallback;
-
-    void Awake()
+    public class QuestsManager : MonoBehaviour
     {
-        questsManager = this;
-    }
+        static public QuestsManager questsManager;
+        public PlayerController questOwner;
+        public List<Quest> activeQuests;
 
-    public void Start()
-    {
-        questOwner = PlayerController.localPlayer;
-        questOwner.OnKillCallback += OnSlay;
-        OnGameStart.Invoke();
-    }
+        public UnityEvent OnGameStart;
 
-    public void Update()
-    {
-        Unit selectedUnit = questOwner.selectedUnit;
-        if (selectedUnit != null)
+        public delegate void QuestUpdateEvent();
+        public event QuestUpdateEvent OnQuestUpdateCallback;
+
+        void Awake()
         {
-            bool dirty = false;
-            List<Quest> questsCopy = new List<Quest>(activeQuests);
+            questsManager = this;
+        }
 
-            foreach(Quest quest in questsCopy)
+        public void Start()
+        {
+            questOwner = PlayerController.localPlayer;
+            questOwner.OnKillCallback += OnSlay;
+            OnGameStart.Invoke();
+        }
+
+        public void Update()
+        {
+            Unit selectedUnit = questOwner.selectedUnit;
+            if (selectedUnit != null)
             {
-                if (quest.UpdateState(selectedUnit))
+                bool dirty = false;
+                List<Quest> questsCopy = new List<Quest>(activeQuests);
+
+                foreach (Quest quest in questsCopy)
                 {
-                    activeQuests.Remove(quest);
-                    dirty = true;
+                    if (quest.UpdateState(selectedUnit))
+                    {
+                        activeQuests.Remove(quest);
+                        dirty = true;
+                    }
+                }
+                questsCopy.Clear();
+
+                if (dirty)
+                {
+                    OnQuestUpdateCallback?.Invoke();
                 }
             }
-            questsCopy.Clear();
-
-            if (dirty)
-            {
-                OnQuestUpdateCallback?.Invoke();
-            }
         }
-    }
 
-    public void AddQuest(Quest quest)
-    {
-        activeQuests.Add(quest);
-        OnQuestUpdateCallback?.Invoke();
-    }
-
-    public void OnSlay(Unit prey)
-    {
-        foreach (Quest quest in activeQuests)
+        public void AddQuest(Quest quest)
         {
-            quest.OnSlay(prey);
+            activeQuests.Add(quest);
+            OnQuestUpdateCallback?.Invoke();
+        }
+
+        public void OnSlay(Unit prey)
+        {
+            foreach (Quest quest in activeQuests)
+            {
+                quest.OnSlay(prey);
+            }
         }
     }
 }

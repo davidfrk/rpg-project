@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     Vector3 targetPosition;
     Unit targetUnit;
 
+    public int gold = 0;
+
     //Avoids clicks on UI firing commands
     UIController uiController;
     float uiProtectionTime = 0.2f;

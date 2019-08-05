@@ -19,6 +19,8 @@ public class UIController : MonoBehaviour, ISlotManager
     public Sprite itemSlotBackgroundSprite;
     public Image draggingItemImage;
     public EquipmentTooltip equipmentTooltipPrefab;
+    public ShopUI shopUI;
+    public Shop shop;
 
     private bool draggingItem = false;
     private EquipmentTooltip equipmentTooltip;
@@ -42,6 +44,18 @@ public class UIController : MonoBehaviour, ISlotManager
         if (Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             Toggle();
+        }
+
+        if (Input.GetKeyDown(KeyCode.KeypadDivide))
+        {
+            if (shopUI.isActiveAndEnabled)
+            {
+                shopUI.Close();
+            }
+            else
+            {
+                shopUI.Open(shop);
+            }
         }
 
         if (Input.GetMouseButtonUp(0)){

@@ -8,6 +8,7 @@ namespace Rpg.Items
     public class Item : MonoBehaviour
     {
         public int id;
+        public int price;
         public Sprite sprite;
         public ItemType itemType = ItemType.Item;
         public GameObject model;
