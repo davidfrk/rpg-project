@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using UnityEngine;
 
 namespace Rpg.Stats
 {
@@ -49,10 +50,11 @@ namespace Rpg.Stats
 
 		public virtual void AddModifier(StatModifier mod)
 		{
-			isDirty = true;
-			statModifiers.Add(mod);
             mod.Owner = this;
-		}
+            statModifiers.Add(mod);
+            isDirty = true;
+            Debug.Log("AddModifier " + _value);
+        }
 
 		public virtual bool RemoveModifier(StatModifier mod)
 		{

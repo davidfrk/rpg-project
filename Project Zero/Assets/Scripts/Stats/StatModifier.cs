@@ -59,6 +59,7 @@ namespace Rpg.Stats
             dependencies = statBonus.dependencies;
 
             RegisterCallbacks();
+            UpdateValue();
         }
 
         private CharacterStat owner;
@@ -92,6 +93,8 @@ namespace Rpg.Stats
 
         private void UpdateValue()
         {
+            if (dependencies.Count == 0f) return;
+
             float newValue = 0f;
             foreach (Dependency dependency in dependencies)
             {

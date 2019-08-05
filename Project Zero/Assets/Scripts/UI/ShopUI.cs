@@ -4,7 +4,7 @@ using UnityEngine;
 using Rpg.Items;
 
 namespace Rpg.UI {
-    public class ShopUI : MonoBehaviour
+    public class ShopUI : MonoBehaviour , IShopManager
     {
         public ShopItemTooltip shopItemTooltipPrefab;
         public Transform contentTransform;
@@ -43,6 +43,12 @@ namespace Rpg.UI {
             ShopItemTooltip tooltip = Instantiate<ShopItemTooltip>(shopItemTooltipPrefab, contentTransform);
             tooltip.UpdateUI(item);
             tooltips.Add(tooltip);
+        }
+
+        public void OnMouseRightClickDown(ShopItemTooltip shopItemTooltip)
+        {
+            shop.Sell(shopItemTooltip.Item, PlayerController.localPlayer);
+            UIController.instance.lastUIClick = Time.time;
         }
     }
 }

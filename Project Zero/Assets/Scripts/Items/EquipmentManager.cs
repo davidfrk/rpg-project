@@ -114,6 +114,9 @@ namespace Rpg.Items
                 Item item1 = GetItem(slot1Type, slot1Index);
                 Item item2 = GetItem(slot2Type, slot2Index);
 
+                SetSlot(slot1Type, slot1Index, null);
+                SetSlot(slot2Type, slot2Index, null);
+
                 SetSlot(slot1Type, slot1Index, item2);
                 SetSlot(slot2Type, slot2Index, item1);
 

@@ -3931,7 +3931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedUnit: {fileID: 440013009}
-  gold: 0
+  gold: 200
   layer:
     serializedVersion: 2
     m_Bits: 1537
@@ -12053,6 +12053,10 @@ PrefabInstance:
       propertyPath: stats.baseStats.HpRegen
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4371175118911467019, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f86b83fa4d6647f4d820458e94c12cde, type: 3}
 --- !u!1 &2138580186
@@ -12088,6 +12092,8 @@ MonoBehaviour:
   items:
   - {fileID: 3557833302729401416, guid: 2e39fa0af387cd54dbc8f06d90accfbf, type: 3}
   - {fileID: 5749383953796622142, guid: c07c0f821a88f524ea6d791841dfcbb8, type: 3}
+  - {fileID: 8496660243653559192, guid: 44cf7eea2ae69f644bf24e94463ebdaa, type: 3}
+  - {fileID: 3557833302729401416, guid: 0971eb185f79c2a41afd0935da6ccdab, type: 3}
 --- !u!4 &2138580188
 Transform:
   m_ObjectHideFlags: 0
