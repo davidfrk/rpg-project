@@ -84,7 +84,7 @@ namespace Rpg.Items
             }
         }
 
-        public void DropItem(Item.ItemType slotType, int slotIndex)
+        public Item DropItem(Item.ItemType slotType, int slotIndex)
         {
             Item item;
             if (slotType == Item.ItemType.Equipment)
@@ -105,6 +105,7 @@ namespace Rpg.Items
                 item.transform.position = transform.position;
                 item.SetState(Item.ItemState.InWorld);
             }
+            return item;
         }
 
         public void SwapItems(Item.ItemType slot1Type, int slot1Index, Item.ItemType slot2Type, int slot2Index)

@@ -85,7 +85,12 @@ public class UIController : MonoBehaviour, ISlotManager
             EquipmentManager equipmentManager = selectedUnit.GetComponent<EquipmentManager>();
             if (equipmentManager != null)
             {
-                equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
+                Item item = equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
+
+                if (shopUI.isActiveAndEnabled)
+                {
+                    shop.Buy(item, PlayerController.localPlayer);
+                }
             }
         }
     }

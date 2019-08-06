@@ -14,7 +14,18 @@ public class Shop : MonoBehaviour
         {
             gold += item.price;
             player.gold -= item.price;
-            Instantiate<Item>(item, player.selectedUnit.transform.position, Quaternion.identity);
+            Item newItem = Instantiate<Item>(item, player.selectedUnit.transform.position, Quaternion.identity);
+            player.selectedUnit.unitController.MoveToPickItem(newItem);
+        }
+    }
+
+    public void Buy(Item item, PlayerController player)
+    {
+        if (item != null && item.State == Item.ItemState.InWorld && gold >= item.price)
+        {
+            gold -= item.price;
+            player.gold += item.price;
+            Destroy(item.gameObject);
         }
     }
 }
