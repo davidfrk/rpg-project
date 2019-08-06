@@ -29,7 +29,7 @@ public class SkillsManager : MonoBehaviour
 
     public void AddSkill(Skill skill)
     {
-        skill.owner = unit;
+        skill.Owner = unit;
         skills.Add(skill);
     }
 

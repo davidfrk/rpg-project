@@ -18,7 +18,7 @@ namespace Rpg.Skills
 
         public override void Cast(Unit owner, Transform castTransform, Vector3 targetPosition)
         {
-            this.owner = owner;
+            //this.owner = owner;
             transform.SetParent(castTransform, false);
             transform.rotation = owner.transform.rotation;
             transform.GetChild(0).gameObject.SetActive(true);
@@ -45,7 +45,7 @@ namespace Rpg.Skills
                 if ((Time.time - lastDamageTick) > damageInterval)
                 {
                     lastDamageTick = Time.time;
-                    DamageTick(owner);
+                    DamageTick(Owner);
                 }
             }
         }

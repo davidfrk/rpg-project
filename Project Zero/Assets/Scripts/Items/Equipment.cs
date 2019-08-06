@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rpg.Stats;
+using Rpg.Skills;
 
 namespace Rpg.Items
 {
@@ -10,6 +11,7 @@ namespace Rpg.Items
         [Space(10)]
         public EquipmentType equipmentType;
         public List<StatBonus> statBonus;
+        public Skill skill;
 
         public enum EquipmentType
         {

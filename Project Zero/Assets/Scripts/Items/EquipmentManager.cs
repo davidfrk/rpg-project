@@ -195,11 +195,19 @@ namespace Rpg.Items
         void Equip(Equipment equipment)
         {
             unit.stats.AddStatModifierList(equipment.statBonus, equipment);
+            if (equipment.skill != null)
+            {
+                equipment.skill.Owner = unit;
+            }
         }
 
         void UnEquip(Equipment equipment)
         {
             unit.stats.RemoveStatModifierList(equipment.statBonus, equipment);
+            if (equipment.skill != null)
+            {
+                equipment.skill.Owner = null;
+            }
         }
     }
 }

@@ -51,6 +51,9 @@ public class UnitController : MonoBehaviour
     public delegate void OnBeingAttackedEvent(Unit aggressor);
     public event OnBeingAttackedEvent OnBeingAttackedCallback;
 
+    public delegate void OnAttackEndEvent(Unit target, float damage);
+    public event OnAttackEndEvent OnAttackEndCallback;
+
     public delegate void DeathEvent(Unit killer);
     public event DeathEvent OnDeathCallback;
 
@@ -235,8 +238,9 @@ public class UnitController : MonoBehaviour
         {
             if (unit.alive && State == UnitState.Attacking)
             {
-                action.targetUnit.TakeDamage(unit.stats.Attack.Value, DamageType.Physical, this.unit);
-                //targetUnit.unitController.OnBeingAttackedEventCallback(this.unit);
+                float attackDamage = unit.stats.Attack.Value;
+                action.targetUnit.TakeDamage(attackDamage, DamageType.Physical, this.unit);
+                OnAttackEndCallback?.Invoke(action.targetUnit, attackDamage);
 
                 if (action.targetUnit.alive)
                 {

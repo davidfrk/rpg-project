@@ -14,6 +14,7 @@ namespace Rpg.UI
         public Text itemName;
         public Text price;
         public Transform statsTransform;
+        public Text skillDescription;
         public StatsTooltipElement statsPrefab;
         public StatsTooltipGradeElement statsGradePrefab;
         public IShopManager shopManager;
@@ -44,6 +45,11 @@ namespace Rpg.UI
             foreach (StatBonus statBonus in equipment.statBonus)
             {
                 AddStatsUI(statBonus);
+            }
+
+            if (equipment.skill != null)
+            {
+                skillDescription.text = equipment.skill.description;
             }
         }
 

@@ -181,6 +181,23 @@ public class Unit : MonoBehaviour
         Mana -= manaCost;
     }
 
+    public void Regen(Resource resource, float amount, Unit healer)
+    {
+        switch (resource)
+        {
+            case Resource.Health:
+                {
+                    Health += amount;
+                    break;
+                }
+            case Resource.Mana:
+                {
+                    Mana += amount;
+                    break;
+                }
+        }
+    }
+
     public void Awake()
     {
         experienceManager = GetComponent<ExperienceManager>();
@@ -215,5 +232,11 @@ public class Unit : MonoBehaviour
         health = lastMaxHealth;
         mana = lastMaxMana;
         alive = true;
+    }
+
+    public enum Resource
+    {
+        Health,
+        Mana,
     }
 }

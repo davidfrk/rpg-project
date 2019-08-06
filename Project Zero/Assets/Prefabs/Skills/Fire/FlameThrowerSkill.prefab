@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea49fc5cb0ecc3e4383b2c12eda57836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillType: 1
   castRange: 5
   manaCost: 25
   canCastOnGround: 1

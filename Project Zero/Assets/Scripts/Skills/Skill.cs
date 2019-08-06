@@ -6,6 +6,7 @@ namespace Rpg.Skills
 {
     public class Skill : MonoBehaviour
     {
+        public SkillType skillType;
         public float castRange = 3f;
         public float manaCost = 50;
         public bool canCastOnGround = true;
@@ -13,7 +14,28 @@ namespace Rpg.Skills
         public Sprite icon;
         [SerializeField]
         private bool canBeInterrupted = false;
-        internal Unit owner;
+        private Unit owner;
+        public Unit Owner
+        {
+            get
+            {
+                return owner;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    RegisterEvents(value);
+                }
+                else
+                {
+                    UnRegisterEvents();
+                }
+                owner = value;
+            }
+        }
+        public string description;
+
         protected AudioSource audioSource;
 
         void Awake()
@@ -38,7 +60,7 @@ namespace Rpg.Skills
 
         public virtual bool CanCast(Unit owner)
         {
-            return owner.Mana >= manaCost;
+            return skillType == SkillType.Active && owner.Mana >= manaCost;
         }
 
         public virtual bool CanBeInterrupted()
@@ -51,9 +73,25 @@ namespace Rpg.Skills
 
         }
 
+        protected virtual void RegisterEvents(Unit owner)
+        {
+            
+        }
+
+        protected virtual void UnRegisterEvents()
+        {
+            
+        }
+
         public static Collider[] FindUnitsInBox(Vector3 center, Vector3 dimensions, Quaternion orientation)
         {
             return Physics.OverlapBox(center, dimensions, orientation, LayerMask.GetMask("Unit"));
+        }
+
+        public enum SkillType
+        {
+            Passive,
+            Active
         }
     }
 }
