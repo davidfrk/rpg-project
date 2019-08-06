@@ -42,6 +42,7 @@ namespace Rpg.Quest
                     {
                         activeQuests.Remove(quest);
                         dirty = true;
+                        SoundManager.instance.PlaySound(SoundManager.UISound.QuestComplete);
                     }
                 }
                 questsCopy.Clear();

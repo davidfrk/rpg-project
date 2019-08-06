@@ -17,11 +17,13 @@ namespace Rpg.UI {
             this.shop = shop;
             UpdateUI();
             gameObject.SetActive(true);
+            SoundManager.instance.PlaySound(SoundManager.UISound.OpenShop);
         }
 
         public void Close()
         {
             gameObject.SetActive(false);
+            SoundManager.instance.PlaySound(SoundManager.UISound.CloseShop);
         }
 
         public void UpdateUI()
