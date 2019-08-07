@@ -57,6 +57,7 @@ MonoBehaviour:
   canCastOnUnit: 1
   icon: {fileID: 21300000, guid: ab2c0effa4522104dbdb381ab0b16a7b, type: 3}
   canBeInterrupted: 0
+  description: Boost Str and provides HpRegen
   StatBonus:
   - stat: 8
     statModType: 100

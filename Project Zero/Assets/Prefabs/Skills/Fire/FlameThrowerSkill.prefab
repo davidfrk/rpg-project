@@ -102,6 +102,7 @@ MonoBehaviour:
   canCastOnUnit: 0
   icon: {fileID: 21300000, guid: e977c1562987f7e41b442f92c93f4234, type: 3}
   canBeInterrupted: 1
+  description: Fire breathing technique
   damageInterval: 0.25
   damage: 10
   durationAfterCastEnd: 3
