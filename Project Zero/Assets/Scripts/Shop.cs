@@ -6,6 +6,7 @@ using Rpg.Items;
 public class Shop : MonoBehaviour
 {
     public int gold;
+    public float sellFraction;
     public List<Item> items;
 
     public void Sell(Item item, PlayerController player)
@@ -24,8 +25,9 @@ public class Shop : MonoBehaviour
     {
         if (item != null && item.State == Item.ItemState.InWorld && gold >= item.price)
         {
-            gold -= item.price;
-            player.gold += item.price;
+            int price = Mathf.FloorToInt(sellFraction * item.price);
+            gold -= price;
+            player.gold += price;
             Destroy(item.gameObject);
             SoundManager.instance.PlaySound(SoundManager.UISound.SellItem);
         }
