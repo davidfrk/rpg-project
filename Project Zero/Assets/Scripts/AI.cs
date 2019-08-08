@@ -8,11 +8,13 @@ public class AI : MonoBehaviour
     Unit unit;
     UnitController unitController;
 
+    public Faction faction;
     public AggressionType aggression = AggressionType.Neutral;
     public float visionRange = 3f;
     public float broadcastRange = 5f;
 
     LayerMask unitsLayer;
+    private float nextSearchForEnemyTime = 0f;
 
     void Awake()
     {
@@ -25,25 +27,33 @@ public class AI : MonoBehaviour
 
     void OnBeingAttacked(Unit aggressor)
     {
-        if (unitController.State == UnitState.Idle && aggressor.alive)
+        if (aggressor.alive)
         {
-            unitController.MoveAttack(aggressor);
-            //Call for assistance
+            if (unitController.State == UnitState.Idle)
+            {
+                unitController.MoveAttack(aggressor);
+            }
+            
+            //Call for assistance, 
             BroadcastOnBeingAttackedEvent(unit, aggressor);
         }
     }
 
     private void BroadcastOnBeingAttackedEvent(Unit target, Unit aggressor)
     {
+        //ToDo: limit the interval between broadcasts
         Collider[] unitsInRange = Physics.OverlapSphere(transform.position, broadcastRange, unitsLayer);
         foreach (Collider unitCollider in unitsInRange)
         {
-            AI unitAI = unitCollider.GetComponent<AI>();
+            AI allyUnit = unitCollider.GetComponent<AI>();
             
-            //Dont broadcast to yourself
-            if (target != unitAI.unit)
+            if (faction == allyUnit.faction)
             {
-                unitAI.ListenOnBeingAttackedEvent(target, aggressor);
+                //Dont broadcast to yourself
+                if (target != allyUnit.unit)
+                {
+                    allyUnit.ListenOnBeingAttackedEvent(target, aggressor);
+                }
             }
         }
     }
@@ -52,10 +62,13 @@ public class AI : MonoBehaviour
     {
         if (unitController.State == UnitState.Idle || unitController.State == UnitState.Moving)
         {
-            //Dont attack yourself
-            if (aggressor != this.unit)
+            if (!unitController.playerUnit && faction == target.GetComponent<AI>().faction)
             {
-                unitController.MoveAttack(aggressor);
+                //Dont attack yourself
+                if (aggressor != this.unit)
+                {
+                    unitController.MoveAttack(aggressor);
+                }
             }
         }
     }
@@ -64,7 +77,10 @@ public class AI : MonoBehaviour
     {
         if (aggression == AggressionType.Agressive && unitController.State == UnitState.Idle)
         {
-            SearchForEnemy();
+            if (Time.time >= nextSearchForEnemyTime)
+            {
+                SearchForEnemy();
+            }
         }
     }
 
@@ -73,19 +89,31 @@ public class AI : MonoBehaviour
         Collider[] unitsInRange = Physics.OverlapSphere(transform.position, visionRange, unitsLayer);
         foreach (Collider unitCollider in unitsInRange)
         {
-            Unit targetUnit = unitCollider.GetComponent<Unit>();
+            AI targetUnit = unitCollider.GetComponent<AI>();
 
-            //Dont attack yourself
-            if (this.unit != targetUnit && targetUnit.alive)
+            if (faction != targetUnit.faction && targetUnit.unit.alive)
             {
-                unitController.MoveAttack(targetUnit);
+                //Dont attack yourself
+                if (this != targetUnit)
+                {
+                    unitController.MoveAttack(targetUnit.unit);
+                }
             }
         }
+        nextSearchForEnemyTime = Time.time + 0.3f + 0.3f * Random.value;
     }
 
     public enum AggressionType
     {
         Neutral,
         Agressive
+    }
+
+    public enum Faction
+    {
+        Human,
+        Monster,
+        AnimalPredator,
+        Animal,
     }
 }

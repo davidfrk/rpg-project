@@ -87,7 +87,7 @@ public class UnitController : MonoBehaviour
 
     void MovementCallback()
     {
-        Debug.Log(gameObject + " MovementCallback ");
+        //Debug.Log(gameObject + " MovementCallback ");
         if (State == UnitState.Moving)
         {
             State = UnitState.Idle;

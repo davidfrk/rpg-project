@@ -11,6 +11,7 @@ namespace Rpg.Stats
 		public float BaseValue;
 
 		protected bool isDirty = true;
+        protected bool isSortDirty = true;
 		protected float lastBaseValue;
 
 		protected float _value;
@@ -52,15 +53,16 @@ namespace Rpg.Stats
 		{
             mod.Owner = this;
             statModifiers.Add(mod);
-            isDirty = true;
-            Debug.Log("AddModifier " + _value);
+            SetDirty();
+            isSortDirty = true;
+            //Debug.Log("AddModifier " + _value);
         }
 
 		public virtual bool RemoveModifier(StatModifier mod)
 		{
 			if (statModifiers.Remove(mod))
 			{
-				isDirty = true;
+                SetDirty();
                 mod.Remove();
 				return true;
 			}
@@ -73,8 +75,8 @@ namespace Rpg.Stats
 
 			if (numRemovals > 0)
 			{
-				isDirty = true;
-				return true;
+                SetDirty();
+                return true;
 			}
 			return false;
 		}
@@ -93,7 +95,11 @@ namespace Rpg.Stats
 			float finalValue = BaseValue;
 			float sumPercentAdd = 0;
 
-			statModifiers.Sort(CompareModifierOrder);
+            if (isSortDirty)
+            {
+                statModifiers.Sort(CompareModifierOrder);
+                isSortDirty = false;
+            }
 
 			for (int i = 0; i < statModifiers.Count; i++)
 			{

@@ -39,18 +39,7 @@ public class QuestsUIManager : MonoBehaviour
         if (dirty)
         {
             InitiateUI();
-        }
-        UpdateUI();
-    }
-
-    public void UpdateUI()
-    {
-        if (questUIList.Count == questsManager.activeQuests.Count)
-        {
-            for (int i = 0; i < questUIList.Count; i++)
-            {
-                questUIList[i].UpdateUI();
-            }
+            dirty = false;
         }
     }
 

@@ -6,14 +6,23 @@ using UnityEngine.UI;
 public class QuestConditionUI : MonoBehaviour
 {
     public Text text;
+    private QuestCondition condition;
     
     public void Awake()
     {
         //text = GetComponent<Text>();
     }
 
-    public void UpdateUI(QuestCondition condition)
+    public void InitiateUI(QuestCondition condition)
     {
+        this.condition = condition;
+        condition.OnChangeCallback += UpdateUI;
+        UpdateUI();
+    }
+
+    public void UpdateUI()
+    {
+        if (text == null) return;
         switch (condition.conditionType)
         {
             case ConditionType.Goal:

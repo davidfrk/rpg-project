@@ -45,7 +45,7 @@ public class SkillsUI : MonoBehaviour, ISkillManagerUI
             foreach (Skill skill in castController.skills)
             {
                 SkillSlotUI skillSlot =  Instantiate<SkillSlotUI>(skillUIPrefab, skillsTransform);
-                skillSlot.UpdateUI(skill);
+                skillSlot.UpdateUI(skill, KeyCode.Q);
                 skillSlots.Add(skillSlot);
             }
         }

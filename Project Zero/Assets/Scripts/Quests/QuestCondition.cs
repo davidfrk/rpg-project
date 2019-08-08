@@ -7,8 +7,8 @@ using Rpg.Items;
 public class QuestCondition
 {
     public bool completed;
-    //public delegate void OnCompleteEvent();
-    //public event OnCompleteEvent OnCompleteCallback;
+    public delegate void OnChangeEvent();
+    public event OnChangeEvent OnChangeCallback;
 
     public ConditionType conditionType;
     public Item item;
@@ -50,7 +50,7 @@ public class QuestCondition
 
         if (equipmentManager != null)
         {
-            currentAmount = 0;
+            int currentAmount = 0;
             
             foreach (EquipmentSlot equipmentSlot in equipmentManager.equipmentSlots)
             {
@@ -68,8 +68,14 @@ public class QuestCondition
                     currentAmount++;
                 }
             }
-        }
 
+            if (this.currentAmount != currentAmount)
+            {
+                this.currentAmount = currentAmount;
+                OnChangeCallback?.Invoke();
+            }
+        }
+        
         return currentAmount >= amount;
     }
 
@@ -91,7 +97,13 @@ public class QuestCondition
         {
             if (prey.id == targetUnit.id)
             {
-                currentAmount = Mathf.Min(currentAmount + 1, amount) ;
+                int newCurrentAmount = Mathf.Min(currentAmount + 1, amount) ;
+
+                if (newCurrentAmount != currentAmount)
+                {
+                    currentAmount = newCurrentAmount;
+                    OnChangeCallback?.Invoke();
+                }
 
                 if (currentAmount >= amount)
                 {

@@ -27,18 +27,8 @@ public class QuestUI : MonoBehaviour
         for (int i = 0; i < quest.questConditions.Count; i++)
         {
             QuestConditionUI newConditionUI = Instantiate<QuestConditionUI>(conditionUIPrefab, conditionsTransform);
+            newConditionUI.InitiateUI(quest.questConditions[i]);
             conditionUIList.Add(newConditionUI);
-        }
-    }
-
-    public void UpdateUI()
-    {
-        if (quest != null && quest.questConditions.Count == conditionUIList.Count)
-        {
-            for (int i = 0; i < conditionUIList.Count; i++)
-            {
-                conditionUIList[i].UpdateUI(quest.questConditions[i]);
-            }
         }
     }
 }
