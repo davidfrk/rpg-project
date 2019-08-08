@@ -35,7 +35,7 @@ GameObject:
   - component: {fileID: 3557833302729401416}
   - component: {fileID: 2319498138503039626}
   m_Layer: 10
-  m_Name: ManaNecklace
+  m_Name: Necklace
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,11 @@ MonoBehaviour:
   itemType: 2
   model: {fileID: 2752649277000001797}
   equipmentType: 5
-  statBonus: []
+  statBonus:
+  - stat: 10
+    statModType: 100
+    value: 2
+    dependencies: []
   skill: {fileID: 2319498138503039626}
 --- !u!114 &2319498138503039626
 MonoBehaviour:

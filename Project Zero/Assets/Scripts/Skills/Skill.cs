@@ -93,5 +93,11 @@ namespace Rpg.Skills
             Passive,
             Active
         }
+
+        public enum BonusType
+        {
+            Flat,
+            Mult,
+        }
     }
 }

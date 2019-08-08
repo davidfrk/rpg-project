@@ -406,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535182445142892717}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.832212, y: 0.18957557, z: -17.079319}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4009061428336620473}
@@ -686,6 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4febc1d733625b640ba6e09a4e544900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   exp: 0
   quadraticTermInLevelFormula: 10
   linearTermInLevelFormula: 1000
@@ -704,6 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de887b539acab1d409afe0b7cc4fd3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faction: 0
   aggression: 0
   visionRange: 3
   broadcastRange: 5

@@ -2737,7 +2737,7 @@ MonoBehaviour:
       ManaRegen: 0
       Armor: 0
       MagicArmor: 0
-      Attack: 15
+      Attack: 45
       AttackSpeed: 20
       Str: 10
       Agi: 8
@@ -2760,6 +2760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4febc1d733625b640ba6e09a4e544900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   exp: 0
   quadraticTermInLevelFormula: 10
   linearTermInLevelFormula: 1000

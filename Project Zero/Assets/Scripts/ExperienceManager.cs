@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ExperienceManager : MonoBehaviour
 {
+    [SerializeField]
     private int level = 1;
     public int Level {
         get

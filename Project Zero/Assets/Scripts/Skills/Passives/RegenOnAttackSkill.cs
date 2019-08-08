@@ -7,6 +7,7 @@ namespace Rpg.Skills
     public class RegenOnAttackSkill : Skill
     {
         public Unit.Resource resource;
+        public BonusType bonusType;
         public float amount;
 
         protected override void RegisterEvents(Unit owner)
@@ -21,7 +22,14 @@ namespace Rpg.Skills
 
         protected virtual void OnAttack(Unit target, float damage)
         {
-            Owner.Regen(resource, amount, Owner);
+            if (bonusType == BonusType.Flat)
+            {
+                Owner.Regen(resource, amount, Owner);
+            }
+            else
+            {
+                Owner.Regen(resource, amount * damage, Owner);
+            }
         }
     }
 }

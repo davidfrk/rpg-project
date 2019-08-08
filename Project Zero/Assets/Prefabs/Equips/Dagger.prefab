@@ -101,7 +101,8 @@ MonoBehaviour:
   canBeInterrupted: 0
   description: Lifesteal
   resource: 0
-  amount: 3
+  bonusType: 1
+  amount: 0.1
 --- !u!1001 &2753598153868385909
 PrefabInstance:
   m_ObjectHideFlags: 0
