@@ -54,6 +54,9 @@ public class UnitController : MonoBehaviour
     public delegate void OnAttackEndEvent(Unit target, float damage);
     public event OnAttackEndEvent OnAttackEndCallback;
 
+    public delegate void SpawnEvent(Unit unit);
+    public event SpawnEvent OnSpawnCallback;
+
     public delegate void DeathEvent(Unit killer);
     public event DeathEvent OnDeathCallback;
 
@@ -305,6 +308,7 @@ public class UnitController : MonoBehaviour
         navMeshAgent.enabled = true;
         State = UnitState.Idle;
         gameObject.layer = LayerMask.NameToLayer("Unit");
+        OnSpawnCallback?.Invoke(this.unit);
     }
 
     public void MoveToPickItem(Item item)
@@ -402,6 +406,13 @@ public class UnitController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Teleport(Vector3 position, Quaternion rotation)
+    {
+        transform.position = position;
+        transform.rotation = rotation;
+        navMeshAgent.SetDestination(position);
     }
 }
 

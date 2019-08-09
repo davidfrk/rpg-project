@@ -14,16 +14,34 @@ namespace Rpg.UI {
 
         public void Open(Shop shop)
         {
-            this.shop = shop;
-            UpdateUI();
-            gameObject.SetActive(true);
-            SoundManager.instance.PlaySound(SoundManager.UISound.OpenShop);
+            if (shop != null)
+            {
+                this.shop = shop;
+                UpdateUI();
+                gameObject.SetActive(true);
+                SoundManager.instance.PlaySound(SoundManager.UISound.OpenShop);
+            }
+            else
+            {
+                Close();
+            }
         }
 
         public void Close()
         {
             gameObject.SetActive(false);
             SoundManager.instance.PlaySound(SoundManager.UISound.CloseShop);
+        }
+
+        public void Update()
+        {
+            if (shop != null)
+            {
+                if ((PlayerController.localPlayer.MainUnit.transform.position - shop.transform.position).magnitude > (Shop.range + 0.5f))
+                {
+                    Close();
+                }
+            }
         }
 
         public void UpdateUI()

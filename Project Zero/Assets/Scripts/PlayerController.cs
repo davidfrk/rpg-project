@@ -6,10 +6,33 @@ using Rpg.Items;
 public class PlayerController : MonoBehaviour
 {
     static public PlayerController localPlayer;
+
+    public CameraController mainCamera;
     public Unit selectedUnit;
+    private Unit mainUnit;
+    public Unit MainUnit
+    {
+        get
+        {
+            return mainUnit;
+        }
+        private set
+        {
+            if (mainUnit != value && value != null)
+            {
+                if (mainUnit != null)
+                {
+                    mainUnit.unitController.OnSpawnCallback -= OnRespawn;
+                }
+                mainUnit = value;
+                mainUnit.unitController.OnSpawnCallback += OnRespawn;
+            }
+        }
+    }
+
     private UnitController selectedUnitController;
-    Vector3 targetPosition;
-    Unit targetUnit;
+    private Vector3 targetPosition;
+    private Unit targetUnit;
 
     public int gold = 0;
 
@@ -37,6 +60,10 @@ public class PlayerController : MonoBehaviour
     {
         selectedUnit = unit;
         selectedUnitController = selectedUnit.GetComponent<UnitController>();
+        if (selectedUnitController.playerUnit)
+        {
+            MainUnit = selectedUnit;
+        }
     }
 
     void Start()
@@ -125,6 +152,16 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            mainCamera.CenterOnUnit(mainUnit);
+        }
+    }
+
+    void OnRespawn(Unit unit)
+    {
+        mainCamera.CenterOnUnit(unit);
     }
 
     public void OnKill(Unit prey)

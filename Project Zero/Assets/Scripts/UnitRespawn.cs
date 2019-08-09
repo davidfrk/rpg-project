@@ -6,7 +6,7 @@ public class UnitRespawn : MonoBehaviour
 {
     public float TimeToRespawn = 3f;
 
-    Vector3 spawnPosition;
+    public Vector3 SpawnPosition { get; private set; }
     Quaternion spawnOrientation;
     UnitController unitController;
 
@@ -18,7 +18,7 @@ public class UnitRespawn : MonoBehaviour
 
     public void Start()
     {
-        spawnPosition = transform.position;
+        SpawnPosition = transform.position;
         spawnOrientation = transform.rotation;
     }
 
@@ -29,6 +29,6 @@ public class UnitRespawn : MonoBehaviour
 
     public void Respawn()
     {
-        unitController.Spawn(spawnPosition, spawnOrientation);
+        unitController.Spawn(SpawnPosition, spawnOrientation);
     }
 }

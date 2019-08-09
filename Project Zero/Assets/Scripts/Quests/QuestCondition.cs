@@ -69,6 +69,8 @@ public class QuestCondition
                 }
             }
 
+            currentAmount = Mathf.Min(currentAmount, amount);
+
             if (this.currentAmount != currentAmount)
             {
                 this.currentAmount = currentAmount;

@@ -68,7 +68,9 @@ public class Unit : MonoBehaviour
     [SerializeField]
     public Stats stats;
 
+    [SerializeField]
     float physicalResistance = 0f;
+    [SerializeField]
     float magicResistance = 0f;
     float attackSpeed = 1f;
     public float AttackSpeed
@@ -198,6 +200,12 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public void RegenToFull()
+    {
+        Health = lastMaxHealth;
+        Mana = lastMaxMana;
+    }
+
     public void Awake()
     {
         experienceManager = GetComponent<ExperienceManager>();
@@ -210,8 +218,18 @@ public class Unit : MonoBehaviour
         UpdateStats();
         lastMaxHealth = stats.MaxHealth.Value;
         lastMaxMana = stats.MaxMana.Value;
-        health = lastMaxHealth;
-        mana = lastMaxMana;
+        
+        if (alive)
+        {
+            health = lastMaxHealth;
+            mana = lastMaxMana;
+        }
+        else
+        {
+            health = 0;
+            mana = 0;
+            unitController.Die(null);
+        }
     }
 
     public void Update()

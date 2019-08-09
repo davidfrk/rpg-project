@@ -5466,7 +5466,7 @@ MonoBehaviour:
     baseStats:
       MaxHealth: 80
       HpRegen: 0
-      MaxMana: 20
+      MaxMana: 30
       ManaRegen: 0
       Armor: 1
       MagicArmor: 1
@@ -5589,6 +5589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4febc1d733625b640ba6e09a4e544900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   exp: 0
   quadraticTermInLevelFormula: 10
   linearTermInLevelFormula: 1000
@@ -5607,6 +5608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de887b539acab1d409afe0b7cc4fd3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faction: 0
   aggression: 0
   visionRange: 3
   broadcastRange: 5

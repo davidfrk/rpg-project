@@ -563,7 +563,7 @@ MonoBehaviour:
     baseStats:
       MaxHealth: 100
       HpRegen: 0
-      MaxMana: 10
+      MaxMana: 25
       ManaRegen: 0
       Armor: 2
       MagicArmor: 0

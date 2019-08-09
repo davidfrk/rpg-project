@@ -2766,7 +2766,7 @@ MonoBehaviour:
   linearTermInLevelFormula: 1000
   audioSource: {fileID: 0}
   levelUpSound: {fileID: 0}
-  experienceGivenOnDeath: 1500
+  experienceGivenOnDeath: 500
 --- !u!114 &6105486388480550552
 MonoBehaviour:
   m_ObjectHideFlags: 0

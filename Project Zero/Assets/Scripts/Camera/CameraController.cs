@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraGrip : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     public float sensitivity = 1f;
     public float height = 5f;
@@ -41,5 +41,10 @@ public class CameraGrip : MonoBehaviour
         displacement = new Vector3(displacement.x, 0f, displacement.y);
 
         transform.position = cameraGripStartingPosition + sensitivity * displacement;
+    }
+
+    public void CenterOnUnit(Unit unit)
+    {
+        transform.position = new Vector3(unit.transform.position.x, transform.position.y, unit.transform.position.z - 6f);
     }
 }

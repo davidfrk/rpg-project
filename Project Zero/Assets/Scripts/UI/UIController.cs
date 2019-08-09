@@ -20,7 +20,7 @@ public class UIController : MonoBehaviour, ISlotManager
     public Image draggingItemImage;
     public EquipmentTooltip equipmentTooltipPrefab;
     public ShopUI shopUI;
-    public Shop shop;
+    private Shop shop;
 
     private bool draggingItem = false;
     private EquipmentTooltip equipmentTooltip;
@@ -41,12 +41,12 @@ public class UIController : MonoBehaviour, ISlotManager
             //Callback selecionou nova unidade
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.KeypadMinus))
         {
-            Toggle();
+            ToggleEquipmentUI();
         }
 
-        if (Input.GetKeyDown(KeyCode.KeypadDivide))
+        if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadDivide))
         {
             if (shopUI.isActiveAndEnabled)
             {
@@ -54,6 +54,7 @@ public class UIController : MonoBehaviour, ISlotManager
             }
             else
             {
+                shop = Shop.FindShopInRange(PlayerController.localPlayer.MainUnit.transform.position);
                 shopUI.Open(shop);
             }
         }
@@ -64,7 +65,7 @@ public class UIController : MonoBehaviour, ISlotManager
         }
     }
 
-    public void Toggle()
+    public void ToggleEquipmentUI()
     {
         show = !show;
 

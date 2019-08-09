@@ -1832,7 +1832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alive: 1
-  id: 5
+  id: 8
   health: 1
   mana: 1
   radius: 0.5

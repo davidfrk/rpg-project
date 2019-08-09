@@ -17,6 +17,7 @@ public class SkillsManager : MonoBehaviour
     {
         unit = GetComponent<Unit>();
         unitController = GetComponent<UnitController>();
+        unitController.OnDeathCallback += OnDeath;
     }
 
     void Start()
@@ -78,5 +79,12 @@ public class SkillsManager : MonoBehaviour
     public void OnCastEnd()
     {
         skill.OnCastEnd();
+    }
+
+    private void OnDeath(Unit killer)
+    {
+        if (skill != null){
+            skill.Interrupt();
+        }
     }
 }

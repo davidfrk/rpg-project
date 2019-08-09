@@ -324,13 +324,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4febc1d733625b640ba6e09a4e544900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  level: 10
   exp: 0
-  quadraticTermInLevelFormula: 10
+  quadraticTermInLevelFormula: 12
   linearTermInLevelFormula: 1000
   audioSource: {fileID: 8757306396129472851}
   levelUpSound: {fileID: 8300000, guid: 38259b041bcceed4d87b45251f0f8324, type: 3}
-  experienceGivenOnDeath: 1000
+  experienceGivenOnDeath: 700
 --- !u!114 &8862137787870928382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519f7a24ba5933c4cb05405cda873f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToRespawn: 3
+  TimeToRespawn: 60
 --- !u!114 &6145484334582658959
 MonoBehaviour:
   m_ObjectHideFlags: 0

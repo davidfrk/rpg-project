@@ -5,6 +5,7 @@ using Rpg.Items;
 
 public class Shop : MonoBehaviour
 {
+    static public float range = 10f;
     public int gold;
     public float sellFraction;
     public List<Item> items;
@@ -31,5 +32,16 @@ public class Shop : MonoBehaviour
             Destroy(item.gameObject);
             SoundManager.instance.PlaySound(SoundManager.UISound.SellItem);
         }
+    }
+
+    static public Shop FindShopInRange(Vector3 position)
+    {
+        Collider[] shopsInRange = Physics.OverlapSphere(position, range, LayerMask.GetMask("Shop"));
+        foreach (Collider shopCollider in shopsInRange)
+        {
+            //ToDo: Pegar o mais proximo
+            return shopCollider.GetComponent<Shop>();
+        }
+        return null;
     }
 }
