@@ -9,15 +9,15 @@ AnimatorOverrideController:
   m_Name: GhostTigerControllerOverride
   m_Controller: {fileID: 9100000, guid: 9faa1a13da90a894da7720c566bf4bcc, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: cff0a5804d97a2f4dad9cb8818a2dc66, type: 3}
-    m_OverrideClip: {fileID: 7400000, guid: 51b60f0121dfee342a9512739078f710, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: d75c3769895ed004298c2e2a3bcf765e, type: 3}
-    m_OverrideClip: {fileID: 7400000, guid: abb5d114c0135744b8a690cbe9447fbd, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 6159abd4343a5d244a08720e789c58be, type: 3}
-    m_OverrideClip: {fileID: 7400000, guid: 234fc00831080934e81c176f51734f47, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 7e5f848ee4eb2af45b2d37d0904dbb8c, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 2079d82cd6c85ed43891c99831094ed9, type: 3}
     m_OverrideClip: {fileID: 7400000, guid: 450009986bf5f46418846a69933b882b, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 4d35b712cc55b2242be446370933cc5a, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: c1fc1b0e3dac61b47a846ca8e15352c5, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 60e5ff459ad67d747ad145438155765a, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: eca929a9d17803b49a47d26db8fe05c0, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 51b60f0121dfee342a9512739078f710, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d95d805893193c04c83dcb57d1957050, type: 3}
     m_OverrideClip: {fileID: 7400000, guid: 2021fc5b415e8b74ca7c208a30337074, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: b75e05fd645d04745accddea8277c657, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 234fc00831080934e81c176f51734f47, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 234546bf7cd34454899979e60b0a377b, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: abb5d114c0135744b8a690cbe9447fbd, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: c701e82cfe7f1324bad1869ff62338c1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c1fc1b0e3dac61b47a846ca8e15352c5, type: 2}

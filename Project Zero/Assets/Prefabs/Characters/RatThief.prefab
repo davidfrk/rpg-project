@@ -1042,6 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2b5c86b2de1174e9c900976a605b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseAnimatorOverrideController: {fileID: 22100000, guid: ac61d1655bb72d24ba7d8aa336127800, type: 2}
   movementSpeed: 1.2
 --- !u!195 &5099711034125097898
 NavMeshAgent:
@@ -1127,6 +1128,8 @@ MonoBehaviour:
     AgiGain: 1.8
     IntGain: 0.8
     WillGain: 0.6
+  physicalResistance: 0
+  magicResistance: 0
 --- !u!114 &5098440950110906387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1139,6 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4febc1d733625b640ba6e09a4e544900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
   exp: 0
   quadraticTermInLevelFormula: 8
   linearTermInLevelFormula: 500

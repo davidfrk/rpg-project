@@ -63,6 +63,9 @@ public class UnitController : MonoBehaviour
     public delegate void KillEvent(Unit prey);
     public event KillEvent OnKillCallback;
 
+    public delegate void CastBeginEvent();
+    public event CastBeginEvent OnCastBeginCallback;
+
     void Awake()
     {
         action.actionType = Action.ActionType.None;
@@ -208,9 +211,10 @@ public class UnitController : MonoBehaviour
         State = UnitState.Attacking;
         //targetUnit = target;
     }
-
+    
     void Cast()
     {
+        OnCastBeginCallback?.Invoke();
         State = UnitState.Casting;
     }
 

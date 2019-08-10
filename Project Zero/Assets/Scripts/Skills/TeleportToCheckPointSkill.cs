@@ -16,11 +16,17 @@ namespace Rpg.Skills
         public override void OnCastEnd()
         {
             ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
-            particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            particleSystem.Stop(true);
             audioSource.Stop();
 
             Owner.unitController.Teleport(Owner.GetComponent<UnitRespawn>().SpawnPosition, transform.rotation);
             Owner.RegenToFull();
+        }
+
+        public override void Interrupt()
+        {
+            ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
+            particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
 }

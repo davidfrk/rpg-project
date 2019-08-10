@@ -9,9 +9,13 @@ namespace Rpg.Skills
         public SkillType skillType;
         public float castRange = 3f;
         public float manaCost = 50;
+        public bool forceSelfCast = false;
         public bool canCastOnGround = true;
         public bool canCastOnUnit = true;
         public Sprite icon;
+        public string key;
+        public AnimationClip animation;
+
         [SerializeField]
         private bool canBeInterrupted = false;
         private Unit owner;

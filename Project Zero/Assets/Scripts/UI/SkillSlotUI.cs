@@ -19,12 +19,12 @@ public class SkillSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         skillManagerUI = GetComponentInParent<ISkillManagerUI>();
     }
 
-    public void UpdateUI(Skill skill, KeyCode keyCode)
+    public void UpdateUI(Skill skill)
     {
         Skill = skill;
         image.sprite = skill.icon;
         cost.text = skill.manaCost.ToString("F0");
-        key.text = keyCode.ToString();
+        key.text = skill.key;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

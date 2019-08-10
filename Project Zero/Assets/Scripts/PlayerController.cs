@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rpg.Items;
+using Rpg.Skills;
 
 public class PlayerController : MonoBehaviour
 {
@@ -101,31 +102,12 @@ public class PlayerController : MonoBehaviour
 
     void UnitCommandsUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (!Debug.isDebugBuild && !selectedUnit.unitController.playerUnit)
         {
-            int slot = 0;
-            if (selectedUnitController.castController != null && selectedUnitController.castController.CanCast(slot))
-            {
-                if (targetUnit != null)
-                {
-                    if (selectedUnitController.castController.skills[slot].canCastOnUnit)
-                    {
-                        selectedUnitController.MoveToCast(targetUnit, slot);
-                    }
-                    else
-                    {
-                        selectedUnitController.MoveToCast(targetUnit.transform.position, slot);
-                    }
-                }
-                else
-                {
-                    if (selectedUnitController.castController.skills[slot].canCastOnGround)
-                    {
-                        selectedUnitController.MoveToCast(hit.point, slot);
-                    }
-                }
-            }
+            return;
         }
+
+        CastInputUpdate();
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -156,6 +138,65 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             mainCamera.CenterOnUnit(mainUnit);
+        }
+    }
+
+    void CastInputUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Cast(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            Cast(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Cast(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Cast(3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            //Cast(GoBaseSkill);
+        }
+    }
+
+    void Cast(int slot)
+    {
+        if (selectedUnitController.castController != null && selectedUnitController.castController.CanCast(slot))
+        {
+            Skill skill = selectedUnitController.castController.skills[slot];
+
+            if (skill.forceSelfCast)
+            {
+                selectedUnitController.MoveToCast(mainUnit, slot);
+            }
+            else if (targetUnit != null)
+            {
+                if (skill.canCastOnUnit)
+                {
+                    selectedUnitController.MoveToCast(targetUnit, slot);
+                }
+                else
+                {
+                    selectedUnitController.MoveToCast(targetUnit.transform.position, slot);
+                }
+            }
+            else
+            {
+                if (skill.canCastOnGround)
+                {
+                    selectedUnitController.MoveToCast(hit.point, slot);
+                }
+            }
         }
     }
 

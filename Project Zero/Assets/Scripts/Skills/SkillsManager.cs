@@ -32,6 +32,19 @@ public class SkillsManager : MonoBehaviour
     {
         skill.Owner = unit;
         skills.Add(skill);
+        skill.key = GetKey(skills.Count -1);
+    }
+
+    private string GetKey(int skillSlot)
+    {
+        switch (skillSlot)
+        {
+            case 0: return "Q";
+            case 1: return "W";
+            case 2: return "E";
+            case 3: return "R";
+            default: return "B";
+        }
     }
 
     public bool CanCast(int skillSlot)
@@ -62,9 +75,11 @@ public class SkillsManager : MonoBehaviour
         }
     }
 
-    public void OnCastStart(int skillSlot)
+    public void OnCastStart()
     {
-        skill = skills[skillSlot];
+        skill = unitController.action.skill;
+        if (skill == null) return;
+
         if (unitController.action.targetUnit != null)
         {
             skill.Cast(unit, castTransform, unitController.action.targetUnit);
@@ -78,7 +93,7 @@ public class SkillsManager : MonoBehaviour
 
     public void OnCastEnd()
     {
-        skill.OnCastEnd();
+        skill?.OnCastEnd();
     }
 
     private void OnDeath(Unit killer)

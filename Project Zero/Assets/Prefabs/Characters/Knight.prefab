@@ -493,6 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2b5c86b2de1174e9c900976a605b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseAnimatorOverrideController: {fileID: 22100000, guid: b95ee3106a0765743a6c48971d9ecfca, type: 2}
   movementSpeed: 0.55
 --- !u!195 &534174340963668758
 NavMeshAgent:
@@ -578,6 +579,8 @@ MonoBehaviour:
     AgiGain: 1
     IntGain: 0.5
     WillGain: 0.7
+  physicalResistance: 0
+  magicResistance: 0
 --- !u!82 &296485656600752224
 AudioSource:
   m_ObjectHideFlags: 0
@@ -805,6 +808,7 @@ MonoBehaviour:
   skills: []
   startingSkills:
   - {fileID: 3892930933726173128, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
+  - {fileID: 3401342557187634145, guid: 6ff69a4496322414eb94463eecb821c7, type: 3}
 --- !u!54 &4200514870737558181
 Rigidbody:
   m_ObjectHideFlags: 0

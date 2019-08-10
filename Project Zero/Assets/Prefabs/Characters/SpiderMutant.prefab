@@ -416,6 +416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2b5c86b2de1174e9c900976a605b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseAnimatorOverrideController: {fileID: 22100000, guid: 0802c0de8a614e44fb06139bae14f614, type: 2}
   movementSpeed: 0.67
 --- !u!195 &8102906383513283294
 NavMeshAgent:
@@ -501,6 +502,8 @@ MonoBehaviour:
     AgiGain: 1
     IntGain: 0.5
     WillGain: 0.7
+  physicalResistance: 0
+  magicResistance: 0
 --- !u!82 &8288838784630835624
 AudioSource:
   m_ObjectHideFlags: 0
