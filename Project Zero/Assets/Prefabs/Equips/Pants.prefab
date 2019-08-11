@@ -34,7 +34,7 @@ GameObject:
   - component: {fileID: 5749383953796622136}
   - component: {fileID: 5749383953796622142}
   m_Layer: 10
-  m_Name: Armor
+  m_Name: ArmorE 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,17 +67,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c1cc4468d721745b1cfd70ec2aa8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
-  price: 60
-  sprite: {fileID: 21300000, guid: 498ca973ebe301c4693a43026d68c152, type: 3}
+  id: 13
+  price: 115
+  sprite: {fileID: 21300000, guid: b8fb302c5768e334ca82005f50e58121, type: 3}
   itemType: 2
   model: {fileID: 4582264051709011703}
-  equipmentType: 1
+  equipmentType: 3
   statBonus:
-  - stat: 4
+  - stat: 5
+    statModType: 100
+    value: 4
+    dependencies: []
+  - stat: 9
     statModType: 100
     value: 5
     dependencies: []
+  skill: {fileID: 0}
 --- !u!1001 &4580892962107773319
 PrefabInstance:
   m_ObjectHideFlags: 0

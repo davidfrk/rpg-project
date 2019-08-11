@@ -107,7 +107,7 @@ MonoBehaviour:
   canBeInterrupted: 1
   description: Fire breathing technique
   damageInterval: 0.25
-  damage: 10
+  damage: 20
   durationAfterCastEnd: 3
   boxDimensions: {x: 1, y: 1.5, z: 4}
 --- !u!82 &4258522251413674966

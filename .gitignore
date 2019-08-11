@@ -8,6 +8,8 @@ build_Data/
 build.exe
 Build/
 **/LightingData*
+*Lightmap-*
+*ReflectionProbe-*
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #

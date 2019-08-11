@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    static public CameraController mainCamera;
     public float sensitivity = 1f;
     public float height = 5f;
     public float displacement = 1f;
@@ -12,11 +13,10 @@ public class CameraController : MonoBehaviour
     Vector3 gripStartingPosition;
     Vector3 cameraGripStartingPosition;
 
-    void Start()
+    void Awake()
     {
-        
+        mainCamera = this;
     }
-
     
     void Update()
     {

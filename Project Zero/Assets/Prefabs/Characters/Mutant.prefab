@@ -29,6 +29,7 @@ GameObject:
   - component: {fileID: 2872715337018464880}
   - component: {fileID: 8852415509544990192}
   - component: {fileID: 3997820221713068842}
+  - component: {fileID: 253606886820316466}
   m_Layer: 9
   m_Name: Mutant
   m_TagString: Untagged
@@ -329,8 +330,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 10
   exp: 0
-  quadraticTermInLevelFormula: 12
-  linearTermInLevelFormula: 1000
   audioSource: {fileID: 8757306396129472851}
   levelUpSound: {fileID: 8300000, guid: 38259b041bcceed4d87b45251f0f8324, type: 3}
   experienceGivenOnDeath: 700
@@ -348,7 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: 1
   aggression: 1
-  visionRange: 3
+  visionRange: 5
   broadcastRange: 6
 --- !u!114 &8862137787683024637
 MonoBehaviour:
@@ -772,6 +771,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &253606886820316466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8860900984397128094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc302cb5f30b904ba2198afbe4fe050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropList:
+  - chance: 0.12
+    item: {fileID: 5749383953796622142, guid: fe38d04edadf6654aa532f0ab632101d, type: 3}
 --- !u!1 &8862137786768673821
 GameObject:
   m_ObjectHideFlags: 0

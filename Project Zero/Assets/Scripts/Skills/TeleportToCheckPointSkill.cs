@@ -21,6 +21,7 @@ namespace Rpg.Skills
 
             Owner.unitController.Teleport(Owner.GetComponent<UnitRespawn>().SpawnPosition, transform.rotation);
             Owner.RegenToFull();
+            CameraController.mainCamera.CenterOnUnit(Owner);
         }
 
         public override void Interrupt()

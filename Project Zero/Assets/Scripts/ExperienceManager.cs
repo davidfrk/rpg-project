@@ -21,8 +21,8 @@ public class ExperienceManager : MonoBehaviour
         }
     }
     public float exp = 0;
-    public float quadraticTermInLevelFormula = 10;
-    public float linearTermInLevelFormula = 1000;
+    float quadraticTermInLevelFormula = 150;
+    float linearTermInLevelFormula = 900;
     public AudioSource audioSource;
     public AudioClip levelUpSound;
 

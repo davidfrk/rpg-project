@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public CameraController mainCamera;
     public Unit selectedUnit;
-    private Unit mainUnit;
+    private Unit mainUnit = null;
     public Unit MainUnit
     {
         get
@@ -51,10 +51,6 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         localPlayer = this;
-        if (selectedUnit != null)
-        {
-            SelectUnit(selectedUnit);
-        }
     }
 
     void SelectUnit(Unit unit)
@@ -70,6 +66,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         uiController = UIController.instance;
+        if (selectedUnit != null)
+        {
+            SelectUnit(selectedUnit);
+        }
     }
 
     void Update()
@@ -79,6 +79,12 @@ public class PlayerController : MonoBehaviour
 
     void InputUpdate()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            mainCamera.CenterOnUnit(mainUnit);
+            selectedUnit = mainUnit;
+        }
+
         //Avoids clicks on UI firing commands
         if (uiController.lastUIClick + uiProtectionTime > Time.time) return;
 
@@ -102,15 +108,15 @@ public class PlayerController : MonoBehaviour
 
     void UnitCommandsUpdate()
     {
-        if (!Debug.isDebugBuild && !selectedUnit.unitController.playerUnit)
-        {
-            return;
-        }
-
         CastInputUpdate();
 
         if (Input.GetMouseButtonDown(1))
         {
+            if (!selectedUnit.unitController.playerUnit)
+            {
+                SelectUnit(mainUnit);
+            }
+
             if (targetUnit != null)
             {
                 //UnitClick
@@ -133,11 +139,6 @@ public class PlayerController : MonoBehaviour
                     selectedUnitController.Move(hit.point);
                 }
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            mainCamera.CenterOnUnit(mainUnit);
         }
     }
 
@@ -171,6 +172,11 @@ public class PlayerController : MonoBehaviour
 
     void Cast(int slot)
     {
+        if (!selectedUnit.unitController.playerUnit)
+        {
+            SelectUnit(mainUnit);
+        }
+
         if (selectedUnitController.castController != null && selectedUnitController.castController.CanCast(slot))
         {
             Skill skill = selectedUnitController.castController.skills[slot];

@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 3265675228040536715}
   - component: {fileID: 8094644397741509899}
   - component: {fileID: 4464458657655933905}
+  - component: {fileID: 4296984359170750434}
   m_Layer: 9
   m_Name: SpiderMutant
   m_TagString: Untagged
@@ -614,8 +615,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   exp: 0
-  quadraticTermInLevelFormula: 10
-  linearTermInLevelFormula: 1000
   audioSource: {fileID: 8288838784630835624}
   levelUpSound: {fileID: 8300000, guid: 38259b041bcceed4d87b45251f0f8324, type: 3}
   experienceGivenOnDeath: 200
@@ -634,7 +633,7 @@ MonoBehaviour:
   faction: 1
   aggression: 1
   visionRange: 5
-  broadcastRange: 6
+  broadcastRange: 8
 --- !u!114 &8102906384586298886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,6 +1065,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4296984359170750434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104178387243571557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc302cb5f30b904ba2198afbe4fe050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropList:
+  - chance: 0.08
+    item: {fileID: 5749383953796622142, guid: 89ac67d8415327744a6d6899fe47c7eb, type: 3}
 --- !u!1 &8366004471635732065
 GameObject:
   m_ObjectHideFlags: 0

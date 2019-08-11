@@ -78,12 +78,11 @@ MonoBehaviour:
     statModType: 100
     value: 10
     dependencies: []
-  - stat: 6
+  - stat: 7
     statModType: 100
-    value: 0
-    dependencies:
-    - StatType: 9
-      Value: 0.4
+    value: 5
+    dependencies: []
+  skill: {fileID: 0}
 --- !u!1001 &2753598153868385909
 PrefabInstance:
   m_ObjectHideFlags: 0

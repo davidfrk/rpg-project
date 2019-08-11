@@ -414,8 +414,10 @@ public class UnitController : MonoBehaviour
 
     public void Teleport(Vector3 position, Quaternion rotation)
     {
+        navMeshAgent.isStopped = true;
         transform.position = position;
         transform.rotation = rotation;
+        navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(position);
     }
 }
