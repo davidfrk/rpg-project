@@ -46,5 +46,7 @@ public class CameraController : MonoBehaviour
     public void CenterOnUnit(Unit unit)
     {
         transform.position = new Vector3(unit.transform.position.x, transform.position.y, unit.transform.position.z - 6f);
+        gripStartingPosition = Input.mousePosition;
+        cameraGripStartingPosition = transform.position;
     }
 }

@@ -1144,8 +1144,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   exp: 0
-  quadraticTermInLevelFormula: 8
-  linearTermInLevelFormula: 500
   audioSource: {fileID: 0}
   levelUpSound: {fileID: 0}
   experienceGivenOnDeath: 300
@@ -1207,7 +1205,7 @@ MonoBehaviour:
   - chance: 0.2
     item: {fileID: 3557833302729401416, guid: 0971eb185f79c2a41afd0935da6ccdab, type: 3}
   - chance: 0.1
-    item: {fileID: 5749383953796622142, guid: c07c0f821a88f524ea6d791841dfcbb8, type: 3}
+    item: {fileID: 5749383953796622142, guid: 494002c0a73d3394597e4118af71c146, type: 3}
 --- !u!82 &5606580134235091534
 AudioSource:
   m_ObjectHideFlags: 0

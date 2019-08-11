@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
                 }
                 mainUnit = value;
                 mainUnit.unitController.OnSpawnCallback += OnRespawn;
+                mainUnit.unitController.equipmentManager.OnItemPickUpCallback += OnItemPickUp;
             }
         }
     }
@@ -47,6 +48,9 @@ public class PlayerController : MonoBehaviour
 
     public delegate void KillEvent(Unit prey);
     public event KillEvent OnKillCallback;
+
+    public delegate void PickUpEvent(Item item);
+    public event PickUpEvent OnItemPickUpCallback;
 
     void Awake()
     {
@@ -82,7 +86,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             mainCamera.CenterOnUnit(mainUnit);
-            selectedUnit = mainUnit;
+            SelectUnit(mainUnit);
         }
 
         //Avoids clicks on UI firing commands
@@ -206,13 +210,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnKill(Unit prey)
+    {
+        OnKillCallback?.Invoke(prey);
+    }
+
+    //Esses eventos deveriam ser recebidos diretamente pelos interessados
     void OnRespawn(Unit unit)
     {
         mainCamera.CenterOnUnit(unit);
     }
 
-    public void OnKill(Unit prey)
+    void OnItemPickUp(Item item)
     {
-        OnKillCallback?.Invoke(prey);
+        OnItemPickUpCallback?.Invoke(item);
     }
 }

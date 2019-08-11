@@ -9,7 +9,7 @@ namespace Rpg.Items
         public List<Item> Items;
         internal int count;
 
-        public void AddItem(Item item)
+        public bool AddItem(Item item)
         {
             if (!isFull())
             {
@@ -17,6 +17,11 @@ namespace Rpg.Items
                 int slot = FindEmptySlot();
                 Items[slot] = item;
                 count++;
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 

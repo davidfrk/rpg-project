@@ -38,7 +38,7 @@ public class UnitController : MonoBehaviour
     internal Unit unit;
     MovementController movementController;
     NavMeshAgent navMeshAgent;
-    EquipmentManager equipmentManager;
+    internal EquipmentManager equipmentManager;
     internal SkillsManager castController;
 
     //[SerializeField]
@@ -260,6 +260,7 @@ public class UnitController : MonoBehaviour
                 else
                 {
                     State = UnitState.Idle;
+                    action.actionType = Action.ActionType.None;
                     action.targetUnit = null;
                 }
             }
@@ -414,10 +415,10 @@ public class UnitController : MonoBehaviour
 
     public void Teleport(Vector3 position, Quaternion rotation)
     {
-        navMeshAgent.isStopped = true;
+        navMeshAgent.enabled = false;
         transform.position = position;
         transform.rotation = rotation;
-        navMeshAgent.isStopped = false;
+        navMeshAgent.enabled = true;
         navMeshAgent.SetDestination(position);
     }
 }

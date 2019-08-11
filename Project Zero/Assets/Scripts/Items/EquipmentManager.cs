@@ -8,9 +8,12 @@ namespace Rpg.Items
     [RequireComponent(typeof(Inventory))]
     public class EquipmentManager : MonoBehaviour
     {
-        Unit unit;
+        private Unit unit;
         internal Inventory inventory;
         public List<EquipmentSlot> equipmentSlots;
+
+        public delegate void PickUpEvent(Item item);
+        public event PickUpEvent OnItemPickUpCallback;
 
         void Awake()
         {
@@ -42,7 +45,10 @@ namespace Rpg.Items
 
         public void AddInInventory(Item item)
         {
-            inventory.AddItem(item);
+            if (inventory.AddItem(item))
+            {
+                OnItemPickUpCallback?.Invoke(item);
+            }
         }
 
         public void AddInEquipmentSlot(Item item)
@@ -62,7 +68,8 @@ namespace Rpg.Items
 
                     //If you found an available equipment slot return
                     Equip(equipment);
-                    //UpdateEquipmentStats();
+
+                    OnItemPickUpCallback?.Invoke(item);
                     return;
                 }
             }
