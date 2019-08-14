@@ -33,7 +33,7 @@ public class StatsLevelUpUI : MonoBehaviour
         switch (stat)
         {
             case 0: return StatType.Str;
-            case 1: return StatType.Agi;
+            case 1: return StatType.Dex;
             case 2: return StatType.Int;
             case 3: return StatType.Will;
             default:

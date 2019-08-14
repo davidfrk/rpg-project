@@ -16,24 +16,26 @@ namespace Rpg.Stats {
         public CharacterStat Attack;
         public CharacterStat AttackSpeed;
         public CharacterStat Str;
-        public CharacterStat Agi;
+        public CharacterStat Dex;
         public CharacterStat Int;
         public CharacterStat Will;
         public CharacterStat MovementSpeed;
+
+        public CharacterStat DamageTakenMultiplier;
 
         [Space(10)]
         public BaseStats baseStats;
 
         [Space(10)]
         public float StrGain;
-        public float AgiGain;
+        public float DexGain;
         public float IntGain;
         public float WillGain;
 
         private int level = 0;
 
         private int StrLevel = 0;
-        private int AgiLevel = 0;
+        private int DexLevel = 0;
         private int IntLevel = 0;
         private int WillLevel = 0;
         private float statGain = 3f;
@@ -57,10 +59,11 @@ namespace Rpg.Stats {
             Attack.BaseValue        = baseStats.Attack;
             AttackSpeed.BaseValue   = baseStats.AttackSpeed;
             Str.BaseValue           = baseStats.Str;
-            Agi.BaseValue           = baseStats.Agi;
+            Dex.BaseValue           = baseStats.Dex;
             Int.BaseValue           = baseStats.Int;
             Will.BaseValue          = baseStats.Will;
             MovementSpeed.BaseValue = baseStats.MovementSpeed;
+            DamageTakenMultiplier.BaseValue = 1f;
 
             MaxHealth.AddModifier(MaxHealthMod);
             MaxMana.AddModifier(MaxManaMod);
@@ -76,7 +79,7 @@ namespace Rpg.Stats {
             switch (type)
             {
                 case StatType.Str: StrLevel += 1; break;
-                case StatType.Agi: AgiLevel += 1; break;
+                case StatType.Dex: DexLevel += 1; break;
                 case StatType.Int: IntLevel += 1; break;
                 case StatType.Will: WillLevel += 1; break;
                 default: return;
@@ -92,7 +95,7 @@ namespace Rpg.Stats {
 
         private int StatsPointsAvailable()
         {
-            return level - (StrLevel + AgiLevel + IntLevel + WillLevel);
+            return level - (StrLevel + DexLevel + IntLevel + WillLevel);
         }
 
         public void UpdateLevel(int level)
@@ -108,7 +111,7 @@ namespace Rpg.Stats {
         private void UpdateBaseStats()
         {
             Str.BaseValue = baseStats.Str + level * StrGain + statGain * StrLevel;
-            Agi.BaseValue = baseStats.Agi + level * AgiGain + statGain * AgiLevel;
+            Dex.BaseValue = baseStats.Dex + level * DexGain + statGain * DexLevel;
             Int.BaseValue = baseStats.Int + level * IntGain + statGain * IntLevel;
             Will.BaseValue = baseStats.Will + level * WillGain + statGain * WillLevel;
         }
@@ -117,11 +120,11 @@ namespace Rpg.Stats {
         {
             MaxHealthMod.Value      = 10f * Str.Value;
             MaxManaMod.Value        = 2f * Int.Value + Will.Value;
-            ArmorMod.Value          = Agi.Value / 5f;
+            ArmorMod.Value          = Dex.Value / 5f;
             MagicArmorMod.Value     = Will.Value;
             AttackMod.Value         = Str.Value;
-            AttackSpeedMod.Value    = Agi.Value;
-            MovementSpeedMod.Value  = Agi.Value / 20f;
+            AttackSpeedMod.Value    = Dex.Value;
+            MovementSpeedMod.Value  = Dex.Value / 20f;
         }
 
         private void AddStatModifier(StatType stat, float value, StatModType modType, object source)
@@ -162,19 +165,20 @@ namespace Rpg.Stats {
         {
             switch (stat)
             {
-                case StatType.MaxHealth:    return MaxHealth;
-                case StatType.HpRegen:      return HpRegen;
-                case StatType.MaxMana:      return MaxMana;
-                case StatType.ManaRegen:    return ManaRegen;
-                case StatType.Armor:        return Armor;
-                case StatType.MagicArmor:   return MagicArmor;
-                case StatType.Attack:       return Attack;
-                case StatType.AttackSpeed:  return AttackSpeed;
-                case StatType.Str:          return Str;
-                case StatType.Agi:          return Agi;
-                case StatType.Int:          return Int;
-                case StatType.Will:         return Will;
-                case StatType.MovementSpeed:return MovementSpeed;
+                case StatType.MaxHealth:                return MaxHealth;
+                case StatType.HpRegen:                  return HpRegen;
+                case StatType.MaxMana:                  return MaxMana;
+                case StatType.ManaRegen:                return ManaRegen;
+                case StatType.Armor:                    return Armor;
+                case StatType.MagicArmor:               return MagicArmor;
+                case StatType.Attack:                   return Attack;
+                case StatType.AttackSpeed:              return AttackSpeed;
+                case StatType.Str:                      return Str;
+                case StatType.Dex:                      return Dex;
+                case StatType.Int:                      return Int;
+                case StatType.Will:                     return Will;
+                case StatType.MovementSpeed:            return MovementSpeed;
+                case StatType.DamageTakenMultiplier:    return DamageTakenMultiplier;
                 default: return null;
             }
         }
@@ -191,10 +195,11 @@ namespace Rpg.Stats {
         Attack,
         AttackSpeed,
         Str,
-        Agi,
+        Dex,
         Int,
         Will,
-        MovementSpeed
+        MovementSpeed,
+        DamageTakenMultiplier,
     }
 
     [System.Serializable]
@@ -209,51 +214,9 @@ namespace Rpg.Stats {
         public float Attack;
         public float AttackSpeed;
         public float Str;
-        public float Agi;
+        public float Dex;
         public float Int;
         public float Will;
         public float MovementSpeed;
-
-        public static BaseStats operator+ (BaseStats stats1, BaseStats stats2)
-        {
-            BaseStats result;
-        
-            result.MaxHealth        = stats1.MaxHealth       + stats2.MaxHealth;
-            result.HpRegen          = stats1.HpRegen         + stats2.HpRegen;
-            result.MaxMana          = stats1.MaxMana         + stats2.MaxMana;
-            result.ManaRegen        = stats1.ManaRegen       + stats2.ManaRegen;
-            result.Armor            = stats1.Armor           + stats2.Armor;
-            result.Attack           = stats1.Attack          + stats2.Attack;
-            result.AttackSpeed      = stats1.AttackSpeed     + stats2.AttackSpeed;
-            result.Str              = stats1.Str             + stats2.Str;
-            result.Agi              = stats1.Agi             + stats2.Agi;
-            result.Int              = stats1.Int             + stats2.Int;
-            result.Will             = stats1.Will            + stats2.Will;
-            result.MovementSpeed    = stats1.MovementSpeed   + stats2.MovementSpeed; 
-            result.MagicArmor       = stats1.MagicArmor + stats2.MagicArmor;
-
-            return result;
-        }
-
-        public static BaseStats operator *(float mult, BaseStats stats)
-        {
-            BaseStats result;
-
-            result.MaxHealth        = mult * stats.MaxHealth;
-            result.HpRegen          = mult * stats.HpRegen;
-            result.MaxMana          = mult * stats.MaxMana;
-            result.ManaRegen        = mult * stats.ManaRegen;
-            result.Armor            = mult * stats.Armor;
-            result.Attack           = mult * stats.Attack;
-            result.AttackSpeed      = mult * stats.AttackSpeed;
-            result.Str              = mult * stats.Str;
-            result.Agi              = mult * stats.Agi;
-            result.Int              = mult * stats.Int;
-            result.Will             = mult * stats.Will;
-            result.MovementSpeed    = mult * stats.MovementSpeed;
-            result.MagicArmor       = mult * stats.MagicArmor;
-
-            return result;
-        }
     }
 }

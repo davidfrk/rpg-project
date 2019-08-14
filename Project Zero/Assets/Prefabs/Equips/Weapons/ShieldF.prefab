@@ -34,7 +34,7 @@ GameObject:
   - component: {fileID: 5749383953796622136}
   - component: {fileID: 5749383953796622142}
   m_Layer: 10
-  m_Name: HelmetFW 1
+  m_Name: ShieldF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,9 +74,9 @@ MonoBehaviour:
   model: {fileID: 4582264051709011703}
   equipmentType: 0
   statBonus:
-  - stat: 4
-    statModType: 100
-    value: 6
+  - stat: 13
+    statModType: 300
+    value: -0.2
     dependencies: []
   skill: {fileID: 0}
 --- !u!1001 &4580892962107773319

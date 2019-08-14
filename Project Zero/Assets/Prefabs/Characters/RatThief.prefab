@@ -1102,13 +1102,15 @@ MonoBehaviour:
       BaseValue: 0
     Str:
       BaseValue: 0
-    Agi:
+    Dex:
       BaseValue: 0
     Int:
       BaseValue: 0
     Will:
       BaseValue: 0
     MovementSpeed:
+      BaseValue: 0
+    DamageTakenMultiplier:
       BaseValue: 0
     baseStats:
       MaxHealth: 80
@@ -1120,12 +1122,12 @@ MonoBehaviour:
       Attack: 3
       AttackSpeed: 20
       Str: 4
-      Agi: 8
+      Dex: 8
       Int: 4
       Will: 3
       MovementSpeed: 50
     StrGain: 1.4
-    AgiGain: 1.8
+    DexGain: 1.8
     IntGain: 0.8
     WillGain: 0.6
   physicalResistance: 0

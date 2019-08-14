@@ -53,7 +53,7 @@ public class StatsUI : MonoBehaviour
             MagicArmor.text = selectedUnit.stats.MagicArmor.Value.ToString("F0");
             
             Str.text = selectedUnit.stats.Str.Value.ToString("F0");
-            Agi.text = selectedUnit.stats.Agi.Value.ToString("F0");
+            Agi.text = selectedUnit.stats.Dex.Value.ToString("F0");
             Int.text = selectedUnit.stats.Int.Value.ToString("F0");
             Will.text = selectedUnit.stats.Will.Value.ToString("F0");
         }

@@ -190,6 +190,11 @@ public class UnitController : MonoBehaviour
         return 3f * unit.radius;
     }
 
+    public void Stop()
+    {
+        Move(transform.position);
+    }
+
     public void Move(Vector3 position)
     {
         if (!StopCurrentAction())

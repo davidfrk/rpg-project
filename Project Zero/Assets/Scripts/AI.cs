@@ -13,6 +13,9 @@ public class AI : MonoBehaviour
     public float visionRange = 3f;
     public float broadcastRange = 5f;
 
+    private float attentionTime = 4f;
+    private float focusStartTime = 0f;
+
     LayerMask unitsLayer;
     private float nextSearchForEnemyTime = 0f;
 
@@ -21,6 +24,8 @@ public class AI : MonoBehaviour
         unit = GetComponent<Unit>();
         unitController = GetComponent<UnitController>();
         unitController.OnBeingAttackedCallback += OnBeingAttacked;
+        unitController.OnAttackEndCallback += OnAttackEnd;
+        unitController.OnKillCallback += OnKill;
 
         unitsLayer = LayerMask.GetMask("Unit");
     }
@@ -31,7 +36,7 @@ public class AI : MonoBehaviour
         {
             if (unitController.State == UnitState.Idle)
             {
-                unitController.MoveAttack(aggressor);
+                Attack(aggressor);
             }
             
             //Call for assistance, 
@@ -67,10 +72,47 @@ public class AI : MonoBehaviour
                 //Dont attack yourself
                 if (aggressor != this.unit)
                 {
-                    unitController.MoveAttack(aggressor);
+                    Attack(aggressor);
                 }
             }
         }
+    }
+
+    void Attack(Unit target)
+    {
+        if (target != null)
+        {
+            unitController.MoveAttack(target);
+            FocusOnEnemy(target);
+        }
+    }
+
+    void OnAttackEnd(Unit target, float damage)
+    {
+        FocusOnEnemy(target);
+    }
+
+    void OnKill(Unit killer)
+    {
+        AI targetEnemy = SearchForEnemy();
+        if (targetEnemy)
+        {
+            Attack(targetEnemy.unit);
+        }
+        else
+        {
+            unitController.Stop();
+        }
+    }
+
+    void FocusOnEnemy(Unit target)
+    {
+        focusStartTime = Time.time;
+    }
+
+    void LoseFocus()
+    {
+        unitController.Stop();
     }
 
     void Update()
@@ -79,13 +121,22 @@ public class AI : MonoBehaviour
         {
             if (Time.time >= nextSearchForEnemyTime)
             {
-                SearchForEnemy();
+                AI targetEnemy = SearchForEnemy();
+                if (targetEnemy) Attack(targetEnemy.unit);
             }
+        }
+
+        if (!unitController.playerUnit && unitController.State == UnitState.MovingToAct && Time.time > (focusStartTime + attentionTime))
+        {
+            LoseFocus();
         }
     }
 
-    void SearchForEnemy()
+    AI SearchForEnemy()
     {
+        AI nearestEnemy = null;
+        float nearestDistance = Mathf.Infinity;
+
         Collider[] unitsInRange = Physics.OverlapSphere(transform.position, visionRange, unitsLayer);
         foreach (Collider unitCollider in unitsInRange)
         {
@@ -96,11 +147,18 @@ public class AI : MonoBehaviour
                 //Dont attack yourself
                 if (this != targetUnit)
                 {
-                    unitController.MoveAttack(targetUnit.unit);
+                    float sqrDistance = (targetUnit.transform.position - transform.position).sqrMagnitude;
+                    if (sqrDistance < nearestDistance)
+                    {
+                        nearestEnemy = targetUnit;
+                        nearestDistance = sqrDistance;
+                    }
                 }
             }
         }
         nextSearchForEnemyTime = Time.time + 0.3f + 0.3f * Random.value;
+
+        return nearestEnemy;
     }
 
     public enum AggressionType

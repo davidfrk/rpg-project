@@ -1856,13 +1856,15 @@ MonoBehaviour:
       BaseValue: 0
     Str:
       BaseValue: 0
-    Agi:
+    Dex:
       BaseValue: 0
     Int:
       BaseValue: 0
     Will:
       BaseValue: 0
     MovementSpeed:
+      BaseValue: 0
+    DamageTakenMultiplier:
       BaseValue: 0
     baseStats:
       MaxHealth: 100
@@ -1874,12 +1876,12 @@ MonoBehaviour:
       Attack: 60
       AttackSpeed: 0
       Str: 10
-      Agi: 50
+      Dex: 15
       Int: 5
       Will: 10
       MovementSpeed: 55
     StrGain: 2
-    AgiGain: 1
+    DexGain: 1.6
     IntGain: 0.7
     WillGain: 1
   physicalResistance: 0
@@ -1994,8 +1996,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 50
   exp: 0
-  quadraticTermInLevelFormula: 10
-  linearTermInLevelFormula: 1000
   audioSource: {fileID: 8279124245784540865}
   levelUpSound: {fileID: 8300000, guid: 38259b041bcceed4d87b45251f0f8324, type: 3}
   experienceGivenOnDeath: 1000

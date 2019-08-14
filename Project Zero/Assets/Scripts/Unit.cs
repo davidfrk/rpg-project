@@ -122,12 +122,12 @@ public class Unit : MonoBehaviour
         {
             case DamageType.Physical:
                 {
-                    Health -= damage * (1 - physicalResistance);
+                    Health -= damage * stats.DamageTakenMultiplier.Value * (1 - physicalResistance);
                     break;
                 }
             case DamageType.Magic:
                 {
-                    Health -= damage * (1 - magicResistance);
+                    Health -= damage * stats.DamageTakenMultiplier.Value * (1 - magicResistance);
                     break;
                 }
             case DamageType.Pure:

@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Rpg.Items;
 
 namespace Rpg.UI {
     public class ShopUI : MonoBehaviour , IShopManager
     {
         public ShopItemTooltip shopItemTooltipPrefab;
+        public Text goldText;
         public Transform contentTransform;
 
         private Shop shop;
@@ -46,6 +48,8 @@ namespace Rpg.UI {
 
         public void UpdateUI()
         {
+            goldText.text = shop.gold.ToString();
+
             foreach(ShopItemTooltip tooltip in tooltips)
             {
                 Destroy(tooltip.gameObject);
