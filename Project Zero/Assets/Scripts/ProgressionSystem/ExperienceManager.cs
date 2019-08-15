@@ -20,6 +20,7 @@ public class ExperienceManager : MonoBehaviour
             }
         }
     }
+
     public float exp = 0;
     float quadraticTermInLevelFormula = 150;
     float linearTermInLevelFormula = 900;

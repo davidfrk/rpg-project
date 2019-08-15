@@ -391,6 +391,7 @@ GameObject:
   - component: {fileID: 6505599772251872067}
   - component: {fileID: 526779209254991043}
   - component: {fileID: 5399388972519961113}
+  - component: {fileID: 1829179136587522853}
   m_Layer: 9
   m_Name: Knight
   m_TagString: Untagged
@@ -1130,6 +1131,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1829179136587522853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535182445142892717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d62777675253843be4af852e6f9d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4010461473915466393
 GameObject:
   m_ObjectHideFlags: 0

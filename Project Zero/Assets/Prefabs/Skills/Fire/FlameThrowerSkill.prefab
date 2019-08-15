@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 1
+  skillTags: 0200000004000000
   castRange: 5
   manaCost: 20
   forceSelfCast: 0

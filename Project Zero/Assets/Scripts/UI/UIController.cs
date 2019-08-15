@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour, ISlotManager
     public EquipmentTooltip equipmentTooltipPrefab;
     public ShopUI shopUI;
     private Shop shop;
+    public SkillTreeUI SkillTreeUI;
 
     private bool draggingItem = false;
     private EquipmentTooltip equipmentTooltip;
@@ -59,6 +60,11 @@ public class UIController : MonoBehaviour, ISlotManager
                 shopUI.Open(shop);
                 equipmentUI.SetActive(true);
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.T))
+        {
+            SkillTreeUI.Toggle();
         }
 
         if (Input.GetMouseButtonUp(0)){

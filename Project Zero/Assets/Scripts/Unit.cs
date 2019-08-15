@@ -175,7 +175,7 @@ public class Unit : MonoBehaviour
 
     public static float AttackSpeedFormula(float attackSpeed)
     {
-        return 0.5f + attackSpeed / 100f;
+        return 0.5f + Mathf.Sqrt(attackSpeed) / 20f;
     }
 
     public void PayManaCost(float manaCost)

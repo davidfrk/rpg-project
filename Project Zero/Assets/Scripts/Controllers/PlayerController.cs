@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
                 if (mainUnit != null)
                 {
                     mainUnit.unitController.OnSpawnCallback -= OnRespawn;
+                    mainUnit.unitController.equipmentManager.OnItemPickUpCallback -= OnItemPickUp;
                 }
                 mainUnit = value;
                 mainUnit.unitController.OnSpawnCallback += OnRespawn;

@@ -25,7 +25,7 @@ namespace Rpg.Quest
         public void StartQuest()
         {
             started = true;
-            Debug.Log("Iniciou quest " + gameObject.name);
+            //Debug.Log("Iniciou quest " + gameObject.name);
             questsManager.AddQuest(this);
         }
 

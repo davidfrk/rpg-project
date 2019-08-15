@@ -7,6 +7,8 @@ namespace Rpg.Skills
     public class Skill : MonoBehaviour
     {
         public SkillType skillType;
+        public List<SkillTag> skillTags;
+
         public float castRange = 3f;
         public float manaCost = 50;
         public bool forceSelfCast = false;
@@ -14,7 +16,7 @@ namespace Rpg.Skills
         public bool canCastOnUnit = true;
         public Sprite icon;
         public string key;
-        public AnimationClip animation;
+        new public AnimationClip animation;
 
         [SerializeField]
         private bool canBeInterrupted = false;

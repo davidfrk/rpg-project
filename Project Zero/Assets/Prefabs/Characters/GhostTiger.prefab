@@ -2011,7 +2011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de887b539acab1d409afe0b7cc4fd3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faction: 1
+  faction: 4
   aggression: 0
   visionRange: 3
   broadcastRange: 6

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b75f8e9290f2b1499b25e815e4eadac, type: 3}
+  m_Name: WillBoost
+  m_EditorClassIdentifier: 
+  tierScale: 1
+  statBonus:
+  - stat: 11
+    statModType: 100
+    value: 5
+    dependencies: []
+  skillTags: 03000000
+  icon: {fileID: 21300000, guid: 8655e96e29978a04e93c2d845a440741, type: 3}
