@@ -6,12 +6,6 @@ using Rpg.Stats;
 public class StatsLevelUpUI : MonoBehaviour
 {
     public GameObject statsLevelUpTransform;
-    AudioSource audioSource;
-
-    void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
 
     void Update()
     {
@@ -25,7 +19,7 @@ public class StatsLevelUpUI : MonoBehaviour
     public void LevelUp(int stat)
     {
         UIController.instance.selectedUnit?.stats.LevelUp(GetStatType(stat));
-        audioSource.Play();
+        AudioManager.instance.PlaySound(AudioManager.UISound.StatUpgrade);
     }
 
     private StatType GetStatType(int stat)

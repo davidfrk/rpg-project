@@ -27,7 +27,8 @@ public class UIController : MonoBehaviour, ISlotManager
     private EquipmentTooltip equipmentTooltip;
     private ItemSlotUI selectedItemSlot;
 
-    internal float lastUIClick = 0f;
+    private float lastUIClick = 0f;
+    private float uiProtectionTime = 0.2f;
 
     void Awake()
     {
@@ -78,6 +79,17 @@ public class UIController : MonoBehaviour, ISlotManager
         showEquipmentUI = !showEquipmentUI;
 
         equipmentUI.SetActive(showEquipmentUI);
+    }
+
+    static public void UIClick()
+    {
+        instance.lastUIClick = Time.time;
+    }
+
+    static public bool UIProtectionTime()
+    {
+        //Avoids clicks on UI firing commands
+        return (instance.lastUIClick + instance.uiProtectionTime > Time.time);
     }
 
     public void OnMouseLeftClickDown(ItemSlotUI itemSlotUI)

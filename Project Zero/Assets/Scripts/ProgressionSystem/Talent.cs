@@ -38,7 +38,7 @@ namespace Rpg.ProgressionSystem
         public StatBonus GetFinalBonus(StatBonus statBonus, int tier)
         {
             StatBonus finalBonus = statBonus;
-            finalBonus.value *= Random.Range(0.9f, 1.1f) * (tier + 1f);
+            finalBonus.value *= Random.Range(0.9f, 1.1f) * tierScale * tier;
             return finalBonus;
         }
 

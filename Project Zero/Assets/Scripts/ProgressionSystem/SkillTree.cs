@@ -7,18 +7,21 @@ namespace Rpg.ProgressionSystem
     public class SkillTree : MonoBehaviour
     {
         public List<SkillBlock> skillBlocks = new List<SkillBlock>();
+        public int SkillPoints { get; private set; } = 0;
 
         private Unit unit;
-        public int SkillPoints { get; private set; } = 10;
+        private ExperienceManager experienceManager;
 
         void Awake()
         {
             unit = GetComponent<Unit>();
+            experienceManager = GetComponent<ExperienceManager>();
         }
 
         void Start()
         {
             Generate();
+            experienceManager.OnLevelUpCallback += OnLevelUp;
         }
 
         public void Generate()
@@ -47,7 +50,17 @@ namespace Rpg.ProgressionSystem
             {
                 SkillPoints -= talent.Cost;
                 Apply(talent);
+                AudioManager.instance.PlaySound(AudioManager.UISound.TalentUpgrade);
             }
+            else
+            {
+                AudioManager.instance.PlaySound(AudioManager.UISound.CantDo);
+            }
+        }
+
+        public void OnLevelUp()
+        {
+            SkillPoints += experienceManager.Level - 1;
         }
     }
 }

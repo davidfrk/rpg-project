@@ -111,7 +111,7 @@ namespace Rpg.Items
             {
                 item.transform.position = transform.position;
                 item.SetState(Item.ItemState.InWorld);
-                SoundManager.instance.PlaySound(SoundManager.UISound.Drop);
+                AudioManager.instance.PlaySound(AudioManager.UISound.Drop);
             }
             return item;
         }
@@ -208,7 +208,7 @@ namespace Rpg.Items
             {
                 equipment.skill.Owner = unit;
             }
-            SoundManager.instance.PlaySound(SoundManager.UISound.Equip);
+            AudioManager.instance.PlaySound(AudioManager.UISound.Equip);
         }
 
         void UnEquip(Equipment equipment)

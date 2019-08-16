@@ -21,7 +21,7 @@ namespace Rpg.UI {
                 this.shop = shop;
                 UpdateUI();
                 gameObject.SetActive(true);
-                SoundManager.instance.PlaySound(SoundManager.UISound.OpenShop);
+                AudioManager.instance.PlaySound(AudioManager.UISound.OpenShop);
             }
             else
             {
@@ -32,7 +32,7 @@ namespace Rpg.UI {
         public void Close()
         {
             gameObject.SetActive(false);
-            SoundManager.instance.PlaySound(SoundManager.UISound.CloseShop);
+            AudioManager.instance.PlaySound(AudioManager.UISound.CloseShop);
         }
 
         public void Update()
@@ -72,7 +72,7 @@ namespace Rpg.UI {
         public void OnMouseRightClickDown(ShopItemTooltip shopItemTooltip)
         {
             shop.Sell(shopItemTooltip.Item, PlayerController.localPlayer);
-            UIController.instance.lastUIClick = Time.time;
+            UIController.UIClick();
         }
     }
 }

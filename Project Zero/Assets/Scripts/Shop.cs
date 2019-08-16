@@ -18,7 +18,7 @@ public class Shop : MonoBehaviour
             player.gold -= item.price;
             Item newItem = Instantiate<Item>(item, player.selectedUnit.transform.position, Quaternion.identity);
             player.selectedUnit.unitController.MoveToPickItem(newItem);
-            SoundManager.instance.PlaySound(SoundManager.UISound.BuyItem);
+            AudioManager.instance.PlaySound(AudioManager.UISound.BuyItem);
         }
     }
 
@@ -30,7 +30,7 @@ public class Shop : MonoBehaviour
             gold -= price;
             player.gold += price;
             Destroy(item.gameObject);
-            SoundManager.instance.PlaySound(SoundManager.UISound.SellItem);
+            AudioManager.instance.PlaySound(AudioManager.UISound.SellItem);
         }
     }
 

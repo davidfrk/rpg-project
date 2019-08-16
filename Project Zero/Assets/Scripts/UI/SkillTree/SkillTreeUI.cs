@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Rpg.ProgressionSystem;
 
 namespace Rpg.UI {
-    public class SkillTreeUI : MonoBehaviour
+    public class SkillTreeUI : MonoBehaviour, IPointerDownHandler
     {
         public SkillBlockUI skillBlockPrefab;
         public Transform skillBlockTransform;
@@ -71,8 +72,14 @@ namespace Rpg.UI {
 
         public void OnMouseRightClickDown(Talent talent)
         {
+            UIController.UIClick();
             skillTree.Buy(talent);
             UpdateSkillPoints();
+        }
+
+        public void OnPointerDown(PointerEventData data)
+        {
+            UIController.UIClick();
         }
     }
 }

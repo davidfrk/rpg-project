@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b75f8e9290f2b1499b25e815e4eadac, type: 3}
-  m_Name: StrBoost
+  m_Name: AttackFlatBoost
   m_EditorClassIdentifier: 
-  tierScale: 0.5
+  tierScale: 1
   statBonus:
-  - stat: 8
-    statModType: 200
-    value: 0.05
+  - stat: 6
+    statModType: 100
+    value: 10
     dependencies: []
-  skillTags: 0000000004000000
-  icon: {fileID: 21300000, guid: 80444ca05aebbeb46af32e6fe938b13a, type: 3}
+  skillTags: 04000000
+  icon: {fileID: 21300000, guid: 496f6b0e37635f146aa60236687986ac, type: 3}

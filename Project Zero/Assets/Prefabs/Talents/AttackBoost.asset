@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b75f8e9290f2b1499b25e815e4eadac, type: 3}
   m_Name: AttackBoost
   m_EditorClassIdentifier: 
-  tierScale: 1
+  tierScale: 0.5
   statBonus:
   - stat: 6
-    statModType: 100
-    value: 10
+    statModType: 200
+    value: 0.05
     dependencies: []
   skillTags: 04000000
   icon: {fileID: 21300000, guid: 496f6b0e37635f146aa60236687986ac, type: 3}

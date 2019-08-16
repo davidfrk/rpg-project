@@ -23,7 +23,23 @@ namespace Rpg.UI {
         {
             this.talent = talent;
             icon.sprite = talent.icon;
-            value.text = talent.statBonus[0].stat.ToString() + " " + talent.statBonus[0].value.ToString("F1");
+            if (talent.Acquired)
+            {
+                icon.color = Color.white;
+            }
+            else
+            {
+                icon.color = Color.gray;
+            }
+
+            if (talent.statBonus[0].statModType == Stats.StatModType.Flat)
+            {
+                value.text = talent.statBonus[0].stat.ToString() + " " + talent.statBonus[0].value.ToString("F0");
+            }
+            else
+            {
+                value.text = talent.statBonus[0].stat.ToString() + " " + (talent.statBonus[0].value * 100).ToString("F0") + "%";
+            }
         }
 
         public void OnPointerDown(PointerEventData eventData)

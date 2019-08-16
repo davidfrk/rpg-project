@@ -39,10 +39,6 @@ public class PlayerController : MonoBehaviour
 
     public int gold = 0;
 
-    //Avoids clicks on UI firing commands
-    UIController uiController;
-    float uiProtectionTime = 0.2f;
-
     RaycastHit hit;
     Ray ray;
     public LayerMask layer;
@@ -70,7 +66,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        uiController = UIController.instance;
         if (selectedUnit != null)
         {
             SelectUnit(selectedUnit);
@@ -91,7 +86,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Avoids clicks on UI firing commands
-        if (uiController.lastUIClick + uiProtectionTime > Time.time) return;
+        if (UIController.UIProtectionTime()) return;
 
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layer))

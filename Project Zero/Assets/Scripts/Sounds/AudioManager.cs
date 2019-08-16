@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    public static AudioManager instance;
     private AudioSource audioSource;
 
     public AudioClip Equip;
@@ -15,6 +15,10 @@ public class SoundManager : MonoBehaviour
     public AudioClip BuyItem;
     public AudioClip SellItem;
     public AudioClip QuestComplete;
+    public AudioClip StatUpgrade;
+    public AudioClip TalentUpgrade;
+    public AudioClip LevelUp;
+    public AudioClip CantDo;
 
     void Awake()
     {
@@ -34,6 +38,10 @@ public class SoundManager : MonoBehaviour
             case UISound.BuyItem: Play(BuyItem); break;
             case UISound.SellItem: Play(SellItem); break;
             case UISound.QuestComplete: Play(QuestComplete); break;
+            case UISound.StatUpgrade: Play(StatUpgrade); break;
+            case UISound.TalentUpgrade: Play(TalentUpgrade); break;
+            case UISound.LevelUp: Play(LevelUp); break;
+            case UISound.CantDo: Play(CantDo); break;
             default: break;
         }
     }
@@ -54,5 +62,9 @@ public class SoundManager : MonoBehaviour
         BuyItem,
         SellItem,
         QuestComplete,
+        StatUpgrade,
+        TalentUpgrade,
+        LevelUp,
+        CantDo,
     }
 }

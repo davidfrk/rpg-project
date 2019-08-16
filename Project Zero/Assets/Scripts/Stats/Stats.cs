@@ -120,7 +120,7 @@ namespace Rpg.Stats {
         {
             MaxHealthMod.Value      = 10f * Str.Value;
             MaxManaMod.Value        = 2f * Int.Value + Will.Value;
-            ArmorMod.Value          = Dex.Value / 5f;
+            ArmorMod.Value          = Dex.Value / 4f;
             MagicArmorMod.Value     = Will.Value;
             AttackMod.Value         = Str.Value;
             AttackSpeedMod.Value    = Dex.Value;

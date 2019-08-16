@@ -16,12 +16,14 @@ namespace Rpg.ProgressionSystem {
 
             if (newTalents == null || newTalents.Count == 0) return;
 
-            int amount = Random.Range(2, 4);
             talents.Clear();
+
+            newTalents.Shuffle();
+            int amount = Random.Range(2, 4);
 
             for (int i = 0; i < amount; i++)
             {
-                int index = Random.Range(0, newTalents.Count);
+                int index = i % newTalents.Count;
                 Talent newTalent = GameObject.Instantiate(newTalents[index]);
                 newTalent.UpdateTier(tier);
                 talents.Add(newTalent);

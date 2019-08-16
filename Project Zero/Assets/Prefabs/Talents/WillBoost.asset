@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b75f8e9290f2b1499b25e815e4eadac, type: 3}
   m_Name: WillBoost
   m_EditorClassIdentifier: 
-  tierScale: 1
+  tierScale: 0.5
   statBonus:
   - stat: 11
-    statModType: 100
-    value: 5
+    statModType: 200
+    value: 0.05
     dependencies: []
   skillTags: 03000000
   icon: {fileID: 21300000, guid: 8655e96e29978a04e93c2d845a440741, type: 3}
