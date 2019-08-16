@@ -21,7 +21,21 @@ public class ExperienceManager : MonoBehaviour
         }
     }
 
-    public float exp = 0;
+    [SerializeField]
+    private float exp = 0;
+    public float Exp
+    {
+        get
+        {
+            return exp;
+        }
+        set
+        {
+            exp = value;
+            UpdateExperience();
+        }
+    }
+
     float quadraticTermInLevelFormula = 150;
     float linearTermInLevelFormula = 900;
     public AudioSource audioSource;
@@ -106,7 +120,7 @@ public class ExperienceManager : MonoBehaviour
         exp = GetExpByLevel(Level);
     }
 
-    //only to debug
+    //ToDo: Events
     public void Update()
     {
         UpdateExperience();

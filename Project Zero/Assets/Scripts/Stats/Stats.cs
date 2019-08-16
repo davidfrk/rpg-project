@@ -34,10 +34,10 @@ namespace Rpg.Stats {
 
         private int level = 0;
 
-        private int StrLevel = 0;
-        private int DexLevel = 0;
-        private int IntLevel = 0;
-        private int WillLevel = 0;
+        public int StrLevel = 0;
+        public int DexLevel = 0;
+        public int IntLevel = 0;
+        public int WillLevel = 0;
         private float statGain = 3f;
 
         private StatModifier MaxHealthMod       = new StatModifier(0f, StatModType.Flat);
@@ -108,7 +108,7 @@ namespace Rpg.Stats {
             }
         }
 
-        private void UpdateBaseStats()
+        public void UpdateBaseStats()
         {
             Str.BaseValue = baseStats.Str + level * StrGain + statGain * StrLevel;
             Dex.BaseValue = baseStats.Dex + level * DexGain + statGain * DexLevel;

@@ -7,7 +7,7 @@ namespace Rpg.ProgressionSystem
     public class SkillTree : MonoBehaviour
     {
         public List<SkillBlock> skillBlocks = new List<SkillBlock>();
-        public int SkillPoints { get; private set; } = 0;
+        public int SkillPoints { get; set; } = 0;
 
         private Unit unit;
         private ExperienceManager experienceManager;

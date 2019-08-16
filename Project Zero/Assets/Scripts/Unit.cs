@@ -20,7 +20,7 @@ public class Unit : MonoBehaviour
         {
             return health;
         }
-        private set
+        set
         {
             if (value <= 0f)
             {
@@ -50,7 +50,7 @@ public class Unit : MonoBehaviour
         {
             return mana;
         }
-        private set
+        set
         {
             mana = Mathf.Clamp(value, 0f, lastMaxMana);
         }
@@ -105,13 +105,18 @@ public class Unit : MonoBehaviour
         health = health / lastMaxHealth * stats.MaxHealth.Value;
         mana = mana / lastMaxMana * stats.MaxMana.Value;
 
-        lastMaxHealth = stats.MaxHealth.Value;
-        lastMaxMana = stats.MaxMana.Value;
+        UpdateMaxStats();
 
         //Update resistances
         physicalResistance = PhysicalResistanceFormula(stats.Armor.Value);
         magicResistance = MagicResistanceFormula(stats.MagicArmor.Value);
         attackSpeed = AttackSpeedFormula(stats.AttackSpeed.Value);
+    }
+
+    private void UpdateMaxStats()
+    {
+        lastMaxHealth = stats.MaxHealth.Value;
+        lastMaxMana = stats.MaxMana.Value;
     }
 
     public void TakeDamage(float damage, DamageType damageType, Unit damageDealer)
@@ -216,8 +221,7 @@ public class Unit : MonoBehaviour
     {
         stats.InitStats();
         UpdateStats();
-        lastMaxHealth = stats.MaxHealth.Value;
-        lastMaxMana = stats.MaxMana.Value;
+        //UpdateMaxStats();
         
         if (alive)
         {
