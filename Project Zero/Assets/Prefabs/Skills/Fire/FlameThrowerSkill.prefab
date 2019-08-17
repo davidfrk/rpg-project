@@ -98,7 +98,7 @@ MonoBehaviour:
   skillType: 1
   skillTags: 0200000004000000
   castRange: 5
-  manaCost: 20
+  manaCost: 1
   forceSelfCast: 0
   canCastOnGround: 1
   canCastOnUnit: 0
@@ -109,7 +109,9 @@ MonoBehaviour:
   description: Fire breathing technique
   damageInterval: 0.25
   damage: 20
+  intMult: 3
   durationAfterCastEnd: 3
+  manaCostPerSecMult: 0.1
   boxDimensions: {x: 1, y: 1.5, z: 4}
 --- !u!82 &4258522251413674966
 AudioSource:

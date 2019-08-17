@@ -11,6 +11,7 @@ namespace Rpg.Items
         [Space(10)]
         public EquipmentType equipmentType;
         public List<StatBonus> statBonus;
+        public List<CritBonus> critBonus;
         public Skill skill;
 
         public enum EquipmentType

@@ -92,6 +92,8 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public CritManager critManager = new CritManager();
+
     public void UpdateStats()
     {
         stats.UpdateLevel(experienceManager.Level);

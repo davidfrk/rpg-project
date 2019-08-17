@@ -23,7 +23,16 @@ public class SkillSlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         Skill = skill;
         image.sprite = skill.icon;
-        cost.text = skill.manaCost.ToString("F0");
+
+        if (skill.manaCost == 0)
+        {
+            cost.text = "";
+        }
+        else
+        {
+            cost.text = skill.manaCost.ToString("F0");
+        }
+        
         key.text = skill.key;
     }
 

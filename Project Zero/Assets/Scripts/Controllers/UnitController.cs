@@ -9,7 +9,7 @@ using Rpg.Items;
 [RequireComponent(typeof(Unit))]
 public class UnitController : MonoBehaviour
 {
-    public bool playerUnit = false;
+    public bool isPlayerUnit = false;
     public PlayerController owner;
 
     [SerializeField]
@@ -54,6 +54,9 @@ public class UnitController : MonoBehaviour
     public delegate void OnAttackEndEvent(Unit target, float damage);
     public event OnAttackEndEvent OnAttackEndCallback;
 
+    public delegate void CritEvent(float damage);
+    public event CritEvent OnCritCallback;
+
     public delegate void SpawnEvent(Unit unit);
     public event SpawnEvent OnSpawnCallback;
 
@@ -65,6 +68,15 @@ public class UnitController : MonoBehaviour
 
     public delegate void CastBeginEvent();
     public event CastBeginEvent OnCastBeginCallback;
+
+    private Crit crit = null;
+    public bool IsCriticalAttack
+    {
+        get
+        {
+            return crit != null;
+        }
+    }
 
     void Awake()
     {
@@ -251,7 +263,16 @@ public class UnitController : MonoBehaviour
             if (unit.alive && State == UnitState.Attacking)
             {
                 float attackDamage = unit.stats.Attack.Value;
+                if (crit != null)
+                {
+                    attackDamage *= crit.criticalDamage;
+                    OnCritCallback?.Invoke(attackDamage);
+                }
                 action.targetUnit.TakeDamage(attackDamage, DamageType.Physical, this.unit);
+
+                //Decide next crit, that way the animation can be different
+                crit = unit.critManager.Proc();
+
                 OnAttackEndCallback?.Invoke(action.targetUnit, attackDamage);
 
                 if (action.targetUnit.alive)

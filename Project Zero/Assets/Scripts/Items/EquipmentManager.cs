@@ -204,16 +204,21 @@ namespace Rpg.Items
         void Equip(Equipment equipment)
         {
             unit.stats.AddStatModifierList(equipment.statBonus, equipment);
+            unit.critManager.AddCritList(equipment.critBonus, equipment);
+
             if (equipment.skill != null)
             {
                 equipment.skill.Owner = unit;
             }
+
             AudioManager.instance.PlaySound(AudioManager.UISound.Equip);
         }
 
         void UnEquip(Equipment equipment)
         {
             unit.stats.RemoveStatModifierList(equipment.statBonus, equipment);
+            unit.critManager.RemoveAllCritsFromSource(equipment);
+
             if (equipment.skill != null)
             {
                 equipment.skill.Owner = null;

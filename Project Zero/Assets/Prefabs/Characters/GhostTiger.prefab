@@ -1762,7 +1762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d835d3ac23c3249b32114e5bdf34e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUnit: 0
+  isPlayerUnit: 0
   owner: {fileID: 0}
   state: 0
   action:
@@ -1796,6 +1796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2b5c86b2de1174e9c900976a605b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowOverride: 0
   baseAnimatorOverrideController: {fileID: 22100000, guid: d6f27b761aae2004c9fc97b8c2379911, type: 2}
   movementSpeed: 0.67
 --- !u!195 &8183545451814098359
@@ -1837,6 +1838,7 @@ MonoBehaviour:
   health: 1
   mana: 1
   radius: 0.5
+  range: 0.15
   stats:
     MaxHealth:
       BaseValue: 0
@@ -1873,8 +1875,8 @@ MonoBehaviour:
       ManaRegen: 1
       Armor: 2
       MagicArmor: 2
-      Attack: 60
-      AttackSpeed: 0
+      Attack: 200
+      AttackSpeed: 25
       Str: 10
       Dex: 15
       Int: 5
@@ -1884,6 +1886,10 @@ MonoBehaviour:
     DexGain: 1.6
     IntGain: 0.7
     WillGain: 1
+    StrLevel: 0
+    DexLevel: 0
+    IntLevel: 0
+    WillLevel: 0
   physicalResistance: 0
   magicResistance: 0
 --- !u!82 &8279124245784540865
@@ -2244,6 +2250,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a8083561b0709e4f85e0a37fd9ae84e, type: 3}
   - {fileID: 8300000, guid: 1343c45a8cf0c4d4c92c8f87acc9849e, type: 3}
   movementAudioSource: {fileID: 8194142734510223970}
+  movementSpeed: 0
   speechAudioSource: {fileID: 4329775809139487928}
 --- !u!82 &8194142734510223970
 AudioSource:

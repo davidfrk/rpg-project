@@ -9,7 +9,9 @@ namespace Rpg.Skills
         [Space(10)]
         public float damageInterval = 0.25f;
         public float damage = 10f;
+        public float intMult = 0.5f;
         public float durationAfterCastEnd = 3;
+        public float manaCostPerSecMult = 0.5f;
         public Vector3 boxDimensions;
 
         private bool active = false;
@@ -31,6 +33,11 @@ namespace Rpg.Skills
 
         public override void OnCastEnd()
         {
+            StopCasting();
+        }
+
+        private void StopCasting()
+        {
             ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
             particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
             audioSource.Stop();
@@ -45,12 +52,19 @@ namespace Rpg.Skills
                 if ((Time.time - lastDamageTick) > damageInterval)
                 {
                     lastDamageTick = Time.time;
-                    DamageTick(Owner);
+                    float damage = (this.damage + intMult * Owner.stats.Int.Value) * damageInterval;
+                    Owner.PayManaCost(damage * manaCostPerSecMult);
+                    DamageTick(Owner, damage);
+
+                    if (Owner.Mana <= 0f)
+                    {
+                        StopCasting();
+                    }
                 }
             }
         }
 
-        public virtual void DamageTick(Unit owner)
+        public virtual void DamageTick(Unit owner, float damage)
         {
             Vector3 center = owner.transform.position + owner.transform.forward * boxDimensions.z + owner.transform.up * boxDimensions.y;
             Collider[] unitColliders = FindUnitsInBox(center, boxDimensions, owner.transform.rotation);

@@ -69,7 +69,7 @@ namespace Rpg.AI
         {
             if (unitController.State == UnitState.Idle || unitController.State == UnitState.Moving)
             {
-                if (!unitController.playerUnit && faction == target.GetComponent<AI>().faction)
+                if (!unitController.isPlayerUnit && faction == target.GetComponent<AI>().faction)
                 {
                     //Dont attack yourself
                     if (aggressor != this.unit)
@@ -128,7 +128,7 @@ namespace Rpg.AI
                 }
             }
 
-            if (!unitController.playerUnit && unitController.State == UnitState.MovingToAct && Time.time > (focusStartTime + attentionTime))
+            if (!unitController.isPlayerUnit && unitController.State == UnitState.MovingToAct && Time.time > (focusStartTime + attentionTime))
             {
                 LoseFocus();
             }

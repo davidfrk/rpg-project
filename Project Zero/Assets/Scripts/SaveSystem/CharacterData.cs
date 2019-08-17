@@ -76,7 +76,7 @@ public class CharacterData
         SkillTree skillTree = unit.GetComponent<SkillTree>();
         if (skillTree != null)
         {
-            skillPoints = skillTree.SkillPoints;
+            skillPoints = skillTree.TotalPoints;
         }
 
         //Position
@@ -127,7 +127,8 @@ public class CharacterData
         SkillTree skillTree = unit.GetComponent<SkillTree>();
         if (skillTree != null)
         {
-            skillTree.SkillPoints = skillPoints;
+            skillTree.TotalPoints = skillPoints;
+            skillTree.Reset();
         }
 
         //Position

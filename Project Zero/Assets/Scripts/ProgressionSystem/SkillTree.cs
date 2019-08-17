@@ -7,7 +7,8 @@ namespace Rpg.ProgressionSystem
     public class SkillTree : MonoBehaviour
     {
         public List<SkillBlock> skillBlocks = new List<SkillBlock>();
-        public int SkillPoints { get; set; } = 0;
+        public int SkillPoints { get; private set; } = 0;
+        public int TotalPoints { get; set; } = 0;
 
         private Unit unit;
         private ExperienceManager experienceManager;
@@ -32,6 +33,15 @@ namespace Rpg.ProgressionSystem
                 skillBlock.Generate(Skills.SkillTag.Attack, i + 1);
                 skillBlocks.Add(skillBlock);
             }
+        }
+
+        public void Reset()
+        {
+            SkillPoints = TotalPoints;
+            unit.stats.RemoveAllStatModifiersFrom(this);
+            skillBlocks.Clear();
+
+            Generate();
         }
 
         public Talent Get(int block, int talent)
@@ -60,7 +70,9 @@ namespace Rpg.ProgressionSystem
 
         public void OnLevelUp()
         {
-            SkillPoints += experienceManager.Level - 1;
+            int pointsGain = experienceManager.Level - 1;
+            SkillPoints += pointsGain;
+            TotalPoints += pointsGain;
         }
     }
 }

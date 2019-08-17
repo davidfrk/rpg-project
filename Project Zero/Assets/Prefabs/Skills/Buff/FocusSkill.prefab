@@ -64,13 +64,15 @@ MonoBehaviour:
   description: Boost Str and provides HpRegen
   StatBonus:
   - stat: 8
-    statModType: 100
-    value: 10
+    statModType: 300
+    value: 0.2
     dependencies: []
   - stat: 1
     statModType: 100
     value: 15
-    dependencies: []
+    dependencies:
+    - StatType: 11
+      Value: 2
   duration: 10
 --- !u!82 &8887046428850492763
 AudioSource:

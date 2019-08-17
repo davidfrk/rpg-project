@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace Rpg.Stats {
 
@@ -158,6 +159,14 @@ namespace Rpg.Stats {
             foreach (StatBonus statBonus in modifiers)
             {
                 RemoveStatModifier(statBonus.stat, source);
+            }
+        }
+
+        public void RemoveAllStatModifiersFrom(object source)
+        {
+            foreach(StatType stat in Enum.GetValues(typeof(StatType)))
+            {
+                RemoveStatModifier(stat, source);
             }
         }
 

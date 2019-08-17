@@ -49,6 +49,7 @@ public class AnimatorUpdate : MonoBehaviour
         animator.SetBool("Attacking", state == UnitState.Attacking);
         animator.SetBool("Casting", state == UnitState.Casting);
         animator.SetBool("Dead", state == UnitState.Dead);
+        animator.SetBool("Crit", unitController.IsCriticalAttack);
     }
     
     void OnStateUpdate(MovementState state)
@@ -57,6 +58,7 @@ public class AnimatorUpdate : MonoBehaviour
         animator.SetBool("Attacking", unitController.State == UnitState.Attacking);
         animator.SetBool("Casting", unitController.State == UnitState.Casting);
         animator.SetBool("Dead", unitController.State == UnitState.Dead);
+        animator.SetBool("Crit", unitController.IsCriticalAttack);
     }
 
     void OnCastBegin()

@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     {
         selectedUnit = unit;
         selectedUnitController = selectedUnit.GetComponent<UnitController>();
-        if (selectedUnitController.playerUnit)
+        if (selectedUnitController.isPlayerUnit)
         {
             MainUnit = selectedUnit;
         }
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (!selectedUnit.unitController.playerUnit)
+            if (!selectedUnit.unitController.isPlayerUnit)
             {
                 SelectUnit(mainUnit);
             }
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
 
     void Cast(int slot)
     {
-        if (!selectedUnit.unitController.playerUnit)
+        if (!selectedUnit.unitController.isPlayerUnit)
         {
             SelectUnit(mainUnit);
         }

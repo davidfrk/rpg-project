@@ -62,7 +62,7 @@ public class ExperienceManager : MonoBehaviour
         if (prey != null)
         {
             //Preventing exploit by killing player units
-            if (unitController.playerUnit && prey.unitController.playerUnit) return;
+            if (unitController.isPlayerUnit && prey.unitController.isPlayerUnit) return;
 
             ExperienceManager experienceManager = prey.GetComponent<ExperienceManager>();
             AddExperience(experienceManager.experienceGivenOnDeath);
@@ -108,7 +108,7 @@ public class ExperienceManager : MonoBehaviour
     private void LevelUp()
     {
         OnLevelUpCallback?.Invoke();
-        if (unitController.playerUnit)
+        if (unitController.isPlayerUnit)
         {
             if (audioSource && levelUpSound)
             {

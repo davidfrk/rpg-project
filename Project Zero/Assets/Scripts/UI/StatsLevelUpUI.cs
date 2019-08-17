@@ -12,7 +12,7 @@ public class StatsLevelUpUI : MonoBehaviour
         Unit selectedUnit = UIController.instance.selectedUnit;
         if (selectedUnit != null)
         {
-            statsLevelUpTransform.SetActive(selectedUnit.unitController.playerUnit && selectedUnit.stats.HasStatsPointsAvailable());
+            statsLevelUpTransform.SetActive(selectedUnit.unitController.isPlayerUnit && selectedUnit.stats.HasStatsPointsAvailable());
         }
     }
 

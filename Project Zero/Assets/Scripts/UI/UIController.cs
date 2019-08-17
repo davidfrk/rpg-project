@@ -13,8 +13,7 @@ public class UIController : MonoBehaviour, ISlotManager
     internal Unit selectedUnit;
 
     [Space(10)]
-    public GameObject equipmentUI;
-    bool showEquipmentUI = false;
+    public EquipmentGroupUI equipmentUI;
     public Sprite itemSlotSprite;
     public Sprite itemSlotBackgroundSprite;
     public Image draggingItemImage;
@@ -45,7 +44,7 @@ public class UIController : MonoBehaviour, ISlotManager
 
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.KeypadMinus))
         {
-            ToggleEquipmentUI();
+            equipmentUI.Toggle();
         }
 
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadDivide))
@@ -53,13 +52,13 @@ public class UIController : MonoBehaviour, ISlotManager
             if (shopUI.isActiveAndEnabled)
             {
                 shopUI.Close();
-                equipmentUI.SetActive(showEquipmentUI);
+                equipmentUI.Close();
             }
             else
             {
                 shop = Shop.FindShopInRange(PlayerController.localPlayer.MainUnit.transform.position);
                 shopUI.Open(shop);
-                equipmentUI.SetActive(true);
+                equipmentUI.Open();
             }
         }
 
@@ -72,13 +71,6 @@ public class UIController : MonoBehaviour, ISlotManager
             selectedItemSlot = null;
             draggingItemImage.gameObject.SetActive(false);
         }
-    }
-
-    public void ToggleEquipmentUI()
-    {
-        showEquipmentUI = !showEquipmentUI;
-
-        equipmentUI.SetActive(showEquipmentUI);
     }
 
     static public void UIClick()

@@ -82,10 +82,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.7
+  m_Height: 4
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.78, z: 0}
 --- !u!114 &2550931863038928566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2b5c86b2de1174e9c900976a605b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowOverride: 0
   baseAnimatorOverrideController: {fileID: 22100000, guid: 0802c0de8a614e44fb06139bae14f614, type: 2}
   movementSpeed: 0.67
 --- !u!195 &2550931863038928560
@@ -173,6 +174,7 @@ MonoBehaviour:
   health: 1
   mana: 1
   radius: 1
+  range: 0.4
   stats:
     MaxHealth:
       BaseValue: 0
@@ -206,10 +208,10 @@ MonoBehaviour:
       MaxHealth: 100
       HpRegen: 20
       MaxMana: 10
-      ManaRegen: 0
-      Armor: 2
+      ManaRegen: 1
+      Armor: 10
       MagicArmor: 0
-      Attack: 60
+      Attack: 120
       AttackSpeed: 100
       Str: 10
       Dex: 6
@@ -220,6 +222,10 @@ MonoBehaviour:
     DexGain: 1.7
     IntGain: 0.5
     WillGain: 0.7
+    StrLevel: 0
+    DexLevel: 0
+    IntLevel: 0
+    WillLevel: 0
   physicalResistance: 0
   magicResistance: 0
 --- !u!82 &2310957501186704838
@@ -580,6 +586,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1a8083561b0709e4f85e0a37fd9ae84e, type: 3}
   - {fileID: 8300000, guid: 1343c45a8cf0c4d4c92c8f87acc9849e, type: 3}
   movementAudioSource: {fileID: 2540031694910112101}
+  movementSpeed: 0
   speechAudioSource: {fileID: 7989671689168029631}
 --- !u!82 &2540031694910112101
 AudioSource:
