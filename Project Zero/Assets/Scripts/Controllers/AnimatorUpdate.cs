@@ -7,6 +7,7 @@ public class AnimatorUpdate : MonoBehaviour
     Animator animator;
     MovementController movementController;
     UnitController unitController;
+    public bool allowOverride = false;
     public AnimatorOverrideController baseAnimatorOverrideController;
     protected AnimatorOverrideController animatorOverrideController;
     protected AnimationClipOverrides clipOverrides;
@@ -60,8 +61,11 @@ public class AnimatorUpdate : MonoBehaviour
 
     void OnCastBegin()
     {
-        clipOverrides["Cast"] = unitController.action.skill.animation;
-        animatorOverrideController.ApplyOverrides(clipOverrides);
+        if (allowOverride)
+        {
+            clipOverrides["Cast"] = unitController.action.skill.animation;
+            animatorOverrideController.ApplyOverrides(clipOverrides);
+        }
     }
 }
 

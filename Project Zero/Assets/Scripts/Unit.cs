@@ -65,6 +65,8 @@ public class Unit : MonoBehaviour
     }
 
     public float radius = 0.5f;
+    public float range = 0.15f;
+
     [SerializeField]
     public Stats stats;
 

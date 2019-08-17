@@ -2704,6 +2704,7 @@ MonoBehaviour:
   health: 1
   mana: 1
   radius: 1.1
+  range: 0.3
   stats:
     MaxHealth:
       BaseValue: 0
@@ -2751,6 +2752,10 @@ MonoBehaviour:
     DexGain: 1
     IntGain: 0.8
     WillGain: 0.6
+    StrLevel: 0
+    DexLevel: 0
+    IntLevel: 0
+    WillLevel: 0
   physicalResistance: 0
   magicResistance: 0
 --- !u!114 &6106765265455225594
@@ -2942,6 +2947,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: eb9b2c6ae6a92054483db8f6fc9a8c8f, type: 3}
   - {fileID: 8300000, guid: 1419b1c984086b84ba2cb036dc9b009b, type: 3}
   movementAudioSource: {fileID: 0}
+  movementSpeed: 0
   speechAudioSource: {fileID: 0}
 --- !u!1 &6106776463294841488
 GameObject:

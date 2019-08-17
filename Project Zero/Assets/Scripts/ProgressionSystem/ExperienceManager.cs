@@ -61,6 +61,9 @@ public class ExperienceManager : MonoBehaviour
     {
         if (prey != null)
         {
+            //Preventing exploit by killing player units
+            if (unitController.playerUnit && prey.unitController.playerUnit) return;
+
             ExperienceManager experienceManager = prey.GetComponent<ExperienceManager>();
             AddExperience(experienceManager.experienceGivenOnDeath);
         }

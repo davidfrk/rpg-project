@@ -182,7 +182,7 @@ public class UnitController : MonoBehaviour
 
     float DistanceToAttack()
     {
-        return unit.radius + action.targetUnit.radius + 0.2f;
+        return 1.05f * (unit.radius + action.targetUnit.radius) + unit.range;
     }
 
     float DistanceToPickItem()
@@ -214,13 +214,13 @@ public class UnitController : MonoBehaviour
     void Attack(Unit target)
     {
         State = UnitState.Attacking;
-        //targetUnit = target;
     }
     
     void Cast()
     {
-        OnCastBeginCallback?.Invoke();
         State = UnitState.Casting;
+        OnCastBeginCallback?.Invoke();
+        action.skill.OnCastBegin();
     }
 
     bool StopCurrentAction()
@@ -365,7 +365,6 @@ public class UnitController : MonoBehaviour
         action.targetUnit = null;
 
         movementController.MoveCloseToPosition(position, action.skill.castRange);
-
         //Debug.Log("CastOnGround");
     }
 
@@ -385,7 +384,6 @@ public class UnitController : MonoBehaviour
         action.targetUnit = target;
 
         movementController.MoveCloseToPosition(target.transform.position, action.skill.castRange);
-
         //Debug.Log("CastOnTarget");
     }
 

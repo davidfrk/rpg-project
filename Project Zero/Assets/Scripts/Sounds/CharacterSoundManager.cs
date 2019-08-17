@@ -7,6 +7,7 @@ public class CharacterSoundManager : MonoBehaviour
     public AudioSource attackAudioSource;
     public List<AudioClip> attackSounds;
     public AudioSource movementAudioSource;
+    public float movementSpeed;
     public AudioSource speechAudioSource;
 
     private UnitController unitController;

@@ -147,7 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 1
-  castRange: 0
+  skillTags: 
+  castRange: 1
   manaCost: 0
   forceSelfCast: 1
   canCastOnGround: 0
