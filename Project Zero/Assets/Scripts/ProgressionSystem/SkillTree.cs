@@ -13,6 +13,9 @@ namespace Rpg.ProgressionSystem
         private Unit unit;
         private ExperienceManager experienceManager;
 
+        public delegate void GainSkillPointEvent();
+        public event GainSkillPointEvent OnGainSkillPointCallback;
+
         void Awake()
         {
             unit = GetComponent<Unit>();
@@ -33,6 +36,8 @@ namespace Rpg.ProgressionSystem
                 skillBlock.Generate(Skills.SkillTag.Attack, i + 1);
                 skillBlocks.Add(skillBlock);
             }
+
+            skillBlocks[0].IsLocked = false;
         }
 
         public void Reset()
@@ -56,10 +61,20 @@ namespace Rpg.ProgressionSystem
 
         public void Buy(Talent talent)
         {
-            if (SkillPoints >= talent.Cost && talent.Acquired == false)
+            if (SkillPoints >= talent.Cost && talent.Acquired == false && !skillBlocks[talent.Tier - 1].IsLocked)
             {
                 SkillPoints -= talent.Cost;
                 Apply(talent);
+
+                //Lock current block
+                skillBlocks[talent.Tier - 1].IsLocked = true;
+
+                //Unlock next block
+                if (talent.Tier < skillBlocks.Count)
+                {
+                    skillBlocks[talent.Tier].IsLocked = false;
+                }
+                
                 AudioManager.instance.PlaySound(AudioManager.UISound.TalentUpgrade);
             }
             else
@@ -70,9 +85,17 @@ namespace Rpg.ProgressionSystem
 
         public void OnLevelUp()
         {
-            int pointsGain = experienceManager.Level - 1;
-            SkillPoints += pointsGain;
-            TotalPoints += pointsGain;
+            if (experienceManager.Level % 3 == 0)
+            {
+                GainSkillPoints(1);// experienceManager.Level - 1;
+            }
+        }
+
+        public void GainSkillPoints(int points)
+        {
+            OnGainSkillPointCallback?.Invoke();
+            SkillPoints += points;
+            TotalPoints += points;
         }
     }
 }

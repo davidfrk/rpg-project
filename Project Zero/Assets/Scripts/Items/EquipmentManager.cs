@@ -204,7 +204,7 @@ namespace Rpg.Items
         void Equip(Equipment equipment)
         {
             unit.stats.AddStatModifierList(equipment.statBonus, equipment);
-            unit.critManager.AddCritList(equipment.critBonus, equipment);
+            unit.crit.AddCritList(equipment.critBonus, equipment);
 
             if (equipment.skill != null)
             {
@@ -217,7 +217,7 @@ namespace Rpg.Items
         void UnEquip(Equipment equipment)
         {
             unit.stats.RemoveStatModifierList(equipment.statBonus, equipment);
-            unit.critManager.RemoveAllCritsFromSource(equipment);
+            unit.crit.RemoveAllCritsFromSource(equipment);
 
             if (equipment.skill != null)
             {

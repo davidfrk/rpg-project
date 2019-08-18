@@ -41,3 +41,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: 3DText
+    uniqueID: 1001501557
+    locked: 0

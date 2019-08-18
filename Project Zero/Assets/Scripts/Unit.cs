@@ -92,7 +92,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    public CritManager critManager = new CritManager();
+    public CharacterCrit crit = new CharacterCrit();
 
     public void UpdateStats()
     {
@@ -155,6 +155,14 @@ public class Unit : MonoBehaviour
         {
             //Credit the death
             unitController.Die(damageDealer);
+        }
+    }
+
+    public float CritMult
+    {
+        get
+        {
+            return 1f + stats.Int.Value / 100f;
         }
     }
 

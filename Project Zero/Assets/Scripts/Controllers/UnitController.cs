@@ -24,12 +24,15 @@ public class UnitController : MonoBehaviour
         {
             if (value != state)
             {
-                state = value;
-                OnStateChangeCallback?.Invoke(state);
-
-                if (state == UnitState.Idle)
+                if (unit.alive || value == UnitState.Dead)
                 {
-                    action.actionType = Action.ActionType.None;
+                    state = value;
+                    OnStateChangeCallback?.Invoke(state);
+
+                    if (state == UnitState.Idle)
+                    {
+                        action.actionType = Action.ActionType.None;
+                    }
                 }
             }
         }
@@ -265,13 +268,14 @@ public class UnitController : MonoBehaviour
                 float attackDamage = unit.stats.Attack.Value;
                 if (crit != null)
                 {
-                    attackDamage *= crit.criticalDamage;
+                    attackDamage *= crit.criticalDamage * unit.CritMult;
                     OnCritCallback?.Invoke(attackDamage);
+                    HitManager.Crit(unit, action.targetUnit, attackDamage);
                 }
                 action.targetUnit.TakeDamage(attackDamage, DamageType.Physical, this.unit);
 
                 //Decide next crit, that way the animation can be different
-                crit = unit.critManager.Proc();
+                crit = unit.crit.Proc();
 
                 OnAttackEndCallback?.Invoke(action.targetUnit, attackDamage);
 

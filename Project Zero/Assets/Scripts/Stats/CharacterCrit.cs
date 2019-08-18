@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CritManager
+public class CharacterCrit
 {
     private List<Crit> criticalSources = new List<Crit>();
 

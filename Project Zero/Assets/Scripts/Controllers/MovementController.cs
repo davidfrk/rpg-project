@@ -83,7 +83,11 @@ public class MovementController : MonoBehaviour
     {
         agent.stoppingDistance = 0.1f;
         targetPosition = position;
-        agent.SetDestination(position);
+        if (agent.isActiveAndEnabled)
+        {
+            agent.SetDestination(position);
+        }
+        
         MovementState = MovementState.Running;
         ensureRotation = false;
     }

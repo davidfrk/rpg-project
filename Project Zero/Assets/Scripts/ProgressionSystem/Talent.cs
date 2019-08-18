@@ -13,13 +13,21 @@ namespace Rpg.ProgressionSystem
         public List<StatBonus> statBonus;
         public List<SkillTag> skillTags;
         public Sprite icon;
+
         private int tier;
+        public int Tier
+        {
+            get
+            {
+                return tier;
+            }
+        }
 
         public int Cost
         {
             get
             {
-                return tier;
+                return 1;// tier;
             }
         }
 

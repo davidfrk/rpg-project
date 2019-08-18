@@ -6,6 +6,7 @@ public class CharacterSoundManager : MonoBehaviour
 {
     public AudioSource attackAudioSource;
     public List<AudioClip> attackSounds;
+    public AudioClip attackCritSound;
     public AudioSource movementAudioSource;
     public float movementSpeed;
     public AudioSource speechAudioSource;
@@ -19,6 +20,7 @@ public class CharacterSoundManager : MonoBehaviour
         movementController = GetComponent<MovementController>();
 
         unitController.OnDeathCallback += OnDeath;
+        unitController.OnCritCallback += OnCrit;
     }
 
     public void AttackEndEvent()
@@ -29,8 +31,7 @@ public class CharacterSoundManager : MonoBehaviour
             {
                 int audioIndex = Random.Range(0, attackSounds.Count);
 
-                attackAudioSource.clip = attackSounds[audioIndex];
-                attackAudioSource.Play();
+                attackAudioSource.PlayOneShot(attackSounds[audioIndex]);
             }
         }
     }
@@ -40,6 +41,14 @@ public class CharacterSoundManager : MonoBehaviour
         if (speechAudioSource != null)
         {
             speechAudioSource.Play();
+        }
+    }
+
+    void OnCrit(float damage)
+    {
+        if (attackAudioSource != null)
+        {
+            attackAudioSource.PlayOneShot(attackCritSound);
         }
     }
     

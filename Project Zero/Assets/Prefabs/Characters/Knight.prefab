@@ -460,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d835d3ac23c3249b32114e5bdf34e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUnit: 0
+  isPlayerUnit: 0
   owner: {fileID: 0}
   state: 0
   action:
@@ -736,6 +736,7 @@ MonoBehaviour:
   attackAudioSource: {fileID: 210361476505172658}
   attackSounds:
   - {fileID: 8300000, guid: 69ee51c395a2060468478c9a086d9cd7, type: 3}
+  attackCritSound: {fileID: 8300000, guid: 7e5562f7875a24d01bcfdf63044f35d2, type: 3}
   movementAudioSource: {fileID: 526779209254991043}
   movementSpeed: 0
   speechAudioSource: {fileID: 5399388972519961113}

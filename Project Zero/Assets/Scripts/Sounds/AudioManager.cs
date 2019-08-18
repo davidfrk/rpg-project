@@ -48,8 +48,7 @@ public class AudioManager : MonoBehaviour
 
     private void Play(AudioClip clip)
     {
-        audioSource.clip = clip;
-        audioSource.Play();
+        audioSource.PlayOneShot(clip);
     }
 
     public enum UISound

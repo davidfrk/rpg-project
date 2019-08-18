@@ -9,6 +9,19 @@ namespace Rpg.ProgressionSystem {
         public int tier;
         public List<Talent> talents = new List<Talent>();
 
+        private bool isLocked = true;
+        public bool IsLocked
+        {
+            get
+            {
+                return isLocked;
+            }
+            set
+            {
+                isLocked = value;
+            }
+        }
+
         public void Generate(SkillTag skillTag, int tier)
         {
             this.tier = tier;

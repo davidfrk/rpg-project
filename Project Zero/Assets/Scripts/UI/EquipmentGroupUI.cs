@@ -8,17 +8,26 @@ namespace Rpg.UI
     {
         public void Toggle()
         {
-            gameObject.SetActive(!isActiveAndEnabled);
+            if (isActiveAndEnabled)
+            {
+                Close();
+            }
+            else
+            {
+                Open();
+            }
         }
 
         public void Open()
         {
             gameObject.SetActive(true);
+            AudioManager.instance.PlaySound(AudioManager.UISound.OpenShop);
         }
 
         public void Close()
         {
             gameObject.SetActive(false);
+            AudioManager.instance.PlaySound(AudioManager.UISound.CloseShop);
         }
     }
 }
