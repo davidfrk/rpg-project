@@ -246,6 +246,9 @@ public class Unit : MonoBehaviour
             mana = 0;
             unitController.Die(null);
         }
+
+        //Temporário até design de critico
+        crit.AddCrit(new Crit(stats.baseStats.crit, this));
     }
 
     public void Update()

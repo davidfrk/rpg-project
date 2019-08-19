@@ -72,4 +72,9 @@ public class CharacterSoundManager : MonoBehaviour
             }
         }
     }
+
+    public void Play(AudioClip clip)
+    {
+        attackAudioSource.PlayOneShot(clip);
+    }
 }

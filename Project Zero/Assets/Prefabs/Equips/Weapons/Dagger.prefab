@@ -34,6 +34,7 @@ GameObject:
   - component: {fileID: 3557833302729401418}
   - component: {fileID: 3557833302729401416}
   - component: {fileID: 498798189029181985}
+  - component: {fileID: 5991247234315062015}
   m_Layer: 10
   m_Name: Dagger
   m_TagString: Untagged
@@ -79,6 +80,7 @@ MonoBehaviour:
     statModType: 100
     value: 15
     dependencies: []
+  critBonus: []
   skill: {fileID: 498798189029181985}
 --- !u!114 &498798189029181985
 MonoBehaviour:
@@ -93,13 +95,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 0
+  skillTags: 
   castRange: 0
   manaCost: 0
+  forceSelfCast: 0
   canCastOnGround: 0
   canCastOnUnit: 0
   icon: {fileID: 21300000, guid: 28a02df1369b7fd4eab040459b0cc450, type: 3}
+  key: 
+  animation: {fileID: 0}
   canBeInterrupted: 0
   description: Lifesteal
+--- !u!114 &5991247234315062015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3557833302729401417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7066d2d1573234191f585df1966528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventType: 2
   resource: 0
   bonusType: 1
   amount: 0.1

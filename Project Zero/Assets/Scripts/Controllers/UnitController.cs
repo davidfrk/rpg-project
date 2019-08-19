@@ -22,7 +22,7 @@ public class UnitController : MonoBehaviour
         }
         set
         {
-            if (value != state)
+            if (value != state && value != UnitState.None)
             {
                 if (unit.alive || value == UnitState.Dead)
                 {
@@ -39,10 +39,10 @@ public class UnitController : MonoBehaviour
     }
 
     internal Unit unit;
-    MovementController movementController;
+    internal  MovementController movementController;
     NavMeshAgent navMeshAgent;
     internal EquipmentManager equipmentManager;
-    internal SkillsManager castController;
+    internal SkillsManager skillsManager;
 
     //[SerializeField]
     public Action action;
@@ -81,6 +81,8 @@ public class UnitController : MonoBehaviour
         }
     }
 
+    internal CharacterSoundManager audioManager;
+
     void Awake()
     {
         action.actionType = Action.ActionType.None;
@@ -90,7 +92,8 @@ public class UnitController : MonoBehaviour
         movementController.OnMovementCallback += MovementCallback;
         navMeshAgent = GetComponent<NavMeshAgent>();
         equipmentManager = GetComponent<EquipmentManager>();
-        castController = GetComponent<SkillsManager>();
+        skillsManager = GetComponent<SkillsManager>();
+        audioManager = GetComponent<CharacterSoundManager>();
     }
 
     void Update()
@@ -233,9 +236,8 @@ public class UnitController : MonoBehaviour
     
     void Cast()
     {
-        State = UnitState.Casting;
-        OnCastBeginCallback?.Invoke();
-        action.skill.OnCastBegin();
+        State = skillsManager.Cast(action);
+        if(State == UnitState.Casting) OnCastBeginCallback?.Invoke();
     }
 
     bool StopCurrentAction()
@@ -297,7 +299,7 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    public void OnCastEnd()
+    public void AnimatorOnCastEnd()
     {
         if (State == UnitState.Casting)
         {
@@ -378,7 +380,7 @@ public class UnitController : MonoBehaviour
         if (!StopCurrentAction())
         {
             actionQueue.actionType = Action.ActionType.Cast;
-            actionQueue.skill = castController.skills[skillSlot];
+            actionQueue.skill = skillsManager.skills[skillSlot];
             actionQueue.targetUnit = null;
             actionQueue.targetPosition = position;
             return;
@@ -386,8 +388,9 @@ public class UnitController : MonoBehaviour
 
         State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.Cast;
-        action.skill = castController.skills[skillSlot];
+        action.skill = skillsManager.skills[skillSlot];
         action.targetUnit = null;
+        action.targetPosition = position;
 
         movementController.MoveCloseToPosition(position, action.skill.castRange);
         //Debug.Log("CastOnGround");
@@ -398,15 +401,17 @@ public class UnitController : MonoBehaviour
         if (!StopCurrentAction())
         {
             actionQueue.actionType = Action.ActionType.Cast;
-            actionQueue.skill = castController.skills[skillSlot];
+            actionQueue.skill = skillsManager.skills[skillSlot];
             actionQueue.targetUnit = target;
+            actionQueue.targetPosition = target.transform.position;
             return;
         }
 
         State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.Cast;
-        action.skill = castController.skills[skillSlot];
+        action.skill = skillsManager.skills[skillSlot];
         action.targetUnit = target;
+        action.targetPosition = target.transform.position;
 
         movementController.MoveCloseToPosition(target.transform.position, action.skill.castRange);
         //Debug.Log("CastOnTarget");
@@ -458,5 +463,6 @@ public enum UnitState
     MovingToAct,
     Attacking,
     Casting,
-    Dead
+    Dead,
+    None,
 }

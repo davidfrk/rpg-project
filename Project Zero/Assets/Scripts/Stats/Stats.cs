@@ -48,6 +48,8 @@ namespace Rpg.Stats {
         private StatModifier AttackMod          = new StatModifier(0f, StatModType.Flat);
         private StatModifier AttackSpeedMod     = new StatModifier(0f, StatModType.Flat);
         private StatModifier MovementSpeedMod   = new StatModifier(0f, StatModType.Flat);
+        private StatModifier HpRegenMod         = new StatModifier(0f, StatModType.Flat);
+        private StatModifier ManaRegenMod       = new StatModifier(0f, StatModType.Flat);
 
         public void InitStats()
         {
@@ -73,6 +75,8 @@ namespace Rpg.Stats {
             Attack.AddModifier(AttackMod);
             AttackSpeed.AddModifier(AttackSpeedMod);
             MovementSpeed.AddModifier(MovementSpeedMod);
+            HpRegen.AddModifier(HpRegenMod);
+            ManaRegen.AddModifier(ManaRegenMod);
         }
 
         public void LevelUp(StatType type)
@@ -126,6 +130,8 @@ namespace Rpg.Stats {
             AttackMod.Value         = Str.Value;
             AttackSpeedMod.Value    = Dex.Value;
             MovementSpeedMod.Value  = Dex.Value / 20f;
+            HpRegenMod.Value        = Will.Value / 40f;
+            ManaRegenMod.Value      = Int.Value / 60f + Will.Value / 40f;
         }
 
         private void AddStatModifier(StatType stat, float value, StatModType modType, object source)
@@ -227,5 +233,6 @@ namespace Rpg.Stats {
         public float Int;
         public float Will;
         public float MovementSpeed;
+        public CritBonus crit;
     }
 }

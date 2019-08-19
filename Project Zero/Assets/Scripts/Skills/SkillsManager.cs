@@ -75,25 +75,39 @@ public class SkillsManager : MonoBehaviour
         }
     }
 
-    public void OnCastStart()
+    public UnitState Cast(Action action)
+    {
+        skill = unitController.action.skill;
+        if (skill == null) return UnitState.Idle;
+
+        return skill.OnCast();
+    }
+
+    public void AnimatorOnCastStart()
     {
         skill = unitController.action.skill;
         if (skill == null) return;
 
         if (unitController.action.targetUnit != null)
         {
-            skill.Cast(unit, castTransform, unitController.action.targetUnit);
+            skill.OnCastStart(unit, castTransform, unitController.action.targetUnit);
         }
         else
         {
-            skill.Cast(unit, castTransform, Vector3.forward);//ToDo: Atualizar cast position
+            skill.OnCastStart(unit, castTransform, unitController.action.targetPosition);
         }
         unit.PayManaCost(skill.manaCost);
     }
 
-    public void OnCastEnd()
+    public void AnimatorOnAction()
+    {
+        //Example: Combo damage instances
+    }
+
+    public void AnimatorOnCastEnd()
     {
         skill?.OnCastEnd();
+        skill = null;
     }
 
     private void OnDeath(Unit killer)

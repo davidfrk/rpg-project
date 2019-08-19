@@ -215,7 +215,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77d0e1d85d6b2a641bea4bae9a75e391, type: 2}
+  - {fileID: 2100000, guid: f0d9728e303edb742a3c2c1d69101fc9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4388,7 +4388,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77d0e1d85d6b2a641bea4bae9a75e391, type: 2}
+  - {fileID: 2100000, guid: f0d9728e303edb742a3c2c1d69101fc9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5363,7 +5363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d835d3ac23c3249b32114e5bdf34e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUnit: 0
+  isPlayerUnit: 0
   owner: {fileID: 0}
   state: 0
   action:
@@ -5399,6 +5399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowOverride: 1
   baseAnimatorOverrideController: {fileID: 22100000, guid: 764ae315de5fa1d4c9c68c8e95fa99b2, type: 2}
+  attackSpeed: 1
   movementSpeed: 0.55
 --- !u!195 &4372174723199442352
 NavMeshAgent:
@@ -5483,6 +5484,9 @@ MonoBehaviour:
       Int: 5
       Will: 3
       MovementSpeed: 50
+      crit:
+        procChance: 0.1
+        criticalDamage: 2.4
     StrGain: 1.4
     DexGain: 1.8
     IntGain: 0.8
@@ -5622,6 +5626,7 @@ MonoBehaviour:
   skills: []
   startingSkills:
   - {fileID: 5930755566368755613, guid: e1d0211543b2b024f9234558aec62c5f, type: 3}
+  - {fileID: 5084636998742845489, guid: 4c6d50fccee424a4bba37a606eba4bf9, type: 3}
   - {fileID: 1930527875822161934, guid: b10dcd95e32605d4ab2f68efb129af14, type: 3}
   - {fileID: 3401342557187634145, guid: 6ff69a4496322414eb94463eecb821c7, type: 3}
 --- !u!114 &3985338305362637462
@@ -5642,6 +5647,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3af14edc53ace4347aed9ed973d066ad, type: 3}
   - {fileID: 8300000, guid: 9a6bce8f50244584386f3cefd458fc9e, type: 3}
   - {fileID: 8300000, guid: 41d538ecdba38ee4e9e6fd7ea76cb882, type: 3}
+  attackCritSound: {fileID: 8300000, guid: a86851350f2b742cc8347528930088d1, type: 3}
   movementAudioSource: {fileID: 8831524933642538977}
   movementSpeed: 0
   speechAudioSource: {fileID: 730582403006046072}

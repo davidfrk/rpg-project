@@ -496,6 +496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowOverride: 1
   baseAnimatorOverrideController: {fileID: 22100000, guid: b95ee3106a0765743a6c48971d9ecfca, type: 2}
+  attackSpeed: 2
   movementSpeed: 0.55
 --- !u!195 &534174340963668758
 NavMeshAgent:
@@ -580,6 +581,9 @@ MonoBehaviour:
       Int: 2
       Will: 4
       MovementSpeed: 50
+      crit:
+        procChance: 0.1
+        criticalDamage: 2
     StrGain: 2
     DexGain: 1
     IntGain: 0.5
@@ -719,6 +723,7 @@ MonoBehaviour:
   skills: []
   startingSkills:
   - {fileID: 3892930933726173128, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
+  - {fileID: 5084636998742845489, guid: 4c6d50fccee424a4bba37a606eba4bf9, type: 3}
   - {fileID: 1930527875822161934, guid: b10dcd95e32605d4ab2f68efb129af14, type: 3}
   - {fileID: 3401342557187634145, guid: 6ff69a4496322414eb94463eecb821c7, type: 3}
 --- !u!114 &6505599772251872067

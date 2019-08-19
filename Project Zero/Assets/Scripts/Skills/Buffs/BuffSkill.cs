@@ -12,7 +12,7 @@ namespace Rpg.Skills
         public List<StatBonus> StatBonus;
         public float duration = 10f;
 
-        public override void Cast(Unit owner, Transform castTransform, Unit targetUnit)
+        public override void OnCastStart(Unit owner, Transform castTransform, Unit targetUnit)
         {
             targetUnit.stats.AddStatModifierList(StatBonus, this);
             ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();

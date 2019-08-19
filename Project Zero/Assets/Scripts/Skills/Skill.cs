@@ -20,6 +20,8 @@ namespace Rpg.Skills
 
         [SerializeField]
         private bool canBeInterrupted = false;
+        public string description;
+
         private Unit owner;
         public Unit Owner
         {
@@ -40,28 +42,54 @@ namespace Rpg.Skills
                 owner = value;
             }
         }
-        public string description;
-
+        
         protected AudioSource audioSource;
+
+        public delegate void CastEvent();
+        public event CastEvent OnCastCallback;
+
+        public delegate void CastStartEvent();
+        public event CastStartEvent OnCastStartCallback;
+
+        public delegate void ActionEvent();
+        public event ActionEvent OnActionCallback;
+
+        public delegate void CastEndEvent();
+        public event CastEndEvent OnCastEndCallback;
+
+        //Transformar em um struct ou outra estrutura?
+        internal Unit target;
+        internal float damageOnTarget = 0f;
 
         void Awake()
         {
             audioSource = GetComponent<AudioSource>();
         }
 
-        public virtual void Cast(Unit owner, Transform castTransform, Vector3 targetPosition)
+        public virtual UnitState OnCast()
         {
-
+            OnCastCallback?.Invoke();
+            return UnitState.Casting;
         }
 
-        public virtual void Cast(Unit owner, Transform castTransform, Unit targetUnit)
+        public virtual void OnCastStart(Unit owner, Transform castTransform, Vector3 targetPosition)
         {
+            OnCastStartCallback?.Invoke();
+        }
 
+        public virtual void OnCastStart(Unit owner, Transform castTransform, Unit targetUnit)
+        {
+            OnCastStartCallback?.Invoke();
+        }
+
+        public virtual void OnAction()
+        {
+            OnActionCallback?.Invoke();
         }
 
         public virtual void OnCastEnd()
         {
-
+            OnCastEndCallback?.Invoke();
         }
 
         public virtual bool CanCast(Unit owner)
@@ -89,14 +117,14 @@ namespace Rpg.Skills
             
         }
 
-        public virtual void OnCastBegin()
-        {
-
-        }
-
         public static Collider[] FindUnitsInBox(Vector3 center, Vector3 dimensions, Quaternion orientation)
         {
             return Physics.OverlapBox(center, dimensions, orientation, LayerMask.GetMask("Unit"));
+        }
+
+        public static Collider[] FindUnitsInSphere(Vector3 center, float radius)
+        {
+            return Physics.OverlapSphere(center, radius, LayerMask.GetMask("Unit"));
         }
 
         public enum SkillType
@@ -105,10 +133,10 @@ namespace Rpg.Skills
             Active
         }
 
-        public enum BonusType
+        public enum EffectType
         {
-            Flat,
-            Mult,
+            Positive,
+            Negative,
         }
     }
 }

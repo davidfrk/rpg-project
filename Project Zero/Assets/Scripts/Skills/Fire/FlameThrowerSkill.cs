@@ -18,7 +18,7 @@ namespace Rpg.Skills
         private float lastDamageTick = 0f;
         
 
-        public override void Cast(Unit owner, Transform castTransform, Vector3 targetPosition)
+        public override void OnCastStart(Unit owner, Transform castTransform, Vector3 targetPosition)
         {
             //this.owner = owner;
             transform.SetParent(castTransform, false);

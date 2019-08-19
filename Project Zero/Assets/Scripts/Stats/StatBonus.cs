@@ -12,4 +12,10 @@ namespace Rpg.Stats
         public float value;
         public List<StatModifier.Dependency> dependencies;
     }
+
+    public enum StatBonusType
+    {
+        Flat,
+        Mult,
+    }
 }

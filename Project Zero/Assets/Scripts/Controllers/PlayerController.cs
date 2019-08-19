@@ -177,9 +177,9 @@ public class PlayerController : MonoBehaviour
             SelectUnit(mainUnit);
         }
 
-        if (selectedUnitController.castController != null && selectedUnitController.castController.CanCast(slot))
+        if (selectedUnitController.skillsManager != null && selectedUnitController.skillsManager.CanCast(slot))
         {
-            Skill skill = selectedUnitController.castController.skills[slot];
+            Skill skill = selectedUnitController.skillsManager.skills[slot];
 
             if (skill.forceSelfCast)
             {

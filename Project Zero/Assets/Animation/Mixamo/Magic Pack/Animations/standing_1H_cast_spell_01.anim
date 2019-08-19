@@ -153979,14 +153979,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.56666666
-    functionName: OnCastStart
+    functionName: AnimatorOnCastStart
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 1.6666666
-    functionName: OnCastEnd
+    functionName: AnimatorOnCastEnd
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

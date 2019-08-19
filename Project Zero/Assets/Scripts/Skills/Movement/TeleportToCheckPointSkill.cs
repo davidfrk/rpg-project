@@ -6,7 +6,7 @@ namespace Rpg.Skills
 {
     public class TeleportToCheckPointSkill : Skill
     {
-        public override void Cast(Unit owner, Transform castTransform, Unit targetUnit)
+        public override void OnCastStart(Unit owner, Transform castTransform, Unit targetUnit)
         {
             ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
             particleSystem.Play(true);
