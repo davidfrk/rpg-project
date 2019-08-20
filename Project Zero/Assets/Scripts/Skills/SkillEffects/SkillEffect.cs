@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Rpg.Skills {
-    public class SkillEffect : MonoBehaviour
+    public class SkillEffect : ScriptableObject
     {
         public SkillEventType eventType;
-        protected Skill skill;
 
-        void Awake()
+        public void Init(Skill skill)
         {
-            skill = GetComponent<Skill>();
-            RegisterEvents();
+            RegisterEvents(skill);
         }
 
-        private void RegisterEvents()
+        private void RegisterEvents(Skill skill)
         {
             switch (eventType)
             {
@@ -38,10 +36,20 @@ namespace Rpg.Skills {
                         skill.OnCastEndCallback += Cast;
                         break;
                     }
+                case SkillEventType.OnAttack:
+                    {
+                        skill.OnActionCallback += Cast;
+                        break;
+                    }
+                case SkillEventType.OnKill:
+                    {
+                        skill.OnActionCallback += Cast;
+                        break;
+                    }
             }
         }
 
-        protected virtual void Cast()
+        protected virtual void Cast(Skill skill)
         {
 
         }

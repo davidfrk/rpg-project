@@ -84,7 +84,7 @@ namespace Rpg.AI
         {
             if (target != null)
             {
-                unitController.MoveAttack(target);
+                unitController.MoveToAttack(target);
                 FocusOnEnemy(target);
             }
         }

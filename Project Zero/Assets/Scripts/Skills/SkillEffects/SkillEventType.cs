@@ -10,5 +10,7 @@ namespace Rpg.Skills
         OnCastStart,
         OnAction,
         OnCastEnd,
+        OnAttack,
+        OnKill,
     }
 }

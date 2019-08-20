@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 878379513057305267}
   - component: {fileID: 2261857104069996503}
-  - component: {fileID: 7925392461937575426}
   m_Layer: 0
   m_Name: StompOnAttackSkill
   m_TagString: Untagged
@@ -56,21 +55,5 @@ MonoBehaviour:
   animation: {fileID: 0}
   canBeInterrupted: 0
   description: Stomp
---- !u!114 &7925392461937575426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2318032232933414624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e53a6e39b40bd94f9a710473d549540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventType: 2
-  radius: 4
-  damage: 200
-  damageType: 0
-  effectSound: {fileID: 8300000, guid: 59182717e8a07eb4dbcd8dfdf2b2584f, type: 3}
-  effectPrefab: {fileID: 5420415318632011664, guid: b3c8a9e7ed1afee4086495e1083d3199, type: 3}
+  skillEffects:
+  - {fileID: 11400000, guid: 666993f208288864aa46929df648ee6c, type: 2}

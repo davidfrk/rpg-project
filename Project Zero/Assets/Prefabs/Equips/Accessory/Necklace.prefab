@@ -34,7 +34,6 @@ GameObject:
   - component: {fileID: 3557833302729401418}
   - component: {fileID: 3557833302729401416}
   - component: {fileID: 2319498138503039626}
-  - component: {fileID: 2427697762117783452}
   m_Layer: 10
   m_Name: Necklace
   m_TagString: Untagged
@@ -106,22 +105,8 @@ MonoBehaviour:
   animation: {fileID: 0}
   canBeInterrupted: 0
   description: Recovers mana by killing
---- !u!114 &2427697762117783452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3557833302729401417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7066d2d1573234191f585df1966528, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventType: 2
-  resource: 1
-  bonusType: 0
-  amount: 5
+  skillEffects:
+  - {fileID: 11400000, guid: 816a52e629ce7ba4cb36d3d8db761d38, type: 2}
 --- !u!1001 &2753598153868385909
 PrefabInstance:
   m_ObjectHideFlags: 0

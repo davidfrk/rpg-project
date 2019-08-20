@@ -22,6 +22,8 @@ namespace Rpg.Skills
         private bool canBeInterrupted = false;
         public string description;
 
+        public List<SkillEffect> skillEffects;
+
         private Unit owner;
         public Unit Owner
         {
@@ -45,16 +47,16 @@ namespace Rpg.Skills
         
         protected AudioSource audioSource;
 
-        public delegate void CastEvent();
+        public delegate void CastEvent(Skill skill);
         public event CastEvent OnCastCallback;
 
-        public delegate void CastStartEvent();
+        public delegate void CastStartEvent(Skill skill);
         public event CastStartEvent OnCastStartCallback;
 
-        public delegate void ActionEvent();
+        public delegate void ActionEvent(Skill skill);
         public event ActionEvent OnActionCallback;
 
-        public delegate void CastEndEvent();
+        public delegate void CastEndEvent(Skill skill);
         public event CastEndEvent OnCastEndCallback;
 
         //Transformar em um struct ou outra estrutura?
@@ -66,30 +68,38 @@ namespace Rpg.Skills
             audioSource = GetComponent<AudioSource>();
         }
 
+        void Start()
+        {
+            foreach (SkillEffect skillEffect in skillEffects)
+            {
+                skillEffect.Init(this);
+            }
+        }
+
         public virtual UnitState OnCast()
         {
-            OnCastCallback?.Invoke();
+            OnCastCallback?.Invoke(this);
             return UnitState.Casting;
         }
 
         public virtual void OnCastStart(Unit owner, Transform castTransform, Vector3 targetPosition)
         {
-            OnCastStartCallback?.Invoke();
+            OnCastStartCallback?.Invoke(this);
         }
 
         public virtual void OnCastStart(Unit owner, Transform castTransform, Unit targetUnit)
         {
-            OnCastStartCallback?.Invoke();
+            OnCastStartCallback?.Invoke(this);
         }
 
         public virtual void OnAction()
         {
-            OnActionCallback?.Invoke();
+            OnActionCallback?.Invoke(this);
         }
 
         public virtual void OnCastEnd()
         {
-            OnCastEndCallback?.Invoke();
+            OnCastEndCallback?.Invoke(this);
         }
 
         public virtual bool CanCast(Unit owner)

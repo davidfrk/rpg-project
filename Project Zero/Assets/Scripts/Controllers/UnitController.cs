@@ -141,8 +141,20 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    public void MoveAttack(Unit target)
+    public void MoveToAttack(Unit target)
     {
+        //Prevent canceling attack animation with another attack order to the same target
+        if (State == UnitState.Attacking && action.targetUnit == target)
+        {
+            //Attacking the same target with good conditions
+            Vector3 targetDir = target.transform.position - transform.position;
+            if (targetDir.magnitude < DistanceToAttack() && Vector3.Angle(transform.forward, targetDir) <= 5f)
+            {
+                return;
+            }
+        }
+
+        //If you cant attack now, put in the queue
         if (!StopCurrentAction())
         {
             actionQueue.actionType = Action.ActionType.Attack;
@@ -150,10 +162,10 @@ public class UnitController : MonoBehaviour
             return;
         }
 
+        //Set attack order
         State = UnitState.MovingToAct;
         action.actionType = Action.ActionType.Attack;
         action.targetUnit = target;
-
 
         movementController.MoveCloseToPosition(target.transform.position, DistanceToAttack());
     }
@@ -267,27 +279,28 @@ public class UnitController : MonoBehaviour
         {
             if (unit.alive && State == UnitState.Attacking)
             {
-                float attackDamage = unit.stats.Attack.Value;
-                if (crit != null)
+                //If target is alive and in range attack
+                if (action.targetUnit.alive && (action.targetUnit.transform.position - transform.position).magnitude < DistanceToAttack())
                 {
-                    attackDamage *= crit.criticalDamage * unit.CritMult;
-                    OnCritCallback?.Invoke(attackDamage);
-                    HitManager.Crit(unit, action.targetUnit, attackDamage);
+                    float attackDamage = unit.stats.Attack.Value;
+                    if (crit != null)
+                    {
+                        attackDamage *= crit.criticalDamage * unit.CritMult;
+                        OnCritCallback?.Invoke(attackDamage);
+                        HitManager.Crit(unit, action.targetUnit, attackDamage);
+                    }
+                    action.targetUnit.TakeDamage(attackDamage, DamageType.Physical, this.unit);
+
+                    //Decide next crit, that we can have different animations to attack and crit
+                    crit = unit.crit.Proc();
+
+                    OnAttackEndCallback?.Invoke(action.targetUnit, attackDamage);
                 }
-                action.targetUnit.TakeDamage(attackDamage, DamageType.Physical, this.unit);
 
-                //Decide next crit, that way the animation can be different
-                crit = unit.crit.Proc();
-
-                OnAttackEndCallback?.Invoke(action.targetUnit, attackDamage);
-
+                //If he still alive move to attack, else Idle
                 if (action.targetUnit.alive)
                 {
-                    Vector3 targetDir = action.targetUnit.transform.position - transform.position;
-                    if (targetDir.magnitude > DistanceToAttack() || Vector3.Angle(transform.forward, targetDir) > 5f)
-                    {
-                        MoveAttack(action.targetUnit);
-                    }
+                    MoveToAttack(action.targetUnit);
                 }
                 else
                 {

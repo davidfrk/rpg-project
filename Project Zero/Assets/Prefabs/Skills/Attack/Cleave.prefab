@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 878379513057305267}
   - component: {fileID: 2261857104069996503}
-  - component: {fileID: 7912121853330897657}
   m_Layer: 0
   m_Name: Cleave
   m_TagString: Untagged
@@ -56,19 +55,5 @@ MonoBehaviour:
   animation: {fileID: 0}
   canBeInterrupted: 0
   description: Cleave
---- !u!114 &7912121853330897657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2318032232933414624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b72ea8ba3b4f5740bdc859df7b92eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventType: 2
-  radius: 1
-  damageMult: 1
-  damageType: 0
+  skillEffects:
+  - {fileID: 11400000, guid: e3719ab5d3a00e241b6d48e6973c6bb5, type: 2}

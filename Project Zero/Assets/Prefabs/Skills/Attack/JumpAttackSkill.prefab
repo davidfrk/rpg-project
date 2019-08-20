@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3892930933726173131}
   - component: {fileID: 5084636998742845489}
-  - component: {fileID: 6210217493019482621}
   m_Layer: 0
   m_Name: JumpAttackSkill
   m_TagString: Untagged
@@ -56,21 +55,5 @@ MonoBehaviour:
   animation: {fileID: 7400000, guid: ce78a7bf322ad774d8b972865cb25c28, type: 2}
   canBeInterrupted: 0
   description: JumpAttack
---- !u!114 &6210217493019482621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3892930933726173129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e53a6e39b40bd94f9a710473d549540, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eventType: 3
-  radius: 1
-  damage: 100
-  damageType: 0
-  effectSound: {fileID: 8300000, guid: 59182717e8a07eb4dbcd8dfdf2b2584f, type: 3}
-  effectPrefab: {fileID: 5420415318632011664, guid: b3c8a9e7ed1afee4086495e1083d3199, type: 3}
+  skillEffects:
+  - {fileID: 11400000, guid: 52110015b92623d4a9e8319c1332267d, type: 2}

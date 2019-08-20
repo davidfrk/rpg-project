@@ -8,7 +8,7 @@ namespace Rpg.Skills
     {
         public override UnitState OnCast()
         {
-            Owner.unitController.MoveAttack(Owner.unitController.action.targetUnit);
+            Owner.unitController.MoveToAttack(Owner.unitController.action.targetUnit);
             return UnitState.None;
         }
     }

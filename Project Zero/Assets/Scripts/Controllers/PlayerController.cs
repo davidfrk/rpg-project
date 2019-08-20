@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
                 //UnitClick
                 if (selectedUnit != targetUnit)
                 {
-                    selectedUnitController.MoveAttack(targetUnit);
+                    selectedUnitController.MoveToAttack(targetUnit);
                 }
             }
             else

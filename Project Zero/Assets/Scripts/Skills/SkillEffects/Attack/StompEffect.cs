@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Rpg.Skills.Effects
 {
+    [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SkillEffect/StompEffect", order = 1)]
     public class StompEffect : SkillEffect
     {
         public float radius;
@@ -12,7 +13,7 @@ namespace Rpg.Skills.Effects
         public AudioClip effectSound;
         public GameObject effectPrefab;
 
-        protected override void Cast()
+        protected override void Cast(Skill skill)
         {
             Vector3 position = skill.Owner.transform.position + radius * skill.Owner.transform.forward + 0.2f * Vector3.up;
             Collider[] unitColliders = Skill.FindUnitsInSphere(position, radius);
@@ -22,7 +23,7 @@ namespace Rpg.Skills.Effects
                 Unit unit = unitCollider.GetComponent<Unit>();
                 if (unit != skill.Owner)
                 {
-                    ApplyEffect(unit);
+                    ApplyEffect(skill, unit);
                 }
             }
 
@@ -30,7 +31,7 @@ namespace Rpg.Skills.Effects
             Instantiate(effectPrefab, position , Quaternion.identity);
         }
 
-        private void ApplyEffect(Unit target)
+        private void ApplyEffect(Skill skill, Unit target)
         {
             target.TakeDamage(damage, damageType, skill.Owner);
         }
