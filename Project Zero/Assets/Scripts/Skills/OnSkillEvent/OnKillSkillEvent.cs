@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Rpg.Skills
+namespace Rpg.Skills.SkillEvent
 {
-    public class OnKillSkill : Skill
+    public class OnKillSkillEvent : OnSkillEvent
     {
         protected override void RegisterEvents(Unit owner)
         {
             owner.unitController.OnKillCallback += OnKill;
         }
 
-        protected override void UnRegisterEvents()
+        protected override void UnRegisterEvents(Unit owner)
         {
-            Owner.unitController.OnKillCallback -= OnKill;
+            owner.unitController.OnKillCallback -= OnKill;
         }
 
         protected virtual void OnKill(Unit prey)
         {
             target = prey;
-            OnAction();
+
+            Cast();
         }
     }
 }

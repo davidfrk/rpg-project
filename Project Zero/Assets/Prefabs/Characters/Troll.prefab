@@ -361,7 +361,7 @@ MonoBehaviour:
   skills: []
   startingSkills:
   - {fileID: 3892930933726173128, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
-  - {fileID: 2261857104069996503, guid: e95065215ed20aa41a8670bcc11419bd, type: 3}
+  - {fileID: 5907455604276514255, guid: e95065215ed20aa41a8670bcc11419bd, type: 3}
 --- !u!114 &6872095051312957060
 MonoBehaviour:
   m_ObjectHideFlags: 0

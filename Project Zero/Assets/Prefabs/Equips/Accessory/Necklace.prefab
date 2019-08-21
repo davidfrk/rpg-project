@@ -33,6 +33,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3557833302729401418}
   - component: {fileID: 3557833302729401416}
+  - component: {fileID: 333593108282114139}
   - component: {fileID: 2319498138503039626}
   m_Layer: 10
   m_Name: Necklace
@@ -80,8 +81,8 @@ MonoBehaviour:
     value: 2
     dependencies: []
   critBonus: []
-  skill: {fileID: 2319498138503039626}
---- !u!114 &2319498138503039626
+  skill: {fileID: 333593108282114139}
+--- !u!114 &333593108282114139
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3557833302729401417}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4593fd622df21914aa2aaa9d01af4bd5, type: 3}
+  m_Script: {fileID: 11500000, guid: f09924e627d9c39429cee8e57332f82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 0
@@ -104,7 +105,19 @@ MonoBehaviour:
   key: 
   animation: {fileID: 0}
   canBeInterrupted: 0
-  description: Recovers mana by killing
+  description: Gain mana per kill
+--- !u!114 &2319498138503039626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3557833302729401417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4593fd622df21914aa2aaa9d01af4bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   skillEffects:
   - {fileID: 11400000, guid: 816a52e629ce7ba4cb36d3d8db761d38, type: 2}
 --- !u!1001 &2753598153868385909

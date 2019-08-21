@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Rpg.Skills
+namespace Rpg.Skills.SkillEvent
 {
-    public class OnAttackSkill : Skill
+    public class OnAttackSkillEvent : OnSkillEvent
     {
         protected override void RegisterEvents(Unit owner)
         {
             owner.unitController.OnAttackEndCallback += OnAttack;
         }
 
-        protected override void UnRegisterEvents()
+        protected override void UnRegisterEvents(Unit owner)
         {
-            Owner.unitController.OnAttackEndCallback -= OnAttack;
+            owner.unitController.OnAttackEndCallback -= OnAttack;
         }
 
         protected virtual void OnAttack(Unit target, float damage)
         {
             this.target = target;
-            this.damageOnTarget = damage;
-            OnAction();
+            this.damage = damage;
+
+            Cast();
         }
+
+
     }
 }

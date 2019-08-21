@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3892930933726173131}
   - component: {fileID: 3892930933726173128}
   - component: {fileID: 8887046428850492763}
+  - component: {fileID: 8956555494329416861}
   m_Layer: 0
   m_Name: FocusSkill
   m_TagString: Untagged
@@ -62,17 +63,6 @@ MonoBehaviour:
   animation: {fileID: 7400000, guid: 2f3bcbd8b31f7434ba2023a88997fa31, type: 2}
   canBeInterrupted: 0
   description: Boost Str and provides HpRegen
-  StatBonus:
-  - stat: 8
-    statModType: 300
-    value: 0.2
-    dependencies: []
-  - stat: 1
-    statModType: 100
-    value: 15
-    dependencies:
-    - StatType: 11
-      Value: 2
   duration: 10
 --- !u!82 &8887046428850492763
 AudioSource:
@@ -170,6 +160,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8956555494329416861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892930933726173129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acb0d2d9be6f5c4a842d9ee88430947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillEffects:
+  - {fileID: 11400000, guid: 92eadb744ef4b934a90fd3efe1dc161d, type: 2}
 --- !u!1001 &3892930933448706186
 PrefabInstance:
   m_ObjectHideFlags: 0

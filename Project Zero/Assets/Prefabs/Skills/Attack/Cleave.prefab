@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 878379513057305267}
+  - component: {fileID: 4094689098814600989}
   - component: {fileID: 2261857104069996503}
   m_Layer: 0
   m_Name: Cleave
@@ -31,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2261857104069996503
+--- !u!114 &4094689098814600989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2318032232933414624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4556218c43a5024e841dd17ce0a3a9e, type: 3}
+  m_Script: {fileID: 11500000, guid: f09924e627d9c39429cee8e57332f82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 0
@@ -55,5 +56,17 @@ MonoBehaviour:
   animation: {fileID: 0}
   canBeInterrupted: 0
   description: Cleave
+--- !u!114 &2261857104069996503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2318032232933414624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4556218c43a5024e841dd17ce0a3a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   skillEffects:
   - {fileID: 11400000, guid: e3719ab5d3a00e241b6d48e6973c6bb5, type: 2}

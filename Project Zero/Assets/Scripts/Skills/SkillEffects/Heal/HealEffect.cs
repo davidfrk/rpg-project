@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Rpg.Stats;
+using Rpg.Skills.SkillEvent;
 
 namespace Rpg.Skills.Effects
 {
@@ -12,7 +13,7 @@ namespace Rpg.Skills.Effects
         public StatBonusType bonusType;
         public float amount;
 
-        protected override void Cast(Skill skill)
+        public override void Cast(OnSkillEvent skillEvent, Skill skill)
         {
             if (bonusType == StatBonusType.Flat)
             {
@@ -20,7 +21,7 @@ namespace Rpg.Skills.Effects
             }
             else
             {
-                skill.Owner.Regen(resource, amount * skill.damageOnTarget, skill.Owner);
+                skill.Owner.Regen(resource, amount * skillEvent.damage, skill.Owner);
             }
         }
     }

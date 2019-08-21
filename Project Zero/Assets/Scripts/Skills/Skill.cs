@@ -22,8 +22,6 @@ namespace Rpg.Skills
         private bool canBeInterrupted = false;
         public string description;
 
-        public List<SkillEffect> skillEffects;
-
         private Unit owner;
         public Unit Owner
         {
@@ -33,73 +31,72 @@ namespace Rpg.Skills
             }
             set
             {
+                if (owner != null)
+                {
+                    UnRegisterEvents(owner);
+                }
+
                 if (value != null)
                 {
                     RegisterEvents(value);
                 }
-                else
-                {
-                    UnRegisterEvents();
-                }
+
                 owner = value;
+
+                OnOwnerChangeCallback?.Invoke(owner);
             }
         }
+        public Unit TargetUnit { get; private set; }
+        public Vector3 TargetPosition { get; private set; }
         
         protected AudioSource audioSource;
 
-        public delegate void CastEvent(Skill skill);
+        public delegate void OwnerChangeEvent(Unit Owner);
+        public event OwnerChangeEvent OnOwnerChangeCallback;
+
+        public delegate void CastEvent();
         public event CastEvent OnCastCallback;
 
-        public delegate void CastStartEvent(Skill skill);
+        public delegate void CastStartEvent();
         public event CastStartEvent OnCastStartCallback;
 
-        public delegate void ActionEvent(Skill skill);
+        public delegate void ActionEvent();
         public event ActionEvent OnActionCallback;
 
-        public delegate void CastEndEvent(Skill skill);
+        public delegate void CastEndEvent();
         public event CastEndEvent OnCastEndCallback;
-
-        //Transformar em um struct ou outra estrutura?
-        internal Unit target;
-        internal float damageOnTarget = 0f;
 
         void Awake()
         {
             audioSource = GetComponent<AudioSource>();
         }
 
-        void Start()
-        {
-            foreach (SkillEffect skillEffect in skillEffects)
-            {
-                skillEffect.Init(this);
-            }
-        }
-
         public virtual UnitState OnCast()
         {
-            OnCastCallback?.Invoke(this);
+            OnCastCallback?.Invoke();
             return UnitState.Casting;
         }
 
         public virtual void OnCastStart(Unit owner, Transform castTransform, Vector3 targetPosition)
         {
-            OnCastStartCallback?.Invoke(this);
+            TargetPosition = targetPosition;
+            OnCastStartCallback?.Invoke();
         }
 
         public virtual void OnCastStart(Unit owner, Transform castTransform, Unit targetUnit)
         {
-            OnCastStartCallback?.Invoke(this);
+            TargetUnit = targetUnit;
+            OnCastStartCallback?.Invoke();
         }
 
         public virtual void OnAction()
         {
-            OnActionCallback?.Invoke(this);
+            OnActionCallback?.Invoke();
         }
 
         public virtual void OnCastEnd()
         {
-            OnCastEndCallback?.Invoke(this);
+            OnCastEndCallback?.Invoke();
         }
 
         public virtual bool CanCast(Unit owner)
@@ -122,7 +119,7 @@ namespace Rpg.Skills
             
         }
 
-        protected virtual void UnRegisterEvents()
+        protected virtual void UnRegisterEvents(Unit owner)
         {
             
         }

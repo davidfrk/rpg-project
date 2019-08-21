@@ -82,6 +82,7 @@ MonoBehaviour:
     statModType: 100
     value: 5
     dependencies: []
+  critBonus: []
   skill: {fileID: 0}
 --- !u!1001 &2753598153868385909
 PrefabInstance:

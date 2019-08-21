@@ -29020,10 +29020,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4828874021842340786, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}
-      propertyPath: startingSkills.Array.size
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 538286129341735905, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.633
@@ -29108,10 +29104,6 @@ PrefabInstance:
       propertyPath: Ssss.BaseValue
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4828874021842340786, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}
-      propertyPath: startingSkills.Array.data[4]
-      value: 
-      objectReference: {fileID: 2261857104069996503, guid: fcea6d04124ff514bb6a6e25a309900c, type: 3}
     m_RemovedComponents:
     - {fileID: 8191392265819481176, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c3a16f9eeb8c928438eaa885c3a68c72, type: 3}

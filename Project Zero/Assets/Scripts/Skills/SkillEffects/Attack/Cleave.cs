@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rpg.Skills.SkillEvent;
 
 namespace Rpg.Skills.Effects
 {
@@ -12,25 +13,25 @@ namespace Rpg.Skills.Effects
         public DamageType damageType;
         public GameObject effectPrefab;
 
-        protected override void Cast(Skill skill)
+        public override void Cast(OnSkillEvent skillEvent, Skill skill)
         {
             Collider[] unitColliders = Skill.FindUnitsInSphere(skill.Owner.transform.position + radius * skill.Owner.transform.forward, radius);
 
             foreach (Collider unitCollider in unitColliders)
             {
                 Unit unit = unitCollider.GetComponent<Unit>();
-                if (unit != skill.Owner && unit != skill.target)
+                if (unit != skill.Owner && unit != skillEvent.target)
                 {
-                    ApplyEffect(skill, unit);
+                    ApplyEffect(skillEvent, skill, unit);
                 }
             }
 
             Instantiate(effectPrefab, skill.Owner.transform.position, skill.Owner.transform.rotation);
         }
 
-        private void ApplyEffect(Skill skill, Unit target)
+        private void ApplyEffect(OnSkillEvent skillEvent, Skill skill, Unit target)
         {
-            target.TakeDamage(damageMult * skill.damageOnTarget, damageType, skill.Owner);
+            target.TakeDamage(damageMult * skillEvent.damage, damageType, skill.Owner);
         }
     }
 }

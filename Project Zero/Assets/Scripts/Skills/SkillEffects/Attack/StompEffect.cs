@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rpg.Skills.SkillEvent;
 
 namespace Rpg.Skills.Effects
 {
@@ -13,7 +14,7 @@ namespace Rpg.Skills.Effects
         public AudioClip effectSound;
         public GameObject effectPrefab;
 
-        protected override void Cast(Skill skill)
+        public override void Cast(OnSkillEvent skillEvent, Skill skill)
         {
             Vector3 position = skill.Owner.transform.position + radius * skill.Owner.transform.forward + 0.2f * Vector3.up;
             Collider[] unitColliders = Skill.FindUnitsInSphere(position, radius);
