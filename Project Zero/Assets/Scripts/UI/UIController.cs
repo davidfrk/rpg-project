@@ -45,6 +45,7 @@ public class UIController : MonoBehaviour, ISlotManager
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.KeypadMinus))
         {
             equipmentUI.Toggle();
+            HideEquipmentTooltip();
         }
 
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadDivide))
@@ -53,12 +54,20 @@ public class UIController : MonoBehaviour, ISlotManager
             {
                 shopUI.Close();
                 equipmentUI.Close();
+                HideEquipmentTooltip();
             }
             else
             {
                 shop = Shop.FindShopInRange(PlayerController.localPlayer.MainUnit.transform.position);
-                shopUI.Open(shop);
-                equipmentUI.Open();
+                if (shop != null)
+                {
+                    shopUI.Open(shop);
+                    equipmentUI.Open();
+                }
+                else
+                {
+                    equipmentUI.Toggle();
+                }
             }
         }
 
@@ -103,6 +112,7 @@ public class UIController : MonoBehaviour, ISlotManager
                 if (shopUI.isActiveAndEnabled)
                 {
                     shop.Buy(item, PlayerController.localPlayer);
+                    shopUI.UpdateUI();
                 }
             }
         }

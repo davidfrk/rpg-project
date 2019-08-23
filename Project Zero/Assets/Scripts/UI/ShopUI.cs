@@ -71,8 +71,9 @@ namespace Rpg.UI {
 
         public void OnMouseRightClickDown(ShopItemTooltip shopItemTooltip)
         {
-            shop.Sell(shopItemTooltip.Item, PlayerController.localPlayer);
             UIController.UIClick();
+            shop.Sell(shopItemTooltip.Item, PlayerController.localPlayer);
+            goldText.text = shop.gold.ToString();
         }
     }
 }

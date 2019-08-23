@@ -14,8 +14,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3892930933726173131}
+  - component: {fileID: 3097600512052682343}
+  - component: {fileID: 4509126097040344925}
   - component: {fileID: 8887046428850492763}
-  - component: {fileID: 3401342557187634145}
   m_Layer: 0
   m_Name: TeleportToBase
   m_TagString: Untagged
@@ -38,6 +39,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3097600512052682343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892930933726173129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26940d2a96ad907419a170d7cc23bf89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillType: 1
+  skillTags: 
+  castRange: 1
+  manaCost: 0
+  forceSelfCast: 1
+  canCastOnGround: 0
+  canCastOnUnit: 1
+  icon: {fileID: 21300000, guid: b0e0e020c9517d349a9e01313d2b684e, type: 3}
+  key: 
+  animation: {fileID: 7400000, guid: 368cc12de4090d44991c490458b1b7b2, type: 2}
+  canBeInterrupted: 0
+  description: Teleport to last rest point
+--- !u!114 &4509126097040344925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892930933726173129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2344acb7986887a40a4830466c234371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillEffects:
+  - {fileID: 11400000, guid: 41d576d986a7b1c40b183c533d9f2bfe, type: 2}
+  - {fileID: 11400000, guid: 7df25469919d2b0498cd116c74ec4513, type: 2}
+  - {fileID: 11400000, guid: dc14242ea93d8fd42bfe0a29d6f656bf, type: 2}
 --- !u!82 &8887046428850492763
 AudioSource:
   m_ObjectHideFlags: 0
@@ -134,30 +175,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3401342557187634145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3892930933726173129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26940d2a96ad907419a170d7cc23bf89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillType: 1
-  skillTags: 
-  castRange: 1
-  manaCost: 0
-  forceSelfCast: 1
-  canCastOnGround: 0
-  canCastOnUnit: 1
-  icon: {fileID: 21300000, guid: b0e0e020c9517d349a9e01313d2b684e, type: 3}
-  key: 
-  animation: {fileID: 7400000, guid: 368cc12de4090d44991c490458b1b7b2, type: 2}
-  canBeInterrupted: 1
-  description: Teleport back to last rest point
 --- !u!1001 &3892930933448706186
 PrefabInstance:
   m_ObjectHideFlags: 0

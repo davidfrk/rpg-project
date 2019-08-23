@@ -12,11 +12,5 @@ namespace Rpg.Skills
             Owner.unitController.movementController.MoveCloseToPosition(Owner.unitController.action.targetPosition, 1f);
             return UnitState.Casting;
         }
-
-        public override void OnCastEnd()
-        {
-            Owner.unitController.Teleport(Owner.transform.position, transform.rotation);
-            base.OnCastEnd();
-        }
     }
 }

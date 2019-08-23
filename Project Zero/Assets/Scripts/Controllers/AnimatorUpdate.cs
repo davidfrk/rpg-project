@@ -23,6 +23,7 @@ public class AnimatorUpdate : MonoBehaviour
         unitController = GetComponent<UnitController>();
         unitController.OnCastBeginCallback += OnCastBegin;
         unitController.OnStateChangeCallback += OnStateUpdate;
+        unitController.OnAttackEndCallback += OnAttackEnd;
     }
 
     void Start()
@@ -42,6 +43,7 @@ public class AnimatorUpdate : MonoBehaviour
     {
         animator.SetFloat("AttackSpeed", attackSpeed * unitController.unit.AttackSpeed);
         animator.SetFloat("MovementSpeed", movementSpeed * unitController.unit.MovementSpeed);
+        //animator.SetBool("Crit", unitController.IsCriticalAttack);
     }
 
     void OnStateUpdate(UnitState state)
@@ -52,6 +54,11 @@ public class AnimatorUpdate : MonoBehaviour
     void OnStateUpdate(MovementState state)
     {
         UpdateState();
+    }
+
+    void OnAttackEnd(Unit attacker, float damage)
+    {
+        animator.SetBool("Crit", unitController.IsCriticalAttack);
     }
 
     void UpdateState()

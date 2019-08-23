@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e53a6e39b40bd94f9a710473d549540, type: 3}
-  m_Name: BigStomp
+  m_Name: JumpAttackStomp
   m_EditorClassIdentifier: 
-  eventType: 4
+  castDistance: 1
   radius: 4
-  damage: 200
+  damage: 100
   damageType: 0
   effectSound: {fileID: 8300000, guid: 59182717e8a07eb4dbcd8dfdf2b2584f, type: 3}
   effectPrefab: {fileID: 5420415318632011664, guid: b3c8a9e7ed1afee4086495e1083d3199, type: 3}

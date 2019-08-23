@@ -286,10 +286,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 90, y: 20}
+  m_CellSize: {x: 180, y: 20}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
-  m_ConstraintCount: 2
+  m_ConstraintCount: 1
 --- !u!1 &4393451157536536850
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +384,6 @@ MonoBehaviour:
   statsTransform: {fileID: 4393451157385104343}
   skillDescription: {fileID: 565333370537730280}
   statsPrefab: {fileID: 4484696138521420216, guid: 92352cfdd9c34a94397b08dc698018c9, type: 3}
-  statsGradePrefab: {fileID: 5565662322291974329, guid: 891278ba16ab7424fb5419a821fea864, type: 3}
 --- !u!1 &4393451157617002872
 GameObject:
   m_ObjectHideFlags: 0

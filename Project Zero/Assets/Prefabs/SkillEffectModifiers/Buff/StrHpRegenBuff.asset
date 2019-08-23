@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405d1fd8ff616af4397118c34a2b025a, type: 3}
   m_Name: StrHpRegenBuff
   m_EditorClassIdentifier: 
+  duration: 10
   StatBonus:
   - stat: 8
     statModType: 300
@@ -23,4 +24,3 @@ MonoBehaviour:
     dependencies:
     - StatType: 11
       Value: 2
-  duration: 10

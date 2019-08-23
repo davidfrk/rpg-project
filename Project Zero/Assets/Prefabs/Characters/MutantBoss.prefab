@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d835d3ac23c3249b32114e5bdf34e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUnit: 0
+  isPlayerUnit: 0
   owner: {fileID: 0}
   state: 0
   action:
@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowOverride: 0
   baseAnimatorOverrideController: {fileID: 22100000, guid: 0802c0de8a614e44fb06139bae14f614, type: 2}
+  attackSpeed: 1
   movementSpeed: 0.67
 --- !u!195 &2550931863038928560
 NavMeshAgent:
@@ -218,6 +219,9 @@ MonoBehaviour:
       Int: 2
       Will: 4
       MovementSpeed: 55
+      crit:
+        procChance: 0
+        criticalDamage: 0
     StrGain: 2
     DexGain: 1.7
     IntGain: 0.5
@@ -452,7 +456,7 @@ MonoBehaviour:
   castTransform: {fileID: 0}
   skills: []
   startingSkills:
-  - {fileID: 3892930933726173128, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
+  - {fileID: 8179864019194194211, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
 --- !u!54 &2180944798677167875
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -585,6 +589,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 59d6c2840d18f7645abe2ac12c67ad5a, type: 3}
   - {fileID: 8300000, guid: 1a8083561b0709e4f85e0a37fd9ae84e, type: 3}
   - {fileID: 8300000, guid: 1343c45a8cf0c4d4c92c8f87acc9849e, type: 3}
+  attackCritSound: {fileID: 0}
   movementAudioSource: {fileID: 2540031694910112101}
   movementSpeed: 0
   speechAudioSource: {fileID: 7989671689168029631}
@@ -794,7 +799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropList:
   - chance: 0.2
-    item: {fileID: 5749383953796622142, guid: 7f69c1d0a322e3f47b6a73a545b197be, type: 3}
+    item: {fileID: 3557833302729401416, guid: 814cc59c674a024488268b36665f29b5, type: 3}
 --- !u!1 &2550931863085449964
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 3
+  name: Hatchet
   price: 60
   sprite: {fileID: 21300000, guid: 357a557a945fb0845869f6eb1d4ce3c5, type: 3}
   itemType: 2
@@ -84,6 +85,7 @@ MonoBehaviour:
     dependencies:
     - StatType: 8
       Value: 0.4
+  critBonus: []
   skill: {fileID: 0}
 --- !u!1001 &6880395039201272492
 PrefabInstance:

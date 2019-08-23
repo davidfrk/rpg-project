@@ -49,7 +49,7 @@ namespace Rpg.Skills
         public Unit TargetUnit { get; private set; }
         public Vector3 TargetPosition { get; private set; }
         
-        protected AudioSource audioSource;
+        public AudioSource AudioSource { get; private set; }
 
         public delegate void OwnerChangeEvent(Unit Owner);
         public event OwnerChangeEvent OnOwnerChangeCallback;
@@ -68,7 +68,7 @@ namespace Rpg.Skills
 
         void Awake()
         {
-            audioSource = GetComponent<AudioSource>();
+            AudioSource = GetComponent<AudioSource>();
         }
 
         public virtual UnitState OnCast()

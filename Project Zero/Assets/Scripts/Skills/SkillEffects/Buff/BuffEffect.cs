@@ -9,8 +9,8 @@ namespace Rpg.Skills.Effects
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SkillEffect/BuffEffect", order = 1)]
     public class BuffEffect : SkillEffect
     {
-        public List<StatBonus> StatBonus;
         public float duration = 10f;
+        public List<StatBonus> StatBonus;
 
         public override void Cast(OnSkillEvent skillEvent, Skill skill)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Rpg.Skills
 {
-    public class FlameThrowerSkill : Skill
+    public class FlameThrowerSkill : ChannelSkill
     {
         [Space(10)]
         public float damageInterval = 0.25f;
@@ -14,35 +14,14 @@ namespace Rpg.Skills
         public float manaCostPerSecMult = 0.5f;
         public Vector3 boxDimensions;
 
-        private bool active = false;
         private float lastDamageTick = 0f;
-        
 
         public override void OnCastStart(Unit owner, Transform castTransform, Vector3 targetPosition)
         {
-            //this.owner = owner;
             transform.SetParent(castTransform, false);
             transform.rotation = owner.transform.rotation;
-            transform.GetChild(0).gameObject.SetActive(true);
-            active = true;
 
-            ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
-            particleSystem.Play(true);
-            audioSource.Play();
-        }
-
-        public override void OnCastEnd()
-        {
-            StopCasting();
-        }
-
-        private void StopCasting()
-        {
-            ParticleSystem particleSystem = GetComponentInChildren<ParticleSystem>();
-            particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            audioSource.Stop();
-
-            active = false;
+            base.OnCastStart(owner, castTransform, targetPosition);
         }
 
         void Update()
@@ -58,7 +37,7 @@ namespace Rpg.Skills
 
                     if (Owner.Mana <= 0f)
                     {
-                        StopCasting();
+                        StopChannel();
                     }
                 }
             }
@@ -77,11 +56,6 @@ namespace Rpg.Skills
                     unit.TakeDamage(damage, DamageType.Magic, owner);
                 }
             }
-        }
-
-        public override void Interrupt()
-        {
-            if (active) OnCastEnd();
         }
     }
 }

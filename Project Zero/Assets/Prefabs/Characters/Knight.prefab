@@ -574,7 +574,7 @@ MonoBehaviour:
       ManaRegen: 0
       Armor: 2
       MagicArmor: 0
-      Attack: 5
+      Attack: 15
       AttackSpeed: 0
       Str: 6
       Dex: 4
@@ -722,10 +722,10 @@ MonoBehaviour:
   castTransform: {fileID: 4008976834811251653}
   skills: []
   startingSkills:
-  - {fileID: 3892930933726173128, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
+  - {fileID: 8179864019194194211, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
   - {fileID: 5084636998742845489, guid: 4c6d50fccee424a4bba37a606eba4bf9, type: 3}
   - {fileID: 1930527875822161934, guid: b10dcd95e32605d4ab2f68efb129af14, type: 3}
-  - {fileID: 3401342557187634145, guid: 6ff69a4496322414eb94463eecb821c7, type: 3}
+  - {fileID: 3097600512052682343, guid: 6ff69a4496322414eb94463eecb821c7, type: 3}
   - {fileID: 4094689098814600989, guid: fcea6d04124ff514bb6a6e25a309900c, type: 3}
 --- !u!114 &6505599772251872067
 MonoBehaviour:

@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
+  name: Knife
   price: 40
   sprite: {fileID: 21300000, guid: d528a2eba8c5e3047a9f2627719f2ba1, type: 3}
   itemType: 2

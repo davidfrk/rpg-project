@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Rpg.Stats
 {
@@ -111,10 +112,38 @@ namespace Rpg.Stats
         }
 
         [System.Serializable]
-        public struct Dependency
+        public struct Dependency : IStat
         {
-           public StatType StatType;
-           public float Value;
+            public StatType StatType;
+            public float Value;
+
+            public string GetName()
+            {
+                return StatType.ToString() + " grade";
+            }
+
+            public string ValueToString()
+            {
+                return GetGrade(Value);
+            }
+
+            private string GetGrade(float value)
+            {
+                int grade = Mathf.FloorToInt(value / 0.5f);
+
+                if (grade <= 0) return "F";
+                switch (grade)
+                {
+                    case 0: return "F";
+                    case 1: return "E";
+                    case 2: return "D";
+                    case 3: return "C";
+                    case 4: return "B";
+                    case 5: return "A";
+                    case 6: return "S";
+                    default: return "S+";
+                }
+            }
         }
     }
 }

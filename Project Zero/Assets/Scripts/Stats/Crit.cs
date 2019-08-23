@@ -2,23 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crit
+namespace Rpg.Stats
 {
-    public float procChance;
-    public float criticalDamage;
-    public object source;
-
-    public Crit(CritBonus crit, object source)
+    public class Crit
     {
-        procChance = crit.procChance;
-        criticalDamage = crit.criticalDamage;
-        this.source = source;
-    }
-}
+        public float procChance;
+        public float criticalDamage;
+        public object source;
 
-[System.Serializable]
-public struct CritBonus
-{
-    public float procChance;
-    public float criticalDamage;
+        public Crit(CritBonus crit, object source)
+        {
+            procChance = crit.procChance;
+            criticalDamage = crit.criticalDamage;
+            this.source = source;
+        }
+    }
+
+    [System.Serializable]
+    public struct CritBonus
+    {
+        public float procChance;
+        public float criticalDamage;
+    }
 }

@@ -1689,9 +1689,10 @@ GameObject:
   - component: {fileID: 6783631698904281117}
   - component: {fileID: 10354855820093175}
   - component: {fileID: 3889866358244396307}
+  - component: {fileID: 2521461285514657197}
+  - component: {fileID: 3220222198108085730}
   - component: {fileID: 5526820009905413124}
   - component: {fileID: 8364122549057256467}
-  - component: {fileID: 3220222198108085730}
   - component: {fileID: 8194142734510223970}
   - component: {fileID: 4329775809139487928}
   m_Layer: 9
@@ -1798,6 +1799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowOverride: 0
   baseAnimatorOverrideController: {fileID: 22100000, guid: d6f27b761aae2004c9fc97b8c2379911, type: 2}
+  attackSpeed: 1
   movementSpeed: 0.67
 --- !u!195 &8183545451814098359
 NavMeshAgent:
@@ -1882,6 +1884,9 @@ MonoBehaviour:
       Int: 5
       Will: 10
       MovementSpeed: 55
+      crit:
+        procChance: 0
+        criticalDamage: 0
     StrGain: 2
     DexGain: 1.6
     IntGain: 0.7
@@ -2116,7 +2121,46 @@ MonoBehaviour:
   castTransform: {fileID: 0}
   skills: []
   startingSkills:
-  - {fileID: 3892930933726173128, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
+  - {fileID: 8179864019194194211, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
+--- !u!114 &2521461285514657197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184542560625387020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc302cb5f30b904ba2198afbe4fe050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropList:
+  - chance: 0.75
+    item: {fileID: 5749383953796622142, guid: 87b292f521edacc43b10effe2acd0c05, type: 3}
+--- !u!114 &3220222198108085730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8184542560625387020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d788f4fff1044b41b153a48eb322ba1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackAudioSource: {fileID: 8364122549057256467}
+  attackSounds:
+  - {fileID: 8300000, guid: 632e5554b47a18c4a91733a868ff33a5, type: 3}
+  - {fileID: 8300000, guid: 8ad88064d0ae8d648a45b91ec8aef161, type: 3}
+  - {fileID: 8300000, guid: f3821ad1da4163f41abad72334dc7778, type: 3}
+  - {fileID: 8300000, guid: 59d6c2840d18f7645abe2ac12c67ad5a, type: 3}
+  - {fileID: 8300000, guid: 1a8083561b0709e4f85e0a37fd9ae84e, type: 3}
+  - {fileID: 8300000, guid: 1343c45a8cf0c4d4c92c8f87acc9849e, type: 3}
+  attackCritSound: {fileID: 0}
+  movementAudioSource: {fileID: 8194142734510223970}
+  movementSpeed: 0
+  speechAudioSource: {fileID: 4329775809139487928}
 --- !u!54 &5526820009905413124
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2229,29 +2273,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3220222198108085730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8184542560625387020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d788f4fff1044b41b153a48eb322ba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackAudioSource: {fileID: 8364122549057256467}
-  attackSounds:
-  - {fileID: 8300000, guid: 632e5554b47a18c4a91733a868ff33a5, type: 3}
-  - {fileID: 8300000, guid: 8ad88064d0ae8d648a45b91ec8aef161, type: 3}
-  - {fileID: 8300000, guid: f3821ad1da4163f41abad72334dc7778, type: 3}
-  - {fileID: 8300000, guid: 59d6c2840d18f7645abe2ac12c67ad5a, type: 3}
-  - {fileID: 8300000, guid: 1a8083561b0709e4f85e0a37fd9ae84e, type: 3}
-  - {fileID: 8300000, guid: 1343c45a8cf0c4d4c92c8f87acc9849e, type: 3}
-  movementAudioSource: {fileID: 8194142734510223970}
-  movementSpeed: 0
-  speechAudioSource: {fileID: 4329775809139487928}
 --- !u!82 &8194142734510223970
 AudioSource:
   m_ObjectHideFlags: 0

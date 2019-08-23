@@ -16,7 +16,6 @@ namespace Rpg.UI
         public Transform statsTransform;
         public Text skillDescription;
         public StatsTooltipElement statsPrefab;
-        public StatsTooltipGradeElement statsGradePrefab;
         public IShopManager shopManager;
         public Item Item { get; private set; }
 
@@ -44,29 +43,17 @@ namespace Rpg.UI
 
             foreach (StatBonus statBonus in equipment.statBonus)
             {
-                AddStatsUI(statBonus);
+                EquipmentTooltip.AddStatsUI(statBonus, statsPrefab, statsTransform);
+            }
+
+            foreach (CritBonus critBonus in equipment.critBonus)
+            {
+                EquipmentTooltip.AddStatsUI(critBonus, statsPrefab, statsTransform);
             }
 
             if (equipment.skill != null)
             {
                 skillDescription.text = equipment.skill.description;
-            }
-        }
-
-        private void AddStatsUI(StatBonus statBonus)
-        {
-            if (statBonus.dependencies.Count == 0)
-            {
-                StatsTooltipElement statTooltip = Instantiate<StatsTooltipElement>(statsPrefab, statsTransform);
-                statTooltip.UpdateUI(statBonus);
-            }
-            else
-            {
-                foreach (StatModifier.Dependency dependency in statBonus.dependencies)
-                {
-                    StatsTooltipGradeElement gradeTooltip = Instantiate<StatsTooltipGradeElement>(statsGradePrefab, statsTransform);
-                    gradeTooltip.UpdateUI(dependency);
-                }
             }
         }
 

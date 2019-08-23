@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd58b4e30b0f7184ab976e50ffe05fbb, type: 3}
+  m_Name: BuffVisualEffect
+  m_EditorClassIdentifier: 
+  duration: 10
+  visualEffectPrefab: {fileID: 5277064145696457765, guid: bbf0972dfda584b49aecbc62684d2d6e, type: 3}

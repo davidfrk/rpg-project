@@ -8,6 +8,7 @@ namespace Rpg.Skills.Effects
     [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SkillEffect/StompEffect", order = 1)]
     public class StompEffect : SkillEffect
     {
+        public float castDistance;
         public float radius;
         public float damage;
         public DamageType damageType;
@@ -16,7 +17,7 @@ namespace Rpg.Skills.Effects
 
         public override void Cast(OnSkillEvent skillEvent, Skill skill)
         {
-            Vector3 position = skill.Owner.transform.position + radius * skill.Owner.transform.forward + 0.2f * Vector3.up;
+            Vector3 position = skill.Owner.transform.position + castDistance * skill.Owner.transform.forward + 0.2f * Vector3.up;
             Collider[] unitColliders = Skill.FindUnitsInSphere(position, radius);
 
             foreach (Collider unitCollider in unitColliders)

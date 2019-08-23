@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Rpg.Items;
+using Rpg.Stats;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(AnimatorUpdate))]
@@ -24,6 +25,11 @@ public class UnitController : MonoBehaviour
         {
             if (value != state && value != UnitState.None)
             {
+                if (State == UnitState.Casting)
+                {
+                    action.skill.Interrupt();
+                }
+
                 if (unit.alive || value == UnitState.Dead)
                 {
                     state = value;
@@ -258,7 +264,6 @@ public class UnitController : MonoBehaviour
         {
             if (action.skill.CanBeInterrupted())
             {
-                action.skill.Interrupt();
                 State = UnitState.Idle;
                 return true;
             }

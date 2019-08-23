@@ -11,10 +11,16 @@ namespace Rpg.UI
         public Text statName;
         public Text statValue;
 
-        public void UpdateUI(StatBonus statBonus)
+        public void UpdateUI(IStat stat)
         {
-            statName.text = statBonus.stat.ToString();
-            statValue.text = statBonus.value.ToString("F0");
+            statName.text = stat.GetName();
+            statValue.text = stat.ValueToString();
+        }
+
+        public void UpdateUI(string name, string value)
+        {
+            statName.text = name;
+            statValue.text = value;
         }
     }
 }

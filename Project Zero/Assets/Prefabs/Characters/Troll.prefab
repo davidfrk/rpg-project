@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4febc1d733625b640ba6e09a4e544900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 100
+  level: 50
   exp: 0
   audioSource: {fileID: 545317819249578250}
   levelUpSound: {fileID: 8300000, guid: 38259b041bcceed4d87b45251f0f8324, type: 3}
@@ -360,7 +360,7 @@ MonoBehaviour:
   castTransform: {fileID: 0}
   skills: []
   startingSkills:
-  - {fileID: 3892930933726173128, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
+  - {fileID: 8179864019194194211, guid: 221cb3b163a3f7c49925426e88e4c39a, type: 3}
   - {fileID: 5907455604276514255, guid: e95065215ed20aa41a8670bcc11419bd, type: 3}
 --- !u!114 &6872095051312957060
 MonoBehaviour:

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7066d2d1573234191f585df1966528, type: 3}
-  m_Name: ManaOnKill
+  m_Script: {fileID: 11500000, guid: 4b72ea8ba3b4f5740bdc859df7b92eb1, type: 3}
+  m_Name: Cleave
   m_EditorClassIdentifier: 
-  eventType: 5
-  resource: 1
-  bonusType: 0
-  amount: 5
+  radius: 1
+  damageMult: 0.5
+  damageType: 0
+  effectPrefab: {fileID: 5196341817314334061, guid: b4653b9256cd6a04bab6009536369889, type: 3}
