@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Rpg.Items;
 using Rpg.UI;
+using Rpg.Items.CraftSystem;
 
 public class UIController : MonoBehaviour, ISlotManager
 {
@@ -21,6 +22,8 @@ public class UIController : MonoBehaviour, ISlotManager
     public ShopUI shopUI;
     private Shop shop;
     public SkillTreeUI SkillTreeUI;
+    public CraftUI craftUI;
+    public CraftManager craftManager;
 
     private bool draggingItem = false;
     private EquipmentTooltip equipmentTooltip;
@@ -71,6 +74,11 @@ public class UIController : MonoBehaviour, ISlotManager
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            craftUI.Toggle(craftManager);
+        }
+
         if(Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.T))
         {
             SkillTreeUI.Toggle();
@@ -107,12 +115,24 @@ public class UIController : MonoBehaviour, ISlotManager
             EquipmentManager equipmentManager = selectedUnit.GetComponent<EquipmentManager>();
             if (equipmentManager != null)
             {
-                Item item = equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
-
-                if (shopUI.isActiveAndEnabled)
+                Item item = equipmentManager.GetItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
+                
+                if (item != null)
                 {
-                    shop.Buy(item, PlayerController.localPlayer);
-                    shopUI.UpdateUI();
+                    if (shopUI.isActiveAndEnabled)
+                    {
+                        //If shop isActive drop the item only if the shop can buy it
+                        if (shop.CanBuy(item, PlayerController.localPlayer))
+                        {
+                            equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
+                            shop.Buy(item, PlayerController.localPlayer);
+                            shopUI.UpdateUI();
+                        }
+                    }
+                    else
+                    {
+                        equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
+                    }
                 }
             }
         }
@@ -155,29 +175,10 @@ public class UIController : MonoBehaviour, ISlotManager
         }
     }
 
-    public void OnPointerEnter(ItemSlotUI itemSlotUI, PointerEventData eventData)
-    {
-        if (itemSlotUI.item != null && itemSlotUI.item.itemType == Item.ItemType.Equipment)
-        {
-            if (!draggingItem)
-            {
-                Equipment equipment = itemSlotUI.item as Equipment;
-                ShowEquipmentTooltip(equipment, eventData.position);
-            }
-        }
-        else
-        {
-            HideEquipmentTooltip();
-        }
-    }
-
-    public void OnPointerExit(ItemSlotUI itemSlotUI, PointerEventData eventData)
-    {
-        HideEquipmentTooltip();
-    }
-
     private void ShowEquipmentTooltip(Equipment equipment, Vector2 position)
     {
+        if (draggingItem) return;
+
         if (equipmentTooltip != null)
         {
             if (equipmentTooltip.equipment == equipment) return;
@@ -195,6 +196,19 @@ public class UIController : MonoBehaviour, ISlotManager
             Destroy(equipmentTooltip.gameObject);
             equipmentTooltip = null;
         }
+    }
+
+    public static void ShowItemTooltip(Item item, Vector2 position)
+    {
+        if (item is Equipment)
+        {
+            instance.ShowEquipmentTooltip(item as Equipment, position);
+        }
+    }
+
+    public static void HideItemTooltip()
+    {
+        instance.HideEquipmentTooltip();
     }
 
     public void SwapItems(ItemSlotUI slot1, ItemSlotUI slot2)

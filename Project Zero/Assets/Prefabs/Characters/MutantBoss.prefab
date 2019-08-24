@@ -359,7 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: 1
   aggression: 1
-  visionRange: 3
+  visionRange: 4
   broadcastRange: 6
 --- !u!114 &2550931864112470632
 MonoBehaviour:

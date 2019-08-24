@@ -95,11 +95,11 @@ public class ItemSlotUI : MonoBehaviour, IPointerClickHandler, IPointerDownHandl
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        slotManager.OnPointerEnter(this, eventData);
+        UIController.ShowItemTooltip(item, eventData.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        slotManager.OnPointerExit(this, eventData);
+        UIController.HideItemTooltip();
     }
 }

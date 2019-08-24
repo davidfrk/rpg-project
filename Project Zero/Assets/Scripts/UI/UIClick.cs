@@ -6,11 +6,10 @@ using UnityEngine.UI;
 
 namespace Rpg.UI
 {
-    public class ButtonUI : Button
+    public class UIClick : MonoBehaviour, IPointerDownHandler
     {
-        public override void OnPointerDown(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)
         {
-            base.OnPointerDown(eventData);
             UIController.UIClick();
         }
     }

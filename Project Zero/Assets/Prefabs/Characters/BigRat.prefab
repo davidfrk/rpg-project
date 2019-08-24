@@ -2629,7 +2629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1d835d3ac23c3249b32114e5bdf34e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerUnit: 0
+  isPlayerUnit: 0
   owner: {fileID: 0}
   state: 0
   action:
@@ -2663,7 +2663,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2b5c86b2de1174e9c900976a605b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowOverride: 0
   baseAnimatorOverrideController: {fileID: 22100000, guid: ac61d1655bb72d24ba7d8aa336127800, type: 2}
+  attackSpeed: 1
   movementSpeed: 0.6
 --- !u!195 &6105486389643045187
 NavMeshAgent:
@@ -2748,6 +2750,9 @@ MonoBehaviour:
       Int: 4
       Will: 3
       MovementSpeed: 50
+      crit:
+        procChance: 0
+        criticalDamage: 0
     StrGain: 1.4
     DexGain: 1
     IntGain: 0.8
@@ -2790,7 +2795,7 @@ MonoBehaviour:
   faction: 3
   aggression: 1
   visionRange: 4
-  broadcastRange: 7
+  broadcastRange: 8
 --- !u!114 &6105486388569363867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2816,7 +2821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519f7a24ba5933c4cb05405cda873f9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeToRespawn: 60
+  TimeToRespawn: 80
 --- !u!114 &921089045743829029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2946,6 +2951,7 @@ MonoBehaviour:
   attackSounds:
   - {fileID: 8300000, guid: eb9b2c6ae6a92054483db8f6fc9a8c8f, type: 3}
   - {fileID: 8300000, guid: 1419b1c984086b84ba2cb036dc9b009b, type: 3}
+  attackCritSound: {fileID: 0}
   movementAudioSource: {fileID: 0}
   movementSpeed: 0
   speechAudioSource: {fileID: 0}

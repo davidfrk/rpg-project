@@ -154,7 +154,7 @@ namespace Rpg.Items
             }
         }
 
-        private Item GetItem(Item.ItemType slotType, int slotIndex)
+        public Item GetItem(Item.ItemType slotType, int slotIndex)
         {
             if (slotType == Item.ItemType.Equipment)
             {
@@ -199,6 +199,84 @@ namespace Rpg.Items
             }
 
             equipmentSlots[slot] = equipSlot;
+        }
+
+        public bool HasItem(Item item)
+        {
+            return inventory.Items.Exists(Item => Item.id == item.id) || equipmentSlots.Exists(EquipmentSlot => EquipmentSlot.equipment?.id == item.id);
+        }
+
+        public bool HasItem(Item item, int amount)
+        {
+            int count = inventory.Items.FindAll(Item => Item?.id == item.id).Count + equipmentSlots.FindAll(EquipmentSlot => EquipmentSlot.equipment?.id == item.id).Count;
+            return count >= amount;
+        }
+
+        public bool HasItemList(List<ItemQuantity> items)
+        {
+            foreach(ItemQuantity itemQuantity in items)
+            {
+                if (!HasItem(itemQuantity.item, itemQuantity.amount))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool FindItem(Item item, out Item.ItemType itemType, out int index)
+        {
+            int itemIndex = inventory.Items.FindIndex(Item => (Item != null && Item.id == item.id));
+            if (itemIndex >= 0)
+            {
+                index = itemIndex;
+                itemType = Item.ItemType.Item;
+                return true;
+            }
+            else
+            {
+                itemIndex = equipmentSlots.FindIndex(EquipmentSlot => (EquipmentSlot.equipment != null && EquipmentSlot.equipment.id == item.id));
+
+                if (itemIndex >= 0)
+                {
+                    index = itemIndex;
+                    itemType = Item.ItemType.Equipment;
+                    return true;
+                }
+                else
+                {
+                    index = itemIndex;
+                    itemType = Item.ItemType.Item;
+                    return false;
+                }
+            }
+        }
+
+        private void RemoveItem(Item item)
+        {
+            Item.ItemType itemType;
+            int index;
+            if (FindItem(item, out itemType, out index))
+            {
+                Item oldItem = DropItem(itemType, index);
+                Destroy(oldItem);
+            }
+        }
+
+        private void RemoveItem(Item item, int amount)
+        {
+            for(int i = 0; i < amount; i++)
+            {
+                RemoveItem(item);
+            }
+        }
+
+        public void RemoveItemList(List<ItemQuantity> items)
+        {
+            foreach (ItemQuantity itemQuantity in items)
+            {
+                RemoveItem(itemQuantity.item, itemQuantity.amount);
+            }
         }
 
         void Equip(Equipment equipment)

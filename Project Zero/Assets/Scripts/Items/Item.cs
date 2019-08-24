@@ -8,7 +8,7 @@ namespace Rpg.Items
     public class Item : MonoBehaviour
     {
         public int id;
-        public string name;
+        new public string name;
         public int price;
         public Sprite sprite;
         public ItemType itemType = ItemType.Item;
@@ -48,5 +48,12 @@ namespace Rpg.Items
             InWorld,
             InInventory
         }
+    }
+
+    [System.Serializable]
+    public struct ItemQuantity
+    {
+        public Item item;
+        public int amount;
     }
 }

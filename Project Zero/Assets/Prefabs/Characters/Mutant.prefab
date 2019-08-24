@@ -360,7 +360,7 @@ MonoBehaviour:
   faction: 1
   aggression: 1
   visionRange: 5
-  broadcastRange: 6
+  broadcastRange: 12
 --- !u!114 &8862137787683024637
 MonoBehaviour:
   m_ObjectHideFlags: 0

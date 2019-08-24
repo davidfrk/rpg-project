@@ -24,14 +24,24 @@ public class Shop : MonoBehaviour
 
     public void Buy(Item item, PlayerController player)
     {
-        if (item != null && item.State == Item.ItemState.InWorld && gold >= item.price)
+        if (item != null && item.State == Item.ItemState.InWorld && CanBuy(item, player))
         {
-            int price = Mathf.FloorToInt(sellFraction * item.price);
+            int price = SellPrice(item, player);
             gold -= price;
             player.gold += price;
             Destroy(item.gameObject);
             AudioManager.instance.PlaySound(AudioManager.UISound.SellItem);
         }
+    }
+
+    public bool CanBuy(Item item, PlayerController player)
+    {
+        return player.gold >= SellPrice(item, player);
+    }
+
+    public int SellPrice(Item item, PlayerController player)
+    {
+        return Mathf.FloorToInt(sellFraction * item.price);
     }
 
     static public Shop FindShopInRange(Vector3 position)
