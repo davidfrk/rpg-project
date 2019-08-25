@@ -12,7 +12,8 @@ public class AnimatorUpdate : MonoBehaviour
     protected AnimatorOverrideController animatorOverrideController;
     protected AnimationClipOverrides clipOverrides;
 
-    public float attackSpeed = 1f;
+    public float attack1Speed = 1f;
+    public float attack2Speed = 1f;
     public float movementSpeed = 1f;
 
     void Awake()
@@ -41,7 +42,8 @@ public class AnimatorUpdate : MonoBehaviour
 
     void Update()
     {
-        animator.SetFloat("AttackSpeed", attackSpeed * unitController.unit.AttackSpeed);
+        animator.SetFloat("Attack1Speed", attack1Speed * unitController.unit.AttackSpeed);
+        animator.SetFloat("Attack2Speed", attack2Speed * unitController.unit.AttackSpeed);
         animator.SetFloat("MovementSpeed", movementSpeed * unitController.unit.MovementSpeed);
         //animator.SetBool("Crit", unitController.IsCriticalAttack);
     }

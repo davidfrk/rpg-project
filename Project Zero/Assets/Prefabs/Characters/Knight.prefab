@@ -496,7 +496,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowOverride: 1
   baseAnimatorOverrideController: {fileID: 22100000, guid: b95ee3106a0765743a6c48971d9ecfca, type: 2}
-  attackSpeed: 2
+  attack1Speed: 2
+  attack2Speed: 2
   movementSpeed: 0.55
 --- !u!195 &534174340963668758
 NavMeshAgent:
@@ -707,6 +708,7 @@ MonoBehaviour:
     equipment: {fileID: 0}
   - equipmentType: 5
     equipment: {fileID: 0}
+  startingItems: []
 --- !u!114 &4828874021842340786
 MonoBehaviour:
   m_ObjectHideFlags: 0

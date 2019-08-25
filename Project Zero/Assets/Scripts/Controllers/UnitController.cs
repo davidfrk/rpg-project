@@ -390,7 +390,6 @@ public class UnitController : MonoBehaviour
             equipmentManager.PickItem(item);
         }
         State = UnitState.Idle;
-        //Debug.Log(gameObject +  " PickItem " + item);
     }
 
     public void MoveToCast(Vector3 position, int skillSlot)

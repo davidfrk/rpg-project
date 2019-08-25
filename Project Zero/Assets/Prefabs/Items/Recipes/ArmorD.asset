@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9c0d4a994997524199c4157b14d8182, type: 3}
-  m_Name: AssassinRingRecipe
+  m_Name: ArmorD
   m_EditorClassIdentifier: 
-  item: {fileID: 3557833302729401416, guid: 32a0dcaa08060d142bf7b64b88e0bd00, type: 3}
+  item: {fileID: 5749383953796622142, guid: 192e6e260121a48418a9ae2a193744d7, type: 3}
   ingredients:
   - item: {fileID: 3557833302729401416, guid: 9fd8ba008d1c8244b92fdf03b692b563, type: 3}
     amount: 1
-  - item: {fileID: 3557833302729401416, guid: 0971eb185f79c2a41afd0935da6ccdab, type: 3}
-    amount: 2
+  - item: {fileID: 5749383953796622142, guid: c07c0f821a88f524ea6d791841dfcbb8, type: 3}
+    amount: 1
+  - item: {fileID: 3487046220458528935, guid: 915f430ac75b3d64ebfc13700e8e4f39, type: 3}
+    amount: 1

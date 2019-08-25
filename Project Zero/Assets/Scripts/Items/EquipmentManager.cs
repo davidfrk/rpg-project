@@ -11,6 +11,7 @@ namespace Rpg.Items
         private Unit unit;
         internal Inventory inventory;
         public List<EquipmentSlot> equipmentSlots;
+        public List<Item> startingItems;
 
         public delegate void PickUpEvent(Item item);
         public event PickUpEvent OnItemPickUpCallback;
@@ -23,7 +24,10 @@ namespace Rpg.Items
 
         void Start()
         {
-            //UpdateEquipmentStats();
+            foreach(Item item in startingItems)
+            {
+                PickItem (Instantiate(item));
+            }
         }
 
         public void PickItem(Item item)
@@ -97,7 +101,7 @@ namespace Rpg.Items
 
                 if (slot.equipment == null && equipmentType == slot.equipmentType)
                 {
-                    equipment.item.SetState(Item.ItemState.InInventory);
+                    equipment.item.SetState(Item.ItemState.InInventory, transform);
                     slot.equipment = equipment;
                     equipmentSlots[i] = slot;
 
@@ -145,7 +149,7 @@ namespace Rpg.Items
             if (item != null)
             {
                 item.transform.position = transform.position;
-                item.SetState(Item.ItemState.InWorld);
+                item.SetState(Item.ItemState.InWorld, null);
                 AudioManager.instance.PlaySound(AudioManager.UISound.Drop);
             }
             return item;

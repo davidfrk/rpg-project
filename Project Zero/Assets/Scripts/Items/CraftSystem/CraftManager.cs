@@ -8,7 +8,7 @@ namespace Rpg.Items.CraftSystem
     {
         public RecipeList recipeList;
 
-        public void Craft(Unit playerUnit, Recipe recipe)
+        public bool Craft(Unit playerUnit, Recipe recipe)
         {
             if (playerUnit != null && recipe != null)
             {
@@ -18,8 +18,10 @@ namespace Rpg.Items.CraftSystem
                     equipmentManager.RemoveItemList(recipe.ingredients);
                     Item item = Instantiate<Item>(recipe.item);
                     equipmentManager.PickItem(item);
+                    return true;
                 }
             }
+            return false;
         }
     }
 }

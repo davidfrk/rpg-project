@@ -13,7 +13,7 @@ namespace Rpg.Items
         {
             if (!isFull())
             {
-                item.SetState(Item.ItemState.InInventory);
+                item.SetState(Item.ItemState.InInventory, transform);
                 int slot = FindEmptySlot();
                 Items[slot] = item;
                 count++;

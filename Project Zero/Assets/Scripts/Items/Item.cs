@@ -21,18 +21,21 @@ namespace Rpg.Items
             item = this;
         }
 
-        public void SetState(ItemState state)
+        public void SetState(ItemState state, Transform parentTransform)
         {
+            //Debug.Log(item.name + " " + state);
             if (state == ItemState.InWorld)
             {
-                model?.SetActive(true);
+                model.SetActive(true);
                 State = ItemState.InWorld;
-
+                transform.parent = null;
             }
             else
             {
-                model?.SetActive(false);
+                model.SetActive(false);
                 State = ItemState.InInventory;
+                transform.parent = parentTransform;
+                transform.localPosition = Vector3.zero;
             }
         }
 

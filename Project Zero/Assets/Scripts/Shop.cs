@@ -24,7 +24,7 @@ public class Shop : MonoBehaviour
 
     public void Buy(Item item, PlayerController player)
     {
-        if (item != null && item.State == Item.ItemState.InWorld && CanBuy(item, player))
+        if (item != null && CanBuy(item, player))
         {
             int price = SellPrice(item, player);
             gold -= price;
@@ -36,7 +36,7 @@ public class Shop : MonoBehaviour
 
     public bool CanBuy(Item item, PlayerController player)
     {
-        return player.gold >= SellPrice(item, player);
+        return gold >= SellPrice(item, player);
     }
 
     public int SellPrice(Item item, PlayerController player)

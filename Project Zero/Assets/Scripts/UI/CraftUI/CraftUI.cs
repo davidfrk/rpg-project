@@ -83,7 +83,10 @@ namespace Rpg.UI {
         public void OnMouseRightClickDown(RecipeTooltip recipeTooltip)
         {
             UIController.UIClick();
-            craftManager.Craft(PlayerController.localPlayer.MainUnit, recipeTooltip.recipe);
+            if (!craftManager.Craft(PlayerController.localPlayer.MainUnit, recipeTooltip.recipe))
+            {
+                AudioManager.instance.PlaySound(AudioManager.UISound.CantDo);
+            }
         }
     }
 }

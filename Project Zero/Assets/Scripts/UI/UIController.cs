@@ -103,22 +103,25 @@ public class UIController : MonoBehaviour, ISlotManager
 
     public void OnMouseLeftClickDown(ItemSlotUI itemSlotUI)
     {
-        if (Time.time - lastUIClick < 0.2f && itemSlotUI.item != null && itemSlotUI.item.itemType == Item.ItemType.Equipment)
+        if (selectedUnit != null && selectedUnit.unitController.isPlayerUnit)
         {
-            if (itemSlotUI.slotType == Item.ItemType.Item)
+            if (Time.time - lastUIClick < 0.2f && itemSlotUI.item != null && itemSlotUI.item.itemType == Item.ItemType.Equipment)
             {
-                EquipmentManager equipmentManager = selectedUnit.GetComponent<EquipmentManager>();
-                Item item = itemSlotUI.item;
+                if (itemSlotUI.slotType == Item.ItemType.Item)
+                {
+                    EquipmentManager equipmentManager = selectedUnit.GetComponent<EquipmentManager>();
+                    Item item = itemSlotUI.item;
 
-                if (equipmentManager.HasEquipmentSlotAvailable(item))
-                {
-                    equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
-                    equipmentManager.PickItem(item);
-                }
-                else
-                {
-                    int slot = equipmentManager.FindEquipmentSlot(item);
-                    equipmentManager.SwapItems(Item.ItemType.Item, itemSlotUI.slotNumber, Item.ItemType.Equipment, slot);
+                    if (equipmentManager.HasEquipmentSlotAvailable(item))
+                    {
+                        equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
+                        equipmentManager.PickItem(item);
+                    }
+                    else
+                    {
+                        int slot = equipmentManager.FindEquipmentSlot(item);
+                        equipmentManager.SwapItems(Item.ItemType.Item, itemSlotUI.slotNumber, Item.ItemType.Equipment, slot);
+                    }
                 }
             }
         }
@@ -130,7 +133,7 @@ public class UIController : MonoBehaviour, ISlotManager
     {
         lastUIClick = Time.time;
 
-        if (selectedUnit != null)
+        if (selectedUnit != null && selectedUnit.unitController.isPlayerUnit)
         {
             EquipmentManager equipmentManager = selectedUnit.GetComponent<EquipmentManager>();
             if (equipmentManager != null)
@@ -139,6 +142,7 @@ public class UIController : MonoBehaviour, ISlotManager
                 
                 if (item != null)
                 {
+                    
                     if (shopUI.isActiveAndEnabled)
                     {
                         //If shop isActive drop the item only if the shop can buy it
@@ -147,6 +151,10 @@ public class UIController : MonoBehaviour, ISlotManager
                             equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
                             shop.Buy(item, PlayerController.localPlayer);
                             shopUI.UpdateUI();
+                        }
+                        else
+                        {
+                            AudioManager.instance.PlaySound(AudioManager.UISound.CantDo);
                         }
                     }
                     else
@@ -233,7 +241,7 @@ public class UIController : MonoBehaviour, ISlotManager
 
     public void SwapItems(ItemSlotUI slot1, ItemSlotUI slot2)
     {
-        if (selectedUnit != null)
+        if (selectedUnit != null && selectedUnit.unitController.isPlayerUnit)
         {
             EquipmentManager equipmentManager = selectedUnit.GetComponent<EquipmentManager>();
             if (equipmentManager != null)
