@@ -51,6 +51,41 @@ namespace Rpg.Items
             }
         }
 
+        public bool HasEquipmentSlotAvailable(Item item)
+        {
+            Equipment equipment = item as Equipment;
+            Equipment.EquipmentType equipmentType = equipment.equipmentType;
+
+            for (int i = 0; i < equipmentSlots.Count; i++)
+            {
+                EquipmentSlot slot = equipmentSlots[i];
+
+                if (slot.equipment == null && equipmentType == slot.equipmentType)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int FindEquipmentSlot(Item item)
+        {
+            Equipment equipment = item as Equipment;
+            Equipment.EquipmentType equipmentType = equipment.equipmentType;
+
+            for (int i = 0; i < equipmentSlots.Count; i++)
+            {
+                EquipmentSlot slot = equipmentSlots[i];
+
+                if (equipmentType == slot.equipmentType)
+                {
+                    return i;
+                }
+            }
+            Debug.LogError("No compatible equipment slot found");
+            return -1;
+        }
+
         public void AddInEquipmentSlot(Item item)
         {
             Equipment equipment = item as Equipment;
@@ -259,7 +294,7 @@ namespace Rpg.Items
             if (FindItem(item, out itemType, out index))
             {
                 Item oldItem = DropItem(itemType, index);
-                Destroy(oldItem);
+                Destroy(oldItem.gameObject);
             }
         }
 

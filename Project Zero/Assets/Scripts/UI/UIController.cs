@@ -103,6 +103,26 @@ public class UIController : MonoBehaviour, ISlotManager
 
     public void OnMouseLeftClickDown(ItemSlotUI itemSlotUI)
     {
+        if (Time.time - lastUIClick < 0.2f && itemSlotUI.item != null && itemSlotUI.item.itemType == Item.ItemType.Equipment)
+        {
+            if (itemSlotUI.slotType == Item.ItemType.Item)
+            {
+                EquipmentManager equipmentManager = selectedUnit.GetComponent<EquipmentManager>();
+                Item item = itemSlotUI.item;
+
+                if (equipmentManager.HasEquipmentSlotAvailable(item))
+                {
+                    equipmentManager.DropItem(itemSlotUI.slotType, itemSlotUI.slotNumber);
+                    equipmentManager.PickItem(item);
+                }
+                else
+                {
+                    int slot = equipmentManager.FindEquipmentSlot(item);
+                    equipmentManager.SwapItems(Item.ItemType.Item, itemSlotUI.slotNumber, Item.ItemType.Equipment, slot);
+                }
+            }
+        }
+
         lastUIClick = Time.time;
     }
 
