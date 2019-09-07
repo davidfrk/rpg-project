@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9c0d4a994997524199c4157b14d8182, type: 3}
-  m_Name: ArmorD
+  m_Name: ArmorD Recipe
   m_EditorClassIdentifier: 
   item: {fileID: 5749383953796622142, guid: 192e6e260121a48418a9ae2a193744d7, type: 3}
   ingredients:

@@ -23,8 +23,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3557833302729401418}
   - component: {fileID: 3557833302729401416}
+  - component: {fileID: -6339851621987076218}
+  - component: {fileID: -4046649890837696166}
   m_Layer: 10
-  m_Name: AssassinRing
+  m_Name: Sword D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,22 +59,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c1cc4468d721745b1cfd70ec2aa8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 12
-  name: Assassin Ring
-  price: 200
-  sprite: {fileID: 21300000, guid: 970324311431c794ca338446ea889948, type: 3}
+  id: 19
+  name: Sword D
+  price: 315
+  sprite: {fileID: 21300000, guid: f3b5d16021a2fe348ab324e4d5d18004, type: 3}
   itemType: 2
   model: {fileID: 2752649277000001797}
-  equipmentType: 5
+  equipmentType: 0
   statBonus:
+  - stat: 6
+    statModType: 100
+    value: 25
+    dependencies: []
   - stat: 6
     statModType: 100
     value: 0
     dependencies:
     - StatType: 9
-      Value: 0.8
+      Value: 0.6
   critBonus: []
-  skill: {fileID: 0}
+  skill: {fileID: -6339851621987076218}
+--- !u!114 &-6339851621987076218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3557833302729401417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f09924e627d9c39429cee8e57332f82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillType: 0
+  skillTags: 
+  castRange: 0
+  manaCost: 0
+  forceSelfCast: 0
+  canCastOnGround: 0
+  canCastOnUnit: 0
+  icon: {fileID: 21300000, guid: 28a02df1369b7fd4eab040459b0cc450, type: 3}
+  key: 
+  animation: {fileID: 0}
+  canBeInterrupted: 0
+  description: Lifesteal
+--- !u!114 &-4046649890837696166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3557833302729401417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4556218c43a5024e841dd17ce0a3a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillEffects:
+  - {fileID: 11400000, guid: 99734cc18d11c6545b780dabd1aad9c5, type: 2}
 --- !u!1001 &2753598153868385909
 PrefabInstance:
   m_ObjectHideFlags: 0

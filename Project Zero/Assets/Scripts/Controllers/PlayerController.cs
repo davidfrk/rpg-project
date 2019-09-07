@@ -187,13 +187,16 @@ public class PlayerController : MonoBehaviour
             }
             else if (targetUnit != null)
             {
-                if (skill.canCastOnUnit)
+                if (skill.CanCastOnTarget(targetUnit))
                 {
                     selectedUnitController.MoveToCast(targetUnit, slot);
                 }
                 else
                 {
-                    selectedUnitController.MoveToCast(targetUnit.transform.position, slot);
+                    if (skill.canCastOnGround)
+                    {
+                        selectedUnitController.MoveToCast(targetUnit.transform.position, slot);
+                    }
                 }
             }
             else

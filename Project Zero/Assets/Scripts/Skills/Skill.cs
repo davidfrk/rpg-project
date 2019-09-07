@@ -12,8 +12,10 @@ namespace Rpg.Skills
         public float castRange = 3f;
         public float manaCost = 50;
         public bool forceSelfCast = false;
-        public bool canCastOnGround = true;
+        public bool canSelfCast = true;
         public bool canCastOnUnit = true;
+        public bool canCastOnGround = true;
+        
         public Sprite icon;
         public string key;
         new public AnimationClip animation;
@@ -102,6 +104,21 @@ namespace Rpg.Skills
         public virtual bool CanCast(Unit owner)
         {
             return skillType == SkillType.Active && owner.Mana >= manaCost;
+        }
+
+        public virtual bool CanCastOnTarget(Unit target)
+        {
+            if (!canCastOnUnit)
+            {
+                return false;
+            }
+
+            if (!canSelfCast && target == Owner)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public virtual bool CanBeInterrupted()

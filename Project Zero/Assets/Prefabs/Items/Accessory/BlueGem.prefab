@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 3557833302729401418}
   - component: {fileID: 3557833302729401416}
   m_Layer: 10
-  m_Name: AssassinRing
+  m_Name: BlueGem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,20 +57,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c1cc4468d721745b1cfd70ec2aa8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 12
-  name: Assassin Ring
-  price: 200
-  sprite: {fileID: 21300000, guid: 970324311431c794ca338446ea889948, type: 3}
+  id: 20
+  name: Blue Gem
+  price: 300
+  sprite: {fileID: 21300000, guid: e7d29a79bc7fae248887c8a08a160303, type: 3}
   itemType: 2
   model: {fileID: 2752649277000001797}
   equipmentType: 5
   statBonus:
-  - stat: 6
-    statModType: 100
-    value: 0
-    dependencies:
-    - StatType: 9
-      Value: 0.8
+  - stat: 10
+    statModType: 300
+    value: 0.1
+    dependencies: []
+  - stat: 11
+    statModType: 300
+    value: 0.1
+    dependencies: []
   critBonus: []
   skill: {fileID: 0}
 --- !u!1001 &2753598153868385909

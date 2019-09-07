@@ -11,5 +11,9 @@ namespace Rpg.Skills
         Int,
         Will,
         Attack,
+        Hp,
+        Armor,
+        MagicArmor,
+        All,
     }
 }

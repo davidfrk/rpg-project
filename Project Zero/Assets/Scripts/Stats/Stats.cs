@@ -95,7 +95,7 @@ namespace Rpg.Stats {
 
         public bool HasStatsPointsAvailable()
         {
-            return StatsPointsAvailable() > 0;
+            return GameManager.instance.enableStatsUpgrade && StatsPointsAvailable() > 0;
         }
 
         private int StatsPointsAvailable()
@@ -127,7 +127,7 @@ namespace Rpg.Stats {
             MaxManaMod.Value        = 2f * Int.Value + Will.Value;
             ArmorMod.Value          = Dex.Value / 4f;
             MagicArmorMod.Value     = Will.Value;
-            AttackMod.Value         = Str.Value;
+            AttackMod.Value         = Str.Value + 0.4f * Dex.Value;
             AttackSpeedMod.Value    = Dex.Value;
             MovementSpeedMod.Value  = Dex.Value / 20f;
             HpRegenMod.Value        = Will.Value / 40f;

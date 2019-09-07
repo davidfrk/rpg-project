@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 878379513057305267}
-  - component: {fileID: 5907455604276514255}
+  - component: {fileID: 4094689098814600989}
   - component: {fileID: 2261857104069996503}
   m_Layer: 0
-  m_Name: StompOnAttackSkill
+  m_Name: Lifesteal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5907455604276514255
+--- !u!114 &4094689098814600989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   key: 
   animation: {fileID: 0}
   canBeInterrupted: 0
-  description: Stomp
+  description: Lifesteal
 --- !u!114 &2261857104069996503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,4 +70,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillEffects:
-  - {fileID: 11400000, guid: 666993f208288864aa46929df648ee6c, type: 2}
+  - {fileID: 11400000, guid: 99734cc18d11c6545b780dabd1aad9c5, type: 2}

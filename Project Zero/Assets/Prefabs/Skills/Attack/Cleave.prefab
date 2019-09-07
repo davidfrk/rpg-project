@@ -49,8 +49,9 @@ MonoBehaviour:
   castRange: 0
   manaCost: 0
   forceSelfCast: 0
-  canCastOnGround: 0
+  canSelfCast: 0
   canCastOnUnit: 0
+  canCastOnGround: 0
   icon: {fileID: 21300000, guid: 28a02df1369b7fd4eab040459b0cc450, type: 3}
   key: 
   animation: {fileID: 0}

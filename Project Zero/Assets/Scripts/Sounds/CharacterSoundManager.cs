@@ -19,15 +19,16 @@ public class CharacterSoundManager : MonoBehaviour
         unitController = GetComponent<UnitController>();
         movementController = GetComponent<MovementController>();
 
+        unitController.OnAttackEndCallback += OnAttackEnd;
         unitController.OnDeathCallback += OnDeath;
         unitController.OnCritCallback += OnCrit;
     }
 
-    public void AttackEndEvent()
+    public void OnAttackEnd(Unit target, float damage)
     {
         if (attackAudioSource != null)
         {
-            if (attackSounds.Count != 0 && unitController.unit.alive)
+            if (attackSounds.Count != 0)
             {
                 int audioIndex = Random.Range(0, attackSounds.Count);
 

@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Rpg.Skills;
 
 namespace Rpg.ProgressionSystem
 {
     public class SkillTree : MonoBehaviour
     {
+        public SkillTag skillTag;
         public List<SkillBlock> skillBlocks = new List<SkillBlock>();
         public int SkillPoints { get; private set; } = 0;
         public int TotalPoints { get; set; } = 0;
@@ -33,7 +35,7 @@ namespace Rpg.ProgressionSystem
             for (int i = 0; i < 10; i++)
             {
                 SkillBlock skillBlock = new SkillBlock();
-                skillBlock.Generate(Skills.SkillTag.Attack, i + 1);
+                skillBlock.Generate(skillTag, i + 1);
                 skillBlocks.Add(skillBlock);
             }
 

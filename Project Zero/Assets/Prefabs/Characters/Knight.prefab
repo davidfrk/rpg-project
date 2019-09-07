@@ -65,6 +65,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 534174340454413244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_UiScaleMode: 0
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 534174341123525934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -222,7 +223,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -231,6 +233,8 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &534174341185845066
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +348,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 534174342437533831}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -353,7 +357,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
@@ -362,6 +367,8 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &535182445142892717
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +502,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowOverride: 1
-  baseAnimatorOverrideController: {fileID: 22100000, guid: b95ee3106a0765743a6c48971d9ecfca, type: 2}
+  baseAnimatorOverrideController: {fileID: 22100000, guid: b95ee3106a0765743a6c48971d9ecfca,
+    type: 2}
   attack1Speed: 2
   attack2Speed: 2
   movementSpeed: 0.55
@@ -760,6 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d62777675253843be4af852e6f9d11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillTag: 8
 --- !u!54 &4200514870737558181
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -785,7 +794,8 @@ AudioSource:
   m_GameObject: {fileID: 535182445142892717}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243294398408899354, guid: 5ca374b67d3d8814fbbdbbd90b66c707, type: 2}
+  OutputAudioMixerGroup: {fileID: 243294398408899354, guid: 5ca374b67d3d8814fbbdbbd90b66c707,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -881,7 +891,8 @@ AudioSource:
   m_GameObject: {fileID: 535182445142892717}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243772380218581968, guid: 5ca374b67d3d8814fbbdbbd90b66c707, type: 2}
+  OutputAudioMixerGroup: {fileID: 243772380218581968, guid: 5ca374b67d3d8814fbbdbbd90b66c707,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.85
@@ -977,7 +988,8 @@ AudioSource:
   m_GameObject: {fileID: 535182445142892717}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243595804197179928, guid: 5ca374b67d3d8814fbbdbbd90b66c707, type: 2}
+  OutputAudioMixerGroup: {fileID: 243595804197179928, guid: 5ca374b67d3d8814fbbdbbd90b66c707,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: d05b473d3f570ef49b2bb6bb0a6be0d2, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.79
@@ -1073,7 +1085,8 @@ AudioSource:
   m_GameObject: {fileID: 535182445142892717}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 243852475158669886, guid: 5ca374b67d3d8814fbbdbbd90b66c707, type: 2}
+  OutputAudioMixerGroup: {fileID: 243852475158669886, guid: 5ca374b67d3d8814fbbdbbd90b66c707,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 556aaf50c20591e41a889dcd54a0db00, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2498,6 +2511,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2575,6 +2589,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2643,6 +2658,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -3195,6 +3211,7 @@ SkinnedMeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -3409,6 +3426,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
