@@ -51,6 +51,7 @@ MonoBehaviour:
   canSelfCast: 0
   canCastOnUnit: 1
   canCastOnGround: 0
+  needToMoveToCast: 0
   icon: {fileID: 21300000, guid: 021ee8796e590fb47a52df407594012a, type: 3}
   key: 
   animation: {fileID: 0}

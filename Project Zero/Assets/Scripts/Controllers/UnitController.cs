@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Rpg.Items;
 using Rpg.Stats;
+using Rpg.Skills;
 
 [RequireComponent(typeof(MovementController))]
 [RequireComponent(typeof(AnimatorUpdate))]
@@ -154,14 +155,14 @@ public class UnitController : MonoBehaviour
         {
             //Attacking the same target with good conditions
             Vector3 targetDir = target.transform.position - transform.position;
-            if (targetDir.magnitude < DistanceToAttack() && Vector3.Angle(transform.forward, targetDir) <= 5f)
+            if (targetDir.magnitude < DistanceToAttack() && AttackAngle(target) <= 5f)
             {
                 return;
             }
         }
 
         //If you cant attack now, put in the queue
-        if (!StopCurrentAction())
+        if (!CanStopCurrentAction)
         {
             actionQueue.actionType = Action.ActionType.Attack;
             actionQueue.targetUnit = target;
@@ -221,6 +222,14 @@ public class UnitController : MonoBehaviour
         return 1.05f * (unit.radius + action.targetUnit.radius) + unit.range;
     }
 
+    float AttackAngle(Unit target)
+    {
+        Vector3 targetDir = target.transform.position - transform.position;
+        targetDir.y = 0f;
+
+        return Mathf.Abs(Vector3.Angle(transform.forward, targetDir));
+    }
+
     float DistanceToPickItem()
     {
         return 3f * unit.radius;
@@ -233,7 +242,7 @@ public class UnitController : MonoBehaviour
 
     public void Move(Vector3 position)
     {
-        if (!StopCurrentAction())
+        if (!CanStopCurrentAction)
         {
             actionQueue.actionType = Action.ActionType.Move;
             actionQueue.targetPosition = position;
@@ -258,24 +267,31 @@ public class UnitController : MonoBehaviour
         if(State == UnitState.Casting) OnCastBeginCallback?.Invoke();
     }
 
-    bool StopCurrentAction()
+    bool CanStopCurrentAction
     {
-        if (State == UnitState.Casting)
+        get
         {
-            if (action.skill.CanBeInterrupted())
+            if (State == UnitState.Casting)
             {
-                State = UnitState.Idle;
-                return true;
+                if (action.skill.CanBeInterrupted())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                return false;
+                return true;
             }
         }
-        else
-        {
-            return true;
-        }
+    }
+
+    void StopCurrentAction()
+    {
+        State = UnitState.Idle;
     }
 
     public void AttackEndEvent()
@@ -368,7 +384,7 @@ public class UnitController : MonoBehaviour
 
     public void MoveToPickItem(Item item)
     {
-        if (!StopCurrentAction())
+        if (!CanStopCurrentAction)
         {
             actionQueue.actionType = Action.ActionType.PickItem;
             actionQueue.item = item;
@@ -392,46 +408,81 @@ public class UnitController : MonoBehaviour
         State = UnitState.Idle;
     }
 
-    public void MoveToCast(Vector3 position, int skillSlot)
+    public void MoveToCast(Vector3 position, Skill skill)
     {
-        if (!StopCurrentAction())
+        if (!CanStopCurrentAction)
         {
-            actionQueue.actionType = Action.ActionType.Cast;
-            actionQueue.skill = skillsManager.skills[skillSlot];
-            actionQueue.targetUnit = null;
-            actionQueue.targetPosition = position;
+            QueueAction(position, skill);
             return;
         }
 
-        State = UnitState.MovingToAct;
-        action.actionType = Action.ActionType.Cast;
-        action.skill = skillsManager.skills[skillSlot];
-        action.targetUnit = null;
-        action.targetPosition = position;
+        SetAction(position, skill);
 
-        movementController.MoveCloseToPosition(position, action.skill.castRange);
-        //Debug.Log("CastOnGround");
+        if (skill.needToMoveToCast)
+        {
+            State = UnitState.MovingToAct;
+            movementController.MoveCloseToPosition(position, action.skill.castRange);
+        }
+        else
+        {
+            Cast();
+        }
     }
 
-    public void MoveToCast(Unit target, int skillSlot)
+    public void MoveToCast(Unit target, Skill skill)
     {
-        if (!StopCurrentAction())
+        //Avoids canceling animation by casting the same skill twice
+        if (State == UnitState.Casting && action.skill == skill && action.targetUnit == target) return;
+
+        if (!CanStopCurrentAction)
         {
-            actionQueue.actionType = Action.ActionType.Cast;
-            actionQueue.skill = skillsManager.skills[skillSlot];
-            actionQueue.targetUnit = target;
-            actionQueue.targetPosition = target.transform.position;
+            QueueAction(target, skill);
             return;
         }
 
-        State = UnitState.MovingToAct;
+        SetAction(target, skill);
+
+        if (skill.needToMoveToCast)
+        {
+            State = UnitState.MovingToAct;
+            movementController.MoveCloseToPosition(target.transform.position, action.skill.castRange);
+        }
+        else
+        {
+            Cast();
+        }
+    }
+
+    private void SetAction(Unit target, Skill skill)
+    {
         action.actionType = Action.ActionType.Cast;
-        action.skill = skillsManager.skills[skillSlot];
+        action.skill = skill;
         action.targetUnit = target;
         action.targetPosition = target.transform.position;
+    }
 
-        movementController.MoveCloseToPosition(target.transform.position, action.skill.castRange);
-        //Debug.Log("CastOnTarget");
+    private void SetAction(Vector3 position, Skill skill)
+    {
+        action.actionType = Action.ActionType.Cast;
+        action.skill = skill;
+        action.targetUnit = null;
+        action.targetPosition = position;
+    }
+
+    private void QueueAction(Unit target, Skill skill)
+    {
+        actionQueue.actionType = Action.ActionType.Cast;
+        actionQueue.skill = skill;
+        actionQueue.targetUnit = target;
+        actionQueue.targetPosition = target.transform.position;
+    }
+
+    private void QueueAction(Vector3 position, Skill skill)
+    {
+        actionQueue.actionType = Action.ActionType.Cast;
+        actionQueue.skill = skill;
+        actionQueue.targetUnit = null;
+        actionQueue.targetPosition = position;
     }
 
     private void ResumeAction()

@@ -15,6 +15,7 @@ namespace Rpg.Skills
         public bool canSelfCast = true;
         public bool canCastOnUnit = true;
         public bool canCastOnGround = true;
+        public bool needToMoveToCast = true;
         
         public Sprite icon;
         public string key;

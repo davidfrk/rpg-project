@@ -183,19 +183,19 @@ public class PlayerController : MonoBehaviour
 
             if (skill.forceSelfCast)
             {
-                selectedUnitController.MoveToCast(mainUnit, slot);
+                selectedUnitController.MoveToCast(mainUnit, selectedUnitController.skillsManager.skills[slot]);
             }
             else if (targetUnit != null)
             {
                 if (skill.CanCastOnTarget(targetUnit))
                 {
-                    selectedUnitController.MoveToCast(targetUnit, slot);
+                    selectedUnitController.MoveToCast(targetUnit, selectedUnitController.skillsManager.skills[slot]);
                 }
                 else
                 {
                     if (skill.canCastOnGround)
                     {
-                        selectedUnitController.MoveToCast(targetUnit.transform.position, slot);
+                        selectedUnitController.MoveToCast(targetUnit.transform.position, selectedUnitController.skillsManager.skills[slot]);
                     }
                 }
             }
@@ -203,7 +203,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (skill.canCastOnGround)
                 {
-                    selectedUnitController.MoveToCast(hit.point, slot);
+                    selectedUnitController.MoveToCast(hit.point, selectedUnitController.skillsManager.skills[slot]);
                 }
             }
         }

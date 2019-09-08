@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
 
     void EdgeUpdate()
     {
-        if (!edgePanActive) return;
+        if (!edgePanActive || Application.isEditor) return;
 
         Vector2 dir = Vector2.zero;
 
