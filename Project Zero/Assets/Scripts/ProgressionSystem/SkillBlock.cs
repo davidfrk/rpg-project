@@ -32,7 +32,7 @@ namespace Rpg.ProgressionSystem {
             talents.Clear();
 
             newTalents.Shuffle();
-            int amount = Random.Range(2, 4);
+            int amount = Random.Range(GameManager.instance.talentTreeMinimumNumberOfTalents, GameManager.instance.talentTreeMaximumNumberOfTalents + 1);
 
             for (int i = 0; i < amount; i++)
             {

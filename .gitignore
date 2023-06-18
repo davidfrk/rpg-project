@@ -7,6 +7,7 @@ Project Zero/Assets/BigFiles/
 build_Data/
 build.exe
 Build/
+Project Zero/Logs/
 **/LightingData*
 *Lightmap-*
 *ReflectionProbe-*
@@ -26,6 +27,7 @@ obj/
 *.unityproj
 *.booproj
 .vs/
+*.vsconfig
 
 # ============ #
 # OS generated #
